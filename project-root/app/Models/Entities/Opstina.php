@@ -38,5 +38,53 @@ class Opstina
      */
     private $grad;
 
+    /**
+     * @return int
+     */
+    public function getIdopstine()
+    {
+        return $this->idopstine;
+    }
+
+    /**
+     * @param int $idopstine
+     */
+    public function setIdopstine($idopstine)
+    {
+        $this->idopstine = $idopstine;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    /**
+     * @param string|null $naziv
+     */
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+    }
+
+    /**
+     * @return Grad
+     */
+    public function getGrad()
+    {
+        return $this->grad;
+    }
+
+    /**
+     * @param Grad $grad
+     */
+    public function setGrad($grad)
+    {
+        $this->grad = $grad;
+    }
+
 
 }

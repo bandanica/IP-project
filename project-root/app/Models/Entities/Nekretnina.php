@@ -179,4 +179,357 @@ class Nekretnina
     private $gradid;
 
 
+
+    /**
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * Many Nekretnina(omiljena) have Many Korisnici(kupci).
+     * @ORM\ManyToMany(targetEntity="Korisnik", mappedBy="omiljene")
+     */
+    private $kupci;
+
+    public function __construct() {
+        $this->kupci = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdn()
+    {
+        return $this->idn;
+    }
+
+    /**
+     * @param int $idn
+     */
+    public function setIdn($idn)
+    {
+        $this->idn = $idn;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getKvadratura()
+    {
+        return $this->kvadratura;
+    }
+
+    /**
+     * @param int|null $kvadratura
+     */
+    public function setKvadratura($kvadratura)
+    {
+        $this->kvadratura = $kvadratura;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getBrSoba()
+    {
+        return $this->brSoba;
+    }
+
+    /**
+     * @param int|null $brSoba
+     */
+    public function setBrSoba($brSoba)
+    {
+        $this->brSoba = $brSoba;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getGodinaIzgradnje()
+    {
+        return $this->godinaIzgradnje;
+    }
+
+    /**
+     * @param \DateTime|null $godinaIzgradnje
+     */
+    public function setGodinaIzgradnje($godinaIzgradnje)
+    {
+        $this->godinaIzgradnje = $godinaIzgradnje;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getSprat()
+    {
+        return $this->sprat;
+    }
+
+    /**
+     * @param int|null $sprat
+     */
+    public function setSprat($sprat)
+    {
+        $this->sprat = $sprat;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUkupnaSpratnost()
+    {
+        return $this->ukupnaSpratnost;
+    }
+
+    /**
+     * @param int|null $ukupnaSpratnost
+     */
+    public function setUkupnaSpratnost($ukupnaSpratnost)
+    {
+        $this->ukupnaSpratnost = $ukupnaSpratnost;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getParking()
+    {
+        return $this->parking;
+    }
+
+    /**
+     * @param string|null $parking
+     */
+    public function setParking($parking)
+    {
+        $this->parking = $parking;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStanje()
+    {
+        return $this->stanje;
+    }
+
+    /**
+     * @param string|null $stanje
+     */
+    public function setStanje($stanje)
+    {
+        $this->stanje = $stanje;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGrejanje()
+    {
+        return $this->grejanje;
+    }
+
+    /**
+     * @param string|null $grejanje
+     */
+    public function setGrejanje($grejanje)
+    {
+        $this->grejanje = $grejanje;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMesecniTroskovi()
+    {
+        return $this->mesecniTroskovi;
+    }
+
+    /**
+     * @param int|null $mesecniTroskovi
+     */
+    public function setMesecniTroskovi($mesecniTroskovi)
+    {
+        $this->mesecniTroskovi = $mesecniTroskovi;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getOpis()
+    {
+        return $this->opis;
+    }
+
+    /**
+     * @param string|null $opis
+     */
+    public function setOpis($opis)
+    {
+        $this->opis = $opis;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string|null $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return Mikrolokacija
+     */
+    public function getMikrolokacija()
+    {
+        return $this->mikrolokacija;
+    }
+
+    /**
+     * @param Mikrolokacija $mikrolokacija
+     */
+    public function setMikrolokacija($mikrolokacija)
+    {
+        $this->mikrolokacija = $mikrolokacija;
+    }
+
+    /**
+     * @return Opstina
+     */
+    public function getOpstina()
+    {
+        return $this->opstina;
+    }
+
+    /**
+     * @param Opstina $opstina
+     */
+    public function setOpstina($opstina)
+    {
+        $this->opstina = $opstina;
+    }
+
+    /**
+     * @return Agencija
+     */
+    public function getAgencija()
+    {
+        return $this->agencija;
+    }
+
+    /**
+     * @param Agencija $agencija
+     */
+    public function setAgencija($agencija)
+    {
+        $this->agencija = $agencija;
+    }
+
+    /**
+     * @return Ulica
+     */
+    public function getUlica()
+    {
+        return $this->ulica;
+    }
+
+    /**
+     * @param Ulica $ulica
+     */
+    public function setUlica($ulica)
+    {
+        $this->ulica = $ulica;
+    }
+
+    /**
+     * @return Karakteristike
+     */
+    public function getKarakteristike()
+    {
+        return $this->karakteristike;
+    }
+
+    /**
+     * @param Karakteristike $karakteristike
+     */
+    public function setKarakteristike($karakteristike)
+    {
+        $this->karakteristike = $karakteristike;
+    }
+
+    /**
+     * @return Korisnik
+     */
+    public function getOglasivac()
+    {
+        return $this->oglasivac;
+    }
+
+    /**
+     * @param Korisnik $oglasivac
+     */
+    public function setOglasivac($oglasivac)
+    {
+        $this->oglasivac = $oglasivac;
+    }
+
+    /**
+     * @return Tipnekretnine
+     */
+    public function getTip()
+    {
+        return $this->tip;
+    }
+
+    /**
+     * @param Tipnekretnine $tip
+     */
+    public function setTip($tip)
+    {
+        $this->tip = $tip;
+    }
+
+    /**
+     * @return Grad
+     */
+    public function getGradid()
+    {
+        return $this->gradid;
+    }
+
+    /**
+     * @param Grad $gradid
+     */
+    public function setGradid($gradid)
+    {
+        $this->gradid = $gradid;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getKupci()
+    {
+        return $this->kupci;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $kupci
+     */
+    public function setKupci($kupci)
+    {
+        $this->kupci = $kupci;
+    }
+
+
+
+
 }

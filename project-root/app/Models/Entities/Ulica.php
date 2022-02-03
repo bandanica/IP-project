@@ -38,5 +38,53 @@ class Ulica
      */
     private $mikrolokacija;
 
+    /**
+     * @return int
+     */
+    public function getIdu()
+    {
+        return $this->idu;
+    }
+
+    /**
+     * @param int $idu
+     */
+    public function setIdu($idu)
+    {
+        $this->idu = $idu;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    /**
+     * @param string|null $naziv
+     */
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+    }
+
+    /**
+     * @return Mikrolokacija
+     */
+    public function getMikrolokacija()
+    {
+        return $this->mikrolokacija;
+    }
+
+    /**
+     * @param Mikrolokacija $mikrolokacija
+     */
+    public function setMikrolokacija($mikrolokacija)
+    {
+        $this->mikrolokacija = $mikrolokacija;
+    }
+
 
 }

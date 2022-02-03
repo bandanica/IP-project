@@ -28,5 +28,37 @@ class Tipnekretnine
      */
     private $nazivTipa;
 
+    /**
+     * @return int
+     */
+    public function getIdtipnekretnine()
+    {
+        return $this->idtipnekretnine;
+    }
+
+    /**
+     * @param int $idtipnekretnine
+     */
+    public function setIdtipnekretnine($idtipnekretnine)
+    {
+        $this->idtipnekretnine = $idtipnekretnine;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNazivTipa()
+    {
+        return $this->nazivTipa;
+    }
+
+    /**
+     * @param string|null $nazivTipa
+     */
+    public function setNazivTipa($nazivTipa)
+    {
+        $this->nazivTipa = $nazivTipa;
+    }
+
 
 }

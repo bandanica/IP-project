@@ -38,5 +38,53 @@ class Mikrolokacija
      */
     private $opstina;
 
+    /**
+     * @return int
+     */
+    public function getIdmikro()
+    {
+        return $this->idmikro;
+    }
+
+    /**
+     * @param int $idmikro
+     */
+    public function setIdmikro($idmikro)
+    {
+        $this->idmikro = $idmikro;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    /**
+     * @param string|null $naziv
+     */
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+    }
+
+    /**
+     * @return Opstina
+     */
+    public function getOpstina()
+    {
+        return $this->opstina;
+    }
+
+    /**
+     * @param Opstina $opstina
+     */
+    public function setOpstina($opstina)
+    {
+        $this->opstina = $opstina;
+    }
+
 
 }

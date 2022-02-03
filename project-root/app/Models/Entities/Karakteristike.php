@@ -98,5 +98,197 @@ class Karakteristike
      */
     private $parking;
 
+    /**
+     * @return int
+     */
+    public function getIdkarakteristike()
+    {
+        return $this->idkarakteristike;
+    }
+
+    /**
+     * @param int $idkarakteristike
+     */
+    public function setIdkarakteristike($idkarakteristike)
+    {
+        $this->idkarakteristike = $idkarakteristike;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTerasa()
+    {
+        return $this->terasa;
+    }
+
+    /**
+     * @param string|null $terasa
+     */
+    public function setTerasa($terasa)
+    {
+        $this->terasa = $terasa;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLodja()
+    {
+        return $this->lodja;
+    }
+
+    /**
+     * @param string|null $lodja
+     */
+    public function setLodja($lodja)
+    {
+        $this->lodja = $lodja;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLift()
+    {
+        return $this->lift;
+    }
+
+    /**
+     * @param string|null $lift
+     */
+    public function setLift($lift)
+    {
+        $this->lift = $lift;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFrancBalkon()
+    {
+        return $this->franc_balkon;
+    }
+
+    /**
+     * @param string|null $franc_balkon
+     */
+    public function setFrancBalkon($franc_balkon)
+    {
+        $this->franc_balkon = $franc_balkon;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPodrum()
+    {
+        return $this->podrum;
+    }
+
+    /**
+     * @param string|null $podrum
+     */
+    public function setPodrum($podrum)
+    {
+        $this->podrum = $podrum;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGaraza()
+    {
+        return $this->garaza;
+    }
+
+    /**
+     * @param string|null $garaza
+     */
+    public function setGaraza($garaza)
+    {
+        $this->garaza = $garaza;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSaBastom()
+    {
+        return $this->saBastom;
+    }
+
+    /**
+     * @param string|null $saBastom
+     */
+    public function setSaBastom($saBastom)
+    {
+        $this->saBastom = $saBastom;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getKlima()
+    {
+        return $this->klima;
+    }
+
+    /**
+     * @param string|null $klima
+     */
+    public function setKlima($klima)
+    {
+        $this->klima = $klima;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInternet()
+    {
+        return $this->internet;
+    }
+
+    /**
+     * @param string|null $internet
+     */
+    public function setInternet($internet)
+    {
+        $this->internet = $internet;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTelefon()
+    {
+        return $this->telefon;
+    }
+
+    /**
+     * @param string|null $telefon
+     */
+    public function setTelefon($telefon)
+    {
+        $this->telefon = $telefon;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getParking()
+    {
+        return $this->parking;
+    }
+
+    /**
+     * @param string|null $parking
+     */
+    public function setParking($parking)
+    {
+        $this->parking = $parking;
+    }
+
 
 }

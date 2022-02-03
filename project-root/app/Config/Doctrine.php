@@ -50,5 +50,5 @@ class Doctrine extends \Daycry\Doctrine\Config\Doctrine
         /*
      * Folder for entities
      */
-    public $folderEntity = APPPATH . 'Models/Entity';
+    public $folderEntity = APPPATH . 'Models/Entities';
 }

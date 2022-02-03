@@ -28,5 +28,37 @@ class Tipkorisnika
      */
     private $tipKorisnika;
 
+    /**
+     * @return int
+     */
+    public function getIdt()
+    {
+        return $this->idt;
+    }
+
+    /**
+     * @param int $idt
+     */
+    public function setIdt($idt)
+    {
+        $this->idt = $idt;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTipKorisnika()
+    {
+        return $this->tipKorisnika;
+    }
+
+    /**
+     * @param string|null $tipKorisnika
+     */
+    public function setTipKorisnika($tipKorisnika)
+    {
+        $this->tipKorisnika = $tipKorisnika;
+    }
+
 
 }

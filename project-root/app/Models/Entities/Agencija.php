@@ -59,5 +59,101 @@ class Agencija
      */
     private $idgrada;
 
+    /**
+     * @return int
+     */
+    public function getIda()
+    {
+        return $this->ida;
+    }
+
+    /**
+     * @param int $ida
+     */
+    public function setIda($ida)
+    {
+        $this->ida = $ida;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    /**
+     * @param string|null $naziv
+     */
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAdresa()
+    {
+        return $this->adresa;
+    }
+
+    /**
+     * @param string|null $adresa
+     */
+    public function setAdresa($adresa)
+    {
+        $this->adresa = $adresa;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTelefon()
+    {
+        return $this->telefon;
+    }
+
+    /**
+     * @param string|null $telefon
+     */
+    public function setTelefon($telefon)
+    {
+        $this->telefon = $telefon;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPib()
+    {
+        return $this->pib;
+    }
+
+    /**
+     * @param string $pib
+     */
+    public function setPib($pib)
+    {
+        $this->pib = $pib;
+    }
+
+    /**
+     * @return Grad
+     */
+    public function getIdgrada()
+    {
+        return $this->idgrada;
+    }
+
+    /**
+     * @param Grad $idgrada
+     */
+    public function setIdgrada($idgrada)
+    {
+        $this->idgrada = $idgrada;
+    }
+
 
 }

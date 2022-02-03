@@ -108,4 +108,227 @@ class Korisnik
     private $idagencije;
 
 
+    /**
+     *
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * Many Korisnik(kupac) have Many Nekretnina(omiljena).
+     * @ORM\ManyToMany(targetEntity="Nekretnina", inversedBy="kupci")
+     * @ORM\JoinTable(name="omiljene")
+     */
+    private $omiljene;
+
+    public function __construct() {
+        $this->omiljene = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdk()
+    {
+        return $this->idk;
+    }
+
+    /**
+     * @param int $idk
+     */
+    public function setIdk($idk)
+    {
+        $this->idk = $idk;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKorIme()
+    {
+        return $this->korIme;
+    }
+
+    /**
+     * @param string $korIme
+     */
+    public function setKorIme($korIme)
+    {
+        $this->korIme = $korIme;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIme()
+    {
+        return $this->ime;
+    }
+
+    /**
+     * @param string $ime
+     */
+    public function setIme($ime)
+    {
+        $this->ime = $ime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrezime()
+    {
+        return $this->prezime;
+    }
+
+    /**
+     * @param string $prezime
+     */
+    public function setPrezime($prezime)
+    {
+        $this->prezime = $prezime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLozinka()
+    {
+        return $this->lozinka;
+    }
+
+    /**
+     * @param string $lozinka
+     */
+    public function setLozinka($lozinka)
+    {
+        $this->lozinka = $lozinka;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDatumRodjenja()
+    {
+        return $this->datumRodjenja;
+    }
+
+    /**
+     * @param \DateTime|null $datumRodjenja
+     */
+    public function setDatumRodjenja($datumRodjenja)
+    {
+        $this->datumRodjenja = $datumRodjenja;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTelefon()
+    {
+        return $this->telefon;
+    }
+
+    /**
+     * @param string|null $telefon
+     */
+    public function setTelefon($telefon)
+    {
+        $this->telefon = $telefon;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEMail()
+    {
+        return $this->eMail;
+    }
+
+    /**
+     * @param string|null $eMail
+     */
+    public function setEMail($eMail)
+    {
+        $this->eMail = $eMail;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBrLicence()
+    {
+        return $this->brLicence;
+    }
+
+    /**
+     * @param string|null $brLicence
+     */
+    public function setBrLicence($brLicence)
+    {
+        $this->brLicence = $brLicence;
+    }
+
+    /**
+     * @return Grad
+     */
+    public function getIdgrada()
+    {
+        return $this->idgrada;
+    }
+
+    /**
+     * @param Grad $idgrada
+     */
+    public function setIdgrada($idgrada)
+    {
+        $this->idgrada = $idgrada;
+    }
+
+    /**
+     * @return Tipkorisnika
+     */
+    public function getTip()
+    {
+        return $this->tip;
+    }
+
+    /**
+     * @param Tipkorisnika $tip
+     */
+    public function setTip($tip)
+    {
+        $this->tip = $tip;
+    }
+
+    /**
+     * @return Agencija
+     */
+    public function getIdagencije()
+    {
+        return $this->idagencije;
+    }
+
+    /**
+     * @param Agencija $idagencije
+     */
+    public function setIdagencije($idagencije)
+    {
+        $this->idagencije = $idagencije;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getOmiljene()
+    {
+        return $this->omiljene;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $omiljene
+     */
+    public function setOmiljene($omiljene)
+    {
+        $this->omiljene = $omiljene;
+    }
+
+
 }

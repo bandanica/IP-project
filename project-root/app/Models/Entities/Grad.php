@@ -28,5 +28,37 @@ class Grad
      */
     private $naziv;
 
+    /**
+     * @return int
+     */
+    public function getIdg()
+    {
+        return $this->idg;
+    }
+
+    /**
+     * @param int $idg
+     */
+    public function setIdg($idg)
+    {
+        $this->idg = $idg;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    /**
+     * @param string|null $naziv
+     */
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
+    }
+
 
 }
