@@ -35,7 +35,7 @@ class Database extends Config
         'hostname' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'database' => 'proba',
+        'database' => 'baza',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

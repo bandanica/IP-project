@@ -8,9 +8,11 @@ class Home extends BaseController
 {
 	public function index()
 	{
-        $gradovi = $this->doctrine->em->getRepository(Korisnik::class)->findAll();
+        /*$gradovi = $this->doctrine->em->getRepository(Korisnik::class)->findAll();
         $grad  = $gradovi[0];
         echo $gradovi[0]->getIme();
+        $grad  = $gradovi[1];
+        echo $gradovi[1]->getIme();*/
 		return view('stranice\index');
 	}
 //    public function login(){
