@@ -1,6 +1,11 @@
-
-
-<form method='post' action="login/login">
+<html>
+<head>
+    <script src="<?php echo base_url(); ?>/js/login.js"></script>
+</head>
+<body>
+<?php //if (isset($poruka)) echo "<font color='red'>$poruka</font><br>"; ?>
+<span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
+<form method='post' action=<?php echo site_url() . "login/login" ?>>
     <h2>Prijava na sajt</h2>
     Korisnicko ime: <input type="text" name="kor_ime"><br/>
     Lozinka: <input type="password" name="lozinka"><br/>
@@ -8,18 +13,35 @@
     <input type='submit' name='submit' value='Prijava'><br/>
 </form>
 
-<form method='post' action="">
+<form method='post' action=<?php echo site_url() . "login/registerSubmit" ?>>
     <h2>Registracija na sajt</h2>
-    Ime: <input type="text" name="ime"><br/>
-    Prezime: <input type="text" name="prez"><br/>
-    Korisnicko ime: <input type="text" name="korime"><br/>
-    Lozinka: <input type="password" name="loz"><br/>
-    Grad: <input type="text" name="grad"><br/>
-    Datum rodjenja: <input type="date" name="rodjenje"><br/>
-    Kontakt telefon: <input type="text" name="ime"><br/>
-    I-mejl: <input type="text" name="mejl"><br/>
+    Ime: <input type="text" name="ime" onchange="f()"><br/>
+    Prezime: <input type="text" name="prez" onchange="f()"><br/>
+    Korisnicko ime: <input type="text" name="korime" onchange="f()"><br/>
+    Lozinka: <input type="password" name="loz" onchange="proveraLozinke()"><br/>
+    Grad: <select name="gradici" onchange="f()">
+        <?php
+        if (isset($gradovi)) {
+            foreach ($gradovi as $g) {
+                ?>
+                <option><?php echo $g->getNaziv() ?> </option>
+                <?php
+            }
+        }
+        ?>
+
+    </select>
+    <br/>
+    Datum rodjenja: <input type="date" name="rodjenje" max=<?php echo date("Y-m-d") ?> onchange="f()"><br/>
+    Kontakt telefon: <input type="text" name="tel" onchange="f()"><br/>
+    I-mejl: <input type="text" name="mejl" onchange="proveraMejla()"><br/>
 
 
-
-    <input type='submit' name='submit' value='Registracija'>
+    <input type='submit' name='submit' disabled value='Registracija' id="regDugme">
+    <br/>
+    <span id="regGreske" style="color: red"><?php if (isset($losaregistracija)) echo $losaregistracija ?></span>
 </form>
+
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `baza` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `baza` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `baza`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
@@ -23,7 +23,7 @@ USE `baza`;
 
 DROP TABLE IF EXISTS `agencija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `agencija` (
   `idA` int unsigned NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `agencija` (
   PRIMARY KEY (`idA`),
   UNIQUE KEY `idA_UNIQUE` (`idA`),
   UNIQUE KEY `PIB_UNIQUE` (`PIB`),
-  UNIQUE KEY `idGrada_UNIQUE` (`idGrada`),
+  
   CONSTRAINT `grad` FOREIGN KEY (`idGrada`) REFERENCES `grad` (`idG`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -54,7 +54,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `grad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `grad` (
   `idG` int unsigned NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -78,7 +78,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `karakteristike`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `karakteristike` (
   `idkarakteristike` int unsigned NOT NULL AUTO_INCREMENT,
   `terasa` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -112,7 +112,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `korisnik`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `korisnik` (
   `idK` int unsigned NOT NULL AUTO_INCREMENT,
   `kor_ime` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -153,14 +153,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mikrolokacija`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `mikrolokacija` (
   `idmikro` int unsigned NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `opstina` int unsigned NOT NULL,
   PRIMARY KEY (`idmikro`),
   UNIQUE KEY `idmikro_UNIQUE` (`idmikro`),
-  UNIQUE KEY `opstina_UNIQUE` (`opstina`),
+  
   CONSTRAINT `opstina` FOREIGN KEY (`opstina`) REFERENCES `opstina` (`idOpstine`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -180,7 +180,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `nekretnina`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `nekretnina` (
   `idN` int unsigned NOT NULL AUTO_INCREMENT,
   `tip` int unsigned NOT NULL,
@@ -204,14 +204,8 @@ CREATE TABLE `nekretnina` (
   `karakteristike` int unsigned NOT NULL,
   PRIMARY KEY (`idN`),
   UNIQUE KEY `idN_UNIQUE` (`idN`),
-  UNIQUE KEY `tip_UNIQUE` (`tip`),
-  UNIQUE KEY `agencija_UNIQUE` (`agencija`),
-  UNIQUE KEY `grad_UNIQUE` (`gradID`),
-  UNIQUE KEY `opstina_UNIQUE` (`opstina`),
-  UNIQUE KEY `mikrolokacija_UNIQUE` (`mikrolokacija`),
-  UNIQUE KEY `ulica_UNIQUE` (`ulica`),
-  UNIQUE KEY `oglasivac_UNIQUE` (`oglasivac`),
-  UNIQUE KEY `karakteristike_UNIQUE` (`karakteristike`),
+  
+  
   CONSTRAINT `agencijaID` FOREIGN KEY (`agencija`) REFERENCES `agencija` (`idA`),
   CONSTRAINT `grd` FOREIGN KEY (`gradID`) REFERENCES `grad` (`idG`),
   CONSTRAINT `karakt` FOREIGN KEY (`karakteristike`) REFERENCES `karakteristike` (`idkarakteristike`),
@@ -238,7 +232,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `omiljene`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `omiljene` (
   `idO` int unsigned NOT NULL AUTO_INCREMENT,
   `idKupca` int unsigned NOT NULL,
@@ -267,14 +261,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `opstina`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `opstina` (
   `idOpstine` int unsigned NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `grad` int unsigned NOT NULL,
   PRIMARY KEY (`idOpstine`),
   UNIQUE KEY `idOpstine_UNIQUE` (`idOpstine`),
-  UNIQUE KEY `grad_UNIQUE` (`grad`),
+  
   CONSTRAINT `idgrad` FOREIGN KEY (`grad`) REFERENCES `grad` (`idG`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -294,7 +288,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tipkorisnika`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `tipkorisnika` (
   `idT` int NOT NULL AUTO_INCREMENT,
   `tip_korisnika` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
@@ -319,7 +313,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tipnekretnine`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `tipnekretnine` (
   `idTipnekretnine` int unsigned NOT NULL AUTO_INCREMENT,
   `naziv_tipa` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -344,14 +338,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ulica`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `ulica` (
   `idU` int unsigned NOT NULL AUTO_INCREMENT,
   `mikrolokacija` int unsigned NOT NULL,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idU`),
   UNIQUE KEY `idU_UNIQUE` (`idU`),
-  UNIQUE KEY `mikrolokacija_UNIQUE` (`mikrolokacija`),
+  
   CONSTRAINT `mikrolokacija` FOREIGN KEY (`mikrolokacija`) REFERENCES `mikrolokacija` (`idmikro`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;

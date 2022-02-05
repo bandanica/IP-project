@@ -118,8 +118,17 @@ class Korisnik
      */
     private $omiljene;
 
-    public function __construct() {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="odobren", type="integer", options={"default" : 0})
+     */
+    private $status;
+
+    public function __construct()
+    {
         $this->omiljene = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->status = 0;
     }
 
     /**
@@ -328,6 +337,22 @@ class Korisnik
     public function setOmiljene($omiljene)
     {
         $this->omiljene = $omiljene;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
     }
 
 
