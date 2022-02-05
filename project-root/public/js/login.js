@@ -27,6 +27,7 @@ function f(greske="",podaci=true) {
 function proveraMejla(){
     podaciOk = true;
     greske="";
+    document.getElementById("regGreske").innerHTML = greske;
     mejl = document.getElementsByName('mejl')[0].value;
     regMejl = /^\w+@\w\.\w{2,3}$/;
     if (!regMejl.test(mejl)){
@@ -43,6 +44,7 @@ function proveraMejla(){
 function proveraLozinke(){
     podaciOk=true;
     greske="";
+    document.getElementById("regGreske").innerHTML = greske;
     lozinka=document.getElementsByName('loz')[0].value;
     //regLozinka = new RegExp("^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])).{8,})");
 
