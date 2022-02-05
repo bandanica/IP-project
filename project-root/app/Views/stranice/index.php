@@ -1,6 +1,6 @@
 
 
-<form method='post' action="Login/login">
+<form method='post' action="login/login">
     <h2>Prijava na sajt</h2>
     Korisnicko ime: <input type="text" name="kor_ime"><br/>
     Lozinka: <input type="password" name="lozinka"><br/>

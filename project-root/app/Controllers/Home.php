@@ -1,15 +1,22 @@
 <?php
 
 namespace App\Controllers;
-/*
-use App\Libraries\Doctrine;
-use Config\Services;
-use PharIo\Manifest\Library;*/
+
+use App\Models\Entities\Korisnik;
 
 class Home extends BaseController
 {
-    public function index()
-    {
-        return view('stranice/index');
-    }
+	public function index()
+	{
+        $gradovi = $this->doctrine->em->getRepository(Korisnik::class)->findAll();
+        $grad  = $gradovi[0];
+        echo $gradovi[0]->getIme();
+		return view('stranice\index');
+	}
+//    public function login(){
+////        $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->find($this->request->getVar('kor_ime'));
+////        return $korisnik->getIme();
+//        echo 'login';
+//        return view('stranice\index');
+//    }
 }

@@ -19,7 +19,7 @@ class Korisnik
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idk;
+    private $idK;
 
     /**
      * @var string
@@ -125,17 +125,17 @@ class Korisnik
     /**
      * @return int
      */
-    public function getIdk()
+    public function getIdK()
     {
-        return $this->idk;
+        return $this->idK;
     }
 
     /**
      * @param int $idk
      */
-    public function setIdk($idk)
+    public function setIdK($idk)
     {
-        $this->idk = $idk;
+        $this->idK = $idk;
     }
 
     /**

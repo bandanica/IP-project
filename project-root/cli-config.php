@@ -1,20 +1,7 @@
 <?php
-/**
- * Part of CodeIgniter Doctrine
- *
- * @author     Daycry <https://github.com/daycry>
- * @license    MIT License
- * @copyright  2015 Kenji Suzuki
- * @link       https://github.com/kenjis/codeigniter-doctrine
- */
-
-error_reporting( E_ALL );
 
 // Path to the front controller (this file)
-if( !defined( 'FCPATH' ) )
-{
-    define( 'FCPATH', __DIR__ . DIRECTORY_SEPARATOR );
-}
+define('FCPATH', __DIR__ . DIRECTORY_SEPARATOR);
 
 // Location of the Paths config file.
 // This is the line that might need to be changed, depending on your folder structure.
@@ -30,18 +17,19 @@ $pathsPath = FCPATH . 'app/Config/Paths.php';
  * and fires up an environment-specific bootstrapping.
  */
 
-// Ensure the current directory is pointing to the front controller's directory
-chdir( __DIR__ );
-
 // Load our paths config file
 require $pathsPath;
 $paths = new Config\Paths();
 
 // Location of the framework bootstrap file.
-$app = require rtrim( $paths->systemDirectory, '/ ' ) . '/bootstrap.php';
+$app = require rtrim($paths->systemDirectory, '/ ') . '/bootstrap.php';
+
+$doctrine = \Config\Services::doctrine();
 
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
+return ConsoleRunner::createHelperSet($doctrine->em); 
 
-$doctrine = new \Daycry\Doctrine\Doctrine();
 
-return ConsoleRunner::createHelperSet( $doctrine->em );
+
+
+
