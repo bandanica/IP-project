@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 06, 2022 at 12:26 PM
+-- Generation Time: Feb 06, 2022 at 09:02 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -91,7 +91,14 @@ CREATE TABLE IF NOT EXISTS `karakteristike` (
   `parking` varchar(3) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idkarakteristike`),
   UNIQUE KEY `idkarakteristike_UNIQUE` (`idkarakteristike`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `karakteristike`
+--
+
+INSERT INTO `karakteristike` (`idkarakteristike`, `terasa`, `lodja`, `lift`, `franc.balkon`, `podrum`, `garaza`, `sa bastom`, `klima`, `internet`, `telefon`, `parking`) VALUES
+(1, 'da', 'ne', 'ne', 'ne', 'da', 'ne', 'ne', 'da', 'da', 'da', 'da');
 
 -- --------------------------------------------------------
 
@@ -121,25 +128,19 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   KEY `tip_idx` (`tip`),
   KEY `gradid_idx` (`idGrada`),
   KEY `idAgencije_idx` (`idAgencije`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `korisnik`
 --
 
 INSERT INTO `korisnik` (`idK`, `kor_ime`, `ime`, `prezime`, `lozinka`, `datum_rodjenja`, `telefon`, `e_mail`, `idGrada`, `idAgencije`, `br_licence`, `tip`, `odobren`) VALUES
-(1, 'mile123', 'Mile', 'Milic', 'sifra123', '1985-05-05 00:00:00', '0616672345', 'milence@gmail.com', 1, NULL, NULL, 1, 0),
-(2, 'luka123', 'Luka', 'Lukic', 'sifra123', '1990-03-01 00:00:00', '06375751895', 'lulence@gmail.com', 1, NULL, NULL, 1, 0),
-(3, 'stana123', 'Stana', 'Stanic', 'sifra123', '1976-01-04 00:00:00', '0665619728', 'stanika@gmail.com', 1, NULL, NULL, 2, 0),
-(4, 'mare', 'marko', 'Markovic', 'marko123', '2022-02-16 10:31:55', '0656356539', 'marko@gmail.com', 1, NULL, NULL, 1, 0),
-(6, 'peki', 'Perar', 'Petrovic', 'peki123', '1999-02-02 10:33:35', '0656356539', 'peki@gmail.com', 1, NULL, NULL, 1, 0),
-(7, 'dandz', 'Dana', 'Danovic', 'dana123', '2022-02-01 10:38:22', '011/123-1-143', 'danica.bandovic@gmail.com', 1, NULL, NULL, 1, 0),
-(11, 'kalu', 'Kalus', 'Kalovic', 'kalu123', '2022-02-01 10:40:57', '011/123-1-143', 'kalu@gmail.com', 1, NULL, NULL, 1, 0),
-(12, 'iki', 'Irena', 'Irenovic', 'iki123', '2022-02-16 10:46:33', '011/123-1-143', 'iki@gmail.com', 1, NULL, NULL, 1, 0),
-(13, 'imenko', 'Ime', 'Imevic', 'ime123', '2022-02-24 10:47:34', '0656356539', 'ime@gmail.com', 1, NULL, NULL, 1, 0),
-(14, 'mina123', 'mina', 'minic', 'minka123!bG', '2001-02-14 13:59:19', '0656356539', 'minka@gmail.com', 1, NULL, NULL, 1, 0),
-(18, 'janci123', 'Jana', 'Micic', 'Janeks1254A#m', '1985-11-12 06:19:48', '066/3647129', 'janica@gmail.com', 1, 1, '00324685', 3, 0),
-(19, 'admin123', 'admin', 'admin', 'admin123', '2022-02-06 12:23:37', NULL, NULL, 1, NULL, NULL, 4, 3);
+(1, 'mile123', 'Mile', 'Milic', 'sifra123', '1985-05-05 00:00:00', '0616672345', 'milence@gmail.com', 1, NULL, NULL, 1, 1),
+(2, 'luka123', 'Luka', 'Lukic', 'sifra123!Sifra', '1990-03-01 00:00:00', '06375751895', 'lulence@gmail.com', 1, NULL, NULL, 1, 1),
+(3, 'stana123', 'Stana', 'Stanic', 'sifra123', '1976-01-04 00:00:00', '0665619728', 'stanika@gmail.com', 1, NULL, NULL, 2, 1),
+(6, 'peki', 'Perar', 'Petrovic', 'peki123', '1999-02-02 10:33:35', '0656356539', 'peki@gmail.com', 1, NULL, NULL, 1, 2),
+(19, 'admin123', 'admin', 'admin', 'admin123', '2022-02-06 12:23:37', NULL, NULL, 1, NULL, NULL, 4, 3),
+(20, 'danica123', 'Danica', 'Markovic', 'Dana123!dana', '1999-05-05 13:16:31', '011/123-1-143', 'danicabandovic@gmail.com', 1, NULL, NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -194,6 +195,8 @@ CREATE TABLE IF NOT EXISTS `nekretnina` (
   `opis` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `status` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `karakteristike` int(10) UNSIGNED NOT NULL,
+  `naziv` varchar(45) COLLATE utf8_bin NOT NULL,
+  `cena` int(11) NOT NULL,
   PRIMARY KEY (`idN`),
   UNIQUE KEY `idN_UNIQUE` (`idN`),
   KEY `agencijaID` (`agencija`),
@@ -204,7 +207,14 @@ CREATE TABLE IF NOT EXISTS `nekretnina` (
   KEY `opst` (`opstina`),
   KEY `tipNekr` (`tip`),
   KEY `ul` (`ulica`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `nekretnina`
+--
+
+INSERT INTO `nekretnina` (`idN`, `tip`, `oglasivac`, `agencija`, `kvadratura`, `gradID`, `opstina`, `mikrolokacija`, `ulica`, `br_soba`, `godina_izgradnje`, `sprat`, `ukupna_spratnost`, `parking`, `stanje`, `grejanje`, `mesecni_troskovi`, `opis`, `status`, `karakteristike`, `naziv`, `cena`) VALUES
+(1, 1, 3, 1, 45, 1, 1, 1, 3, 2, NULL, 2, 5, 'da', 'izvorno', 'na struju', 12000, 'Super lokacija, svetao stan, opremljen kuhinjom.', 'novogradnja', 1, 'Stan Hadzi Milentijeva 50', 60000);
 
 -- --------------------------------------------------------
 
