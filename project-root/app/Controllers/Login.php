@@ -78,6 +78,10 @@ class Login extends BaseController
         if ($korisnik->getTip()->getTipKorisnika() == "administrator") {
             return redirect()->to(site_url('administrator'));
         }
+        else
+        {
+            return redirect()->to(site_url('oglasivac'));
+        }
     }
 
     public function registerSubmit()
