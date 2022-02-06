@@ -96,3 +96,7 @@ if (isset($korisnici) && !empty($korisnici)) {
 <form>
     <input type="submit" name="novaUlica" value="Dodaj ulicu">
 </form>
+<form method='post' action=<?php echo site_url() . "login/logout" ?>>
+    <input type="submit" name="logout" value="Odjavi se">
+
+</form>

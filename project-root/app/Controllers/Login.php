@@ -30,6 +30,7 @@ class Login extends BaseController
         $porukaL = $this->session->get("porukaLozinka");
         $this->session->set("poruka", '');
         $this->session->set("poruka1", '');
+        $this->session->set("porukaLozinka", '');
         return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL]);
     }
 
@@ -153,5 +154,9 @@ class Login extends BaseController
     public function registrovan()
     {
         return $this->prikaz("kreiranKorisnik", []);
+    }
+    public function logout(){
+        $this->session->remove('korisnik');
+        return redirect()->to(site_url());
     }
 }
