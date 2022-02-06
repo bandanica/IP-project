@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 05, 2022 at 09:14 PM
+-- Generation Time: Feb 06, 2022 at 12:26 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -39,7 +39,14 @@ CREATE TABLE IF NOT EXISTS `agencija` (
   UNIQUE KEY `idA_UNIQUE` (`idA`),
   UNIQUE KEY `PIB_UNIQUE` (`PIB`),
   KEY `grad` (`idGrada`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `agencija`
+--
+
+INSERT INTO `agencija` (`idA`, `naziv`, `adresa`, `telefon`, `PIB`, `idGrada`) VALUES
+(1, 'Felix', 'Tosin bunar', '011/324511', '0058649', 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   KEY `tip_idx` (`tip`),
   KEY `gradid_idx` (`idGrada`),
   KEY `idAgencije_idx` (`idAgencije`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `korisnik`
@@ -130,7 +137,9 @@ INSERT INTO `korisnik` (`idK`, `kor_ime`, `ime`, `prezime`, `lozinka`, `datum_ro
 (11, 'kalu', 'Kalus', 'Kalovic', 'kalu123', '2022-02-01 10:40:57', '011/123-1-143', 'kalu@gmail.com', 1, NULL, NULL, 1, 0),
 (12, 'iki', 'Irena', 'Irenovic', 'iki123', '2022-02-16 10:46:33', '011/123-1-143', 'iki@gmail.com', 1, NULL, NULL, 1, 0),
 (13, 'imenko', 'Ime', 'Imevic', 'ime123', '2022-02-24 10:47:34', '0656356539', 'ime@gmail.com', 1, NULL, NULL, 1, 0),
-(14, 'mina123', 'mina', 'minic', 'minka123!bG', '2001-02-14 13:59:19', '0656356539', 'minka@gmail.com', 1, NULL, NULL, 1, 0);
+(14, 'mina123', 'mina', 'minic', 'minka123!bG', '2001-02-14 13:59:19', '0656356539', 'minka@gmail.com', 1, NULL, NULL, 1, 0),
+(18, 'janci123', 'Jana', 'Micic', 'Janeks1254A#m', '1985-11-12 06:19:48', '066/3647129', 'janica@gmail.com', 1, 1, '00324685', 3, 0),
+(19, 'admin123', 'admin', 'admin', 'admin123', '2022-02-06 12:23:37', NULL, NULL, 1, NULL, NULL, 4, 3);
 
 -- --------------------------------------------------------
 
