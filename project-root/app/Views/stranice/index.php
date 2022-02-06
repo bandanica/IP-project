@@ -52,7 +52,7 @@
 
     <div id="agencija" hidden>
         Agencija:
-        <select name="agencije" id="ListaAgencija" onchange="f()">
+        <select name="agencije1" id="ListaAgencija" onchange="f()">
 
             <?php
             if (isset($agencije)) {

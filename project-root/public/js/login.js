@@ -12,27 +12,30 @@ function f(greske="",podaciOk=true) {
     telefon = document.getElementsByName('tel')[0].value;
     mejl = document.getElementsByName('mejl')[0].value;
     //tipkor = document.getElementsByName('tip');
-    // if(document.getElementById('kupac').checked) {
-    //     console.log(document.getElementById('kupac').value);
-    //     document.getElementById("agencija").hidden=true;
-    //     //document.getElementsByName('brlicence').style.display=true;
-    // }
-    // else if(document.getElementById('samostalni prodavac').checked) {
-    //     console.log(document.getElementById('samostalni prodavac').value);
-    //     document.getElementById("agencija").hidden=true;
-    // }
-    if(document.getElementById('agent').checked) {
+    tip='';
+    if(document.getElementById('kupac').checked) {
+         console.log(document.getElementById('kupac').value);
+         document.getElementById("agencija").hidden=true;
+         //document.getElementsByName('brlicence').style.display=true;
+        tip='kupac';
+    }
+    else if(document.getElementById('samostalni prodavac').checked) {
+        console.log(document.getElementById('samostalni prodavac').value);
+        document.getElementById("agencija").hidden=true;
+        tip='prodavac';
+    }
+    else if(document.getElementById('agent').checked) {
         console.log(document.getElementById('agent').value);
         document.getElementById("agencija").hidden=false;
-        //document.getElementsByName('brlicence').style.display='none';
+        tip='agent';
     }
-    else{
-        document.getElementById("agencija").hidden=true;
-    }
+    //else{
+    //    document.getElementById("agencija").hidden=true;
+    //}
 
 
     console.log(ime,prezime,korime,grad,lozinka,datum,telefon,mejl);
-    if (ime==='' || prezime==='' || korime==='' || grad==='' || lozinka==='' || telefon==='' || mejl===''){
+    if (ime==='' || prezime==='' || korime==='' || grad==='' || lozinka==='' || telefon==='' || mejl==='' || tip===''){
         greske=greske.concat("Sva polja su obavezna!");
         podaciOk=false;
     }

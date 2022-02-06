@@ -59,8 +59,8 @@ class Login extends BaseController
         if ($korisnik->getTip()->getTipKorisnika() == "kupac") {
             return redirect()->to(site_url('korisnik'));
         }
-        if ($korisnik->getTip()->getTipKorisnika() == "kupac") {
-            return redirect()->to(site_url('korisnik'));
+        if ($korisnik->getTip()->getTipKorisnika() == "administrator") {
+            return redirect()->to(site_url('administrator'));
         }
     }
 
@@ -77,6 +77,8 @@ class Login extends BaseController
         $mejl = $this->request->getVar('mejl');
         $grad = $this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv' => $grad]);
         $rodjenje = date_create_from_format("Y-m-d", $rodjenje);
+        $tipKor = $this->request->getVar('tip');
+
 
         //PROVERA DA LI POSTOJI KORISNIK SA KORISNICKIM IMENOM ILI MEJLOM U BAZI
         $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
@@ -101,7 +103,22 @@ class Login extends BaseController
         $korisnik->setDatumRodjenja($rodjenje);
         $korisnik->setEMail($mejl);
         $korisnik->setStatus(0);
-        $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'kupac']));
+        if ($tipKor==='kupac'){
+            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'kupac']));
+        }
+        else if ($tipKor==='samostalni prodavac'){
+            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'samostalni prodavac']));
+        }
+        else {
+            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'agent']));
+            $agencija = $this->request->getVar('agencije1');
+            $agencija = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $agencija]);
+
+            $licenca = $this->request->getVar('brlicence');
+            $korisnik->setBrLicence($licenca);
+            $korisnik->setIdagencije($agencija);
+
+        }
 
         echo $ime;
         echo $prez;
