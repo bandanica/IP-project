@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\EntitetiZaProsledjivanje\Nekretnine;
+use App\Models\Entities\Nekretnina;
+
 class Oglasivac extends BaseController
 {
     public function index()
@@ -9,7 +12,18 @@ class Oglasivac extends BaseController
         //echo $this->session->get("korisnik")->getIme();
         $poruka = $this->session->get("poruka2");
         $this->session->set("poruka2", '');
-        return $this->prikaz('oglasivac',['poruka2'=>$poruka]);
+        $id = $this->session->get('korisnik');
+        //echo $id;
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK'=>$id]);
+        //echo $kor->getIme();
+        $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac'=>$kor]);
+        $prosNek = [];
+        foreach ($nekretnine as $n){
+            $nek1 = new Nekretnine($n);
+            array_push($prosNek,$nek1);
+        }
+
+        return $this->prikaz('oglasivac',['poruka2'=>$poruka,'mojenekretnine'=>$prosNek]);
     }
     protected function prikaz($page, $data)
     {
@@ -43,5 +57,9 @@ class Oglasivac extends BaseController
             $this->session->set("poruka2", 'Niste uneli dobru staru lozinku');
             return redirect()->to(site_url('oglasivac'));
         }
+    }
+
+    public function novaNekretnina(){
+        return $this->prikaz('dodavanjeNekretnine',[]);
     }
 }

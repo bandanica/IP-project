@@ -12,7 +12,7 @@ class Administrator extends BaseController
         $regzahtevi = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status' => 0]);
 
         $korisnici = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status'=>[1,2]]);
-        $tl = [];
+        //$tl = [];
 //        foreach ($korisnici as $kor) {
 //            array_push($tl, $kor);
 //            echo $kor->getKorIme();

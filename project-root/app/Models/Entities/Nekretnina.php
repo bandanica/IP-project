@@ -94,6 +94,20 @@ class Nekretnina
     /**
      * @var string|null
      *
+     * @ORM\Column(name="naziv", type="string", length=45, nullable=false)
+     */
+    private $naziv;
+
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(name="cena", type="integer", length=11, nullable=false)
+     */
+    private $cena;
+
+    /**
+     * @var string|null
+     *
      * @ORM\Column(name="status", type="string", length=45, nullable=true)
      */
     private $status;
@@ -242,6 +256,21 @@ class Nekretnina
     }
 
     /**
+     * @return int|null
+     */
+    public function getCena()
+    {
+        return $this->cena;
+    }
+
+    /**
+     * @param int|null $cena
+     */
+    public function setCena($cena)
+    {
+        $this->cena = $cena;
+    }
+    /**
      * @return \DateTime|null
      */
     public function getGodinaIzgradnje()
@@ -367,6 +396,22 @@ class Nekretnina
     public function setOpis($opis)
     {
         $this->opis = $opis;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNaziv()
+    {
+        return $this->naziv;
+    }
+
+    /**
+     * @param string $naziv
+     */
+    public function setNaziv($naziv)
+    {
+        $this->naziv = $naziv;
     }
 
     /**
