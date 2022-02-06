@@ -8,7 +8,7 @@ class Korisnik extends BaseController
 {
     public function index()
     {
-        echo $this->session->get("korisnik")->getIme();
+        //echo $this->session->get("korisnik")->getIme();
         $poruka = $this->session->get("poruka2");
         $this->session->set("poruka2", '');
         return $this->prikaz('kupac',['poruka2'=>$poruka]);
@@ -25,7 +25,7 @@ class Korisnik extends BaseController
         $this->session->set("poruka2", '');
         $stara = $this->request->getVar('staraL');
         $kor = $this->session->get('korisnik');
-        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK'=>$kor->getIdK()]);
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK'=>$kor]);
         $loz = $kor->getLozinka();
         echo $loz;
         echo "<br/>";

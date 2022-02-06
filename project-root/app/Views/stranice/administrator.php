@@ -8,8 +8,8 @@ if (isset($zahtevi) && !empty($zahtevi)) {
             <th>Ime</th>
             <th>Prezime</th>
             <th>Korisnicko ime</th>
-            <th>Prihvatanje</th>
             <th>Odbijanje</th>
+            <th>Prihvatanje</th>
         </tr>
         <?php
 

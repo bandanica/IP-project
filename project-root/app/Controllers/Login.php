@@ -66,9 +66,10 @@ class Login extends BaseController
             $this->session->set("poruka", 'Vas zahtev za registracijom je odbijen. Molimo vas registrujte se ponovo.');
             return redirect()->to(site_url());
         }
-        $korisnik->getIdgrada()->getNaziv();
+        //$korisnik->getIdgrada()->getNaziv();
+        $zaSesiju = $korisnik->getIdK();
 
-        $this->session->set('korisnik', $korisnik);
+        $this->session->set('korisnik', $zaSesiju);
 
         if ($korisnik->getTip()->getTipKorisnika() == "kupac") {
             return redirect()->to(site_url('korisnik'));
