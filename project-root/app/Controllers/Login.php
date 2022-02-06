@@ -54,6 +54,14 @@ class Login extends BaseController
             $this->session->set("poruka", 'Pogresna lozinka');
             return redirect()->to(site_url());
         }
+        if ($korisnik->getStatus()==0){
+            $this->session->set("poruka", 'Vas zahtev za registracijom jos uvek nije odobren od administratora.Pokusajte ponovo kasnije.');
+            return redirect()->to(site_url());
+        }
+        if ($korisnik->getStatus()==2){
+            $this->session->set("poruka", 'Vas zahtev za registracijom je odbijen. Molimo vas registrujte se ponovo.');
+            return redirect()->to(site_url());
+        }
         $this->session->set('korisnik', $korisnik->getIme());
 
         if ($korisnik->getTip()->getTipKorisnika() == "kupac") {
