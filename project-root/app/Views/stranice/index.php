@@ -34,12 +34,44 @@
     <br/>
     Datum rodjenja: <input type="date" name="rodjenje" max=<?php echo date("Y-m-d") ?> onchange="f()"><br/>
     Kontakt telefon: <input type="text" name="tel" onchange="f()"><br/>
-    I-mejl: <input type="text" name="mejl" onchange="proveraMejla()"><br/>
+    I-mejl: <input type="text" name="mejl" onchange="f()"><br/>
 
+    Tip korisnika:
+    <?php
+    if (isset($tipkorisnika)) {
+        foreach ($tipkorisnika as $t) {
 
+            ?>
+            <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                   value="<?php echo $t->getTipKorisnika() ?>" onchange="f()"> <?php echo $t->getTipKorisnika() ?>
+            <?php
+        }
+    }
+    ?>
+    <br/>
+
+    <div id="agencija" hidden>
+        Agencija:
+        <select name="agencije" id="ListaAgencija" onchange="f()">
+
+            <?php
+            if (isset($agencije)) {
+                foreach ($agencije as $a) {
+                    ?>
+                    <option><?php echo $a->getNaziv() ?> </option>
+                    <?php
+                }
+            }
+            ?>
+        </select>
+        <br/>
+
+        Broj licence agenta:<input type="text" name="brlicence"><br/>
+    </div>
     <input type='submit' name='submit' disabled value='Registracija' id="regDugme">
     <br/>
-    <span id="regGreske" style="color: red"><?php if (isset($losaregistracija)) echo $losaregistracija ?></span>
+
+    <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
 </form>
 
 

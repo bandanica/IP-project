@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Entities\Agencija;
 use App\Models\Entities\Grad;
 use App\Models\Entities\Korisnik;
 use App\Models\Entities\Tipkorisnika;
@@ -11,9 +12,22 @@ class Login extends BaseController
     public function index()
     {
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
+        $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
+        $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
+        $indexAdmin = -1;
+        foreach ($tipkorisnika as $t){
+            $indexAdmin+=1;
+            if ($t->getTipKorisnika()=="administrator"){
+                break;
+            }
+        }
+
+        unset($tipkorisnika[$indexAdmin]);
         $poruka = $this->session->get("poruka");
+        $poruka1 = $this->session->get("poruka1");
         $this->session->set("poruka", '');
-        return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka]);
+        $this->session->set("poruka1",'');
+        return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1'=>$poruka1,'tipkorisnika'=>$tipkorisnika,'agencije'=>$agencije]);
     }
 
     protected function prikaz($page, $data)
@@ -52,7 +66,7 @@ class Login extends BaseController
 
     public function registerSubmit()
     {
-        $this->session->set("poruka", '');
+        $this->session->set("poruka1", '');
         $ime = $this->request->getVar('ime');
         $prez = $this->request->getVar('prez');
         $korime = $this->request->getVar('korime');
@@ -64,6 +78,19 @@ class Login extends BaseController
         $grad = $this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv' => $grad]);
         $rodjenje = date_create_from_format("Y-m-d", $rodjenje);
 
+        //PROVERA DA LI POSTOJI KORISNIK SA KORISNICKIM IMENOM ILI MEJLOM U BAZI
+        $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
+            ->findOneBy(['korIme' => $this->request->getVar('korime')]);
+        if ($korisnik1!=null){
+            $this->session->set("poruka1", 'Zauzeto korisnicko ime');
+            return redirect()->to(site_url());
+        }
+        $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
+            ->findOneBy(['eMail' => $this->request->getVar('mejl')]);
+        if ($korisnik1!=null){
+            $this->session->set("poruka1", 'Zauzeta email adresa');
+            return redirect()->to(site_url());
+        }
         $korisnik = new Korisnik();
         $korisnik->setIme($ime);
         $korisnik->setPrezime($prez);
