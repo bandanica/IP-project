@@ -179,17 +179,17 @@ class Nekretnina
     private $gradid;
 
 
-
     /**
      *
-     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @var \App\Models\Entities\Korisnik[]
      *
      * Many Nekretnina(omiljena) have Many Korisnici(kupci).
-     * @ORM\ManyToMany(targetEntity="Korisnik", mappedBy="omiljene")
+     * @ORM\ManyToMany(targetEntity="App\Models\Entities\Korisnik", mappedBy="omiljene")
      */
     private $kupci;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->kupci = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -528,8 +528,6 @@ class Nekretnina
     {
         $this->kupci = $kupci;
     }
-
-
 
 
 }

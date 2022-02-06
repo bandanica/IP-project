@@ -104,19 +104,23 @@ class Korisnik
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idAgencije", referencedColumnName="idA")
      * })
+     *
      */
     private $idagencije;
 
 
-    /**
-     *
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     *
-     * Many Korisnik(kupac) have Many Nekretnina(omiljena).
-     * @ORM\ManyToMany(targetEntity="Nekretnina", inversedBy="kupci")
-     * @ORM\JoinTable(name="omiljene")
-     */
-    private $omiljene;
+//    /**
+//     *
+//     * @var \App\Models\Entities\Nekretnina[]
+//     *
+//     * Many Korisnik(kupac) have Many Nekretnina(omiljena).
+//     * @ORM\ManyToMany(targetEntity="App\Models\Entities\Nekretnina", inversedBy="kupci")
+//     * @ORM\JoinTable(name="omiljene",
+//     *       joinColumns={@ORM\JoinColumn(name="idK", referencedColumnName="idKupca")},
+//     *       inverseJoinColumns={@ORM\JoinColumn(name="idn", referencedColumnName="idNekretnine")}
+//     *      )
+//     */
+//    private $omiljene;
 
     /**
      * @var int
@@ -324,7 +328,7 @@ class Korisnik
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return Nekretnina[]
      */
     public function getOmiljene()
     {
@@ -332,7 +336,7 @@ class Korisnik
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $omiljene
+     * @param Nekretnina[] $omiljene
      */
     public function setOmiljene($omiljene)
     {

@@ -9,8 +9,9 @@ class Administrator extends BaseController
     public function index()
     {
         $k = 0;
-        $korisnici = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status' => 0]);
-        //$korisnici = $this->doctrine->em->getRepository(Korisnik::class)->findAll();
+        $regzahtevi = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status' => 0]);
+
+        $korisnici = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status'=>[1,2]]);
         $tl = [];
 //        foreach ($korisnici as $kor) {
 //            array_push($tl, $kor);
@@ -19,7 +20,7 @@ class Administrator extends BaseController
 //        }
 
         //echo $this->session->get('korisnik');
-        return $this->prikaz('administrator', ['zahtevi' => $korisnici]);
+        return $this->prikaz('administrator', ['zahtevi' => $regzahtevi, 'korisnici'=>$korisnici]);
 
     }
 
@@ -45,5 +46,21 @@ class Administrator extends BaseController
             $this->doctrine->em->flush();
             return redirect()->to(site_url('administrator'));
         }
+    }
+
+    public function azuriranje(){
+        if ($this->request->getVar('dugme1')=='Azuriraj'){
+            //DODATI AZURIRANJE KORISNIKA
+
+        }
+        else if ($this->request->getVar('dugme1')=='Obrisi'){
+            $korisnik = $this->request->getVar('idKor');
+            $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->findOneBy(['idK' => $korisnik]);
+            $this->doctrine->em->remove($korisnik);
+            $this->doctrine->em->flush();
+            return redirect()->to(site_url('administrator'));
+
+        }
+
     }
 }

@@ -3,7 +3,7 @@
     <script src="<?php echo base_url(); ?>/js/login.js"></script>
 </head>
 <body>
-<?php //if (isset($poruka)) echo "<font color='red'>$poruka</font><br>"; ?>
+<?php if (isset($porukaL)) echo "$porukaL"; echo "<br/>";?>
 <span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
 <form method='post' action=<?php echo site_url() . "login/login" ?>>
     <h2>Prijava na sajt</h2>
