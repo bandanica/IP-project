@@ -17,13 +17,13 @@ class Oglasivac extends BaseController
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK'=>$id]);
         //echo $kor->getIme();
         $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac'=>$kor]);
-        $prosNek = [];
-        foreach ($nekretnine as $n){
-            $nek1 = new Nekretnine($n);
-            array_push($prosNek,$nek1);
-        }
+//        $prosNek = [];
+//        foreach ($nekretnine as $n){
+//            $nek1 = new Nekretnine($n);
+//            array_push($prosNek,$nek1);
+//        }
 
-        return $this->prikaz('oglasivac',['poruka2'=>$poruka,'mojenekretnine'=>$prosNek]);
+        return $this->prikaz('oglasivac',['poruka2'=>$poruka,'mojenekretnine'=>$nekretnine]);
     }
     protected function prikaz($page, $data)
     {
