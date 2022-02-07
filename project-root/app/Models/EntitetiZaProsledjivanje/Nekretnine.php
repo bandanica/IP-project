@@ -18,24 +18,24 @@ class Nekretnine
     private $idn;
     private $kvadratura;
     private $brSoba;
-    private $godinaIzgradnje;
+    //private $godinaIzgradnje;
     private $sprat;
-    private $ukupnaSpratnost;
-    private $parking;
-    private $stanje;
-    private $grejanje;
+    //private $ukupnaSpratnost;
+    //private $parking;
+    //private $stanje;
+    //private $grejanje;
     private $mesecniTroskovi;
-    private $opis;
+    //private $opis;
     private $naziv;
-    private $status;
-    private $mikrolokacija;
-    private $opstina;
-    private $agencija;
-    private $ulica;
-    private $karakteristike;
+    //private $status;
+    //private $mikrolokacija;
+    //private $opstina;
+    //private $agencija;
+    //private $ulica;
+    //private $karakteristike;
     private $oglasivac;
-    private $tip;
-    private $gradid;
+    //private $tip;
+    //private $gradid;
     private $cena;
 
     /**

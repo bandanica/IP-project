@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\EntitetiZaProsledjivanje\Nekretnine;
+use App\Models\Entities\Grad;
 use App\Models\Entities\Nekretnina;
+use App\Models\Entities\Opstina;
 
 class Oglasivac extends BaseController
 {
@@ -17,13 +19,13 @@ class Oglasivac extends BaseController
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK'=>$id]);
         //echo $kor->getIme();
         $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac'=>$kor]);
-        $prosNek = [];
-        foreach ($nekretnine as $n){
-            $nek1 = new Nekretnine($n);
-            array_push($prosNek,$nek1);
-        }
+//        $prosNek = [];
+//        foreach ($nekretnine as $n){
+//            $nek1 = new Nekretnine($n);
+//            array_push($prosNek,$nek1);
+//        }
 
-        return $this->prikaz('oglasivac',['poruka2'=>$poruka,'mojenekretnine'=>$prosNek]);
+        return $this->prikaz('oglasivac',['poruka2'=>$poruka,'mojenekretnine'=>$nekretnine]);
     }
     protected function prikaz($page, $data)
     {
@@ -60,6 +62,19 @@ class Oglasivac extends BaseController
     }
 
     public function novaNekretnina(){
-        return $this->prikaz('dodavanjeNekretnine',[]);
+        $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
+        return $this->prikaz('dodavanjeNekretnine',['gradovi'=>$gradovi]);
+    }
+
+    public function opstineUGradu(){
+        $grad = $this->doctrine->em->getRepository(Grad::class)->find($this->request->getVar('idgrad'));
+        $opstine = $this->doctrine->em->getRepository(Opstina::class)->findBy(['grad'=>$grad]);
+        $sveOpstine = [];
+        foreach ($opstine as $o)
+            array_push($sveOpstine, [
+                "naziv" => $o->getNaziv(),
+                "idO"=>$o->getIdopstine()
+            ]);
+        return json_encode($sveOpstine);
     }
 }

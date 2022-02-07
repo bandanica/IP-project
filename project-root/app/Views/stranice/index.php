@@ -3,7 +3,8 @@
     <script src="<?php echo base_url(); ?>/js/login.js"></script>
 </head>
 <body>
-<?php if (isset($porukaL)) echo "$porukaL"; echo "<br/>";?>
+<?php if (isset($porukaL)) echo "$porukaL";
+echo "<br/>"; ?>
 <span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
 <form method='post' action=<?php echo site_url() . "login/login" ?>>
     <h2>Prijava na sajt</h2>
@@ -74,6 +75,50 @@
     <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
 </form>
 
+<h2>Poslednji oglasi:</h2>
+<?php
+if (isset($poslednjOgl) && !empty($poslednjOgl)) {
+    ?>
+    <table>
+        <tr>
+            <th>Slika</th>
+            <th>Naziv</th>
+            <th>Cena</th>
+            <th>Linije</th>
+            <th></th>
+        </tr>
+        <?php
 
+        foreach ($poslednjOgl as $n1) {
+            //OVO TREBA DA SE DORADI!!! treba fja koja ce da redirektuje na oglas
+            ?>
+            <form method='post' action=<?php echo site_url() . "login/login" ?>>
+                <tr>
+                    <td><?php //echo $n->getIdK() ?>
+                        <input type='hidden' value="<?php echo $n1->getIdn() ?>"
+                               name='idNek'>
+                    </td>
+                    <td><?php echo $n1->getNaziv() ?></td>
+                    <td><?php echo $n1->getCena() ?></td>
+
+
+                    <td><input type='submit' name='dugmeO' value='Pogledaj'></td>
+                </tr>
+            </form>
+            <?php
+        }
+
+
+        ?>
+    </table>
+    <?php
+} else {
+    if (isset($nekretnine))
+        foreach ($nekretnine as $nek) {
+            echo $nek->getNaziv()." ".$nek->getGodinaIzgradnje()->format("Y");
+            echo "<br/>";
+        }
+}
+?>
 </body>
 </html>

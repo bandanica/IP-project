@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Nekretnina
  *
- * @ORM\Table(name="nekretnina", uniqueConstraints={@ORM\UniqueConstraint(name="tip_UNIQUE", columns={"tip"}), @ORM\UniqueConstraint(name="grad_UNIQUE", columns={"gradID"}), @ORM\UniqueConstraint(name="mikrolokacija_UNIQUE", columns={"mikrolokacija"}), @ORM\UniqueConstraint(name="oglasivac_UNIQUE", columns={"oglasivac"}), @ORM\UniqueConstraint(name="agencija_UNIQUE", columns={"agencija"}), @ORM\UniqueConstraint(name="opstina_UNIQUE", columns={"opstina"}), @ORM\UniqueConstraint(name="ulica_UNIQUE", columns={"ulica"}), @ORM\UniqueConstraint(name="karakteristike_UNIQUE", columns={"karakteristike"}), @ORM\UniqueConstraint(name="idN_UNIQUE", columns={"idN"})})
- * @ORM\Entity
+ * @ORM\Table(name="nekretnina", uniqueConstraints={@ORM\UniqueConstraint(name="idN_UNIQUE", columns={"idN"})}, indexes={@ORM\Index(name="oglasivacID", columns={"oglasivac"}), @ORM\Index(name="tipNekr", columns={"tip"}), @ORM\Index(name="agencijaID", columns={"agencija"}), @ORM\Index(name="karakt", columns={"karakteristike"}), @ORM\Index(name="opst", columns={"opstina"}), @ORM\Index(name="ul", columns={"ulica"}), @ORM\Index(name="grd", columns={"gradID"}), @ORM\Index(name="mikrlok", columns={"mikrolokacija"})})
+ * @ORM\Entity(repositoryClass="App\Models\Repositories\NekretninaRepository")
  */
 class Nekretnina
 {

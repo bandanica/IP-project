@@ -109,18 +109,18 @@ class Korisnik
     private $idagencije;
 
 
-//    /**
-//     *
-//     * @var \App\Models\Entities\Nekretnina[]
-//     *
-//     * Many Korisnik(kupac) have Many Nekretnina(omiljena).
-//     * @ORM\ManyToMany(targetEntity="App\Models\Entities\Nekretnina", inversedBy="kupci")
-//     * @ORM\JoinTable(name="omiljene",
-//     *       joinColumns={@ORM\JoinColumn(name="idK", referencedColumnName="idKupca")},
-//     *       inverseJoinColumns={@ORM\JoinColumn(name="idn", referencedColumnName="idNekretnine")}
-//     *      )
-//     */
-//    private $omiljene;
+    /**
+     *
+     * @var \App\Models\Entities\Nekretnina[]
+     *
+     * Many Korisnik(kupac) have Many Nekretnina(omiljena).
+     * @ORM\ManyToMany(targetEntity="App\Models\Entities\Nekretnina", inversedBy="kupci")
+     * @ORM\JoinTable(name="omiljene",
+     *       joinColumns={@ORM\JoinColumn(name="idK", referencedColumnName="idKupca")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="idn", referencedColumnName="idNekretnine")}
+     *      )
+     */
+    private $omiljene;
 
     /**
      * @var int
