@@ -128,7 +128,7 @@ class Oglasivac extends BaseController
         $sobe = (int)$this->request->getVar('brsoba');
         $gi = $this->request->getVar('dizgradnje');
         $gi = date_create_from_format("Y-m-d", $gi);
-        $gi = new DateTime;
+//        $gi = new DateTime;
         $stanjen = $this->request->getVar('stanje');
         $sprat = (int)$this->request->getVar('sprat');
         $uks = (int)$this->request->getVar('ukspratnost');
@@ -147,7 +147,7 @@ class Oglasivac extends BaseController
         $k = 'ne';
         $in = 'ne';
         $tel = 'ne';
-        //$grejanje = $this->request->getVar('grej');
+        $grejanje = $this->request->getVar('grej');
         if ($this->request->getVar('parking') != '') {
             $p = "da";
         }
@@ -206,7 +206,7 @@ class Oglasivac extends BaseController
 //        echo "<br/>";
 //        echo $tel;
 //        echo "<br/>";
-        $grejanje = "Na struju";
+        //
         $kar = new Karakteristike();
         $kar->setTelefon($tel);
         $kar->setFrancBalkon($fb);
@@ -233,7 +233,7 @@ class Oglasivac extends BaseController
         $nekretninaN->setGrejanje($grejanje);
         $nekretninaN->setKarakteristike($kar);
         $nekretninaN->setGradid($grad);
-        $nekretninaN->setNaziv("$ime");
+        $nekretninaN->setNaziv($ime);
         $nekretninaN->setKvadratura($kv);
         $nekretninaN->setStanje($stanjen);
         $nekretninaN->setSprat($sprat);
@@ -243,7 +243,7 @@ class Oglasivac extends BaseController
         $nekretninaN->setOpstina($opstina);
         $nekretninaN->setMikrolokacija($lokacija);
         $nekretninaN->setUlica($ulica);
-        $oglasivac = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find(3);
+        $oglasivac = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get("korisnik"));
         //echo $oglasivac->getIdK();
         $nekretninaN->setOglasivac($oglasivac);
         //$ag = $oglasivac->getIdagencije();

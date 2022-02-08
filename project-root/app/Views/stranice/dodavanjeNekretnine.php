@@ -56,7 +56,7 @@
     Mesecni troskovi:<input type="text" name="mesTroskovi">
     Cena:<input type="text" name="cenaNekretnine"><br/>
     <h3>Karakteristike:</h3>
-    Grejanje:<select id="grej">
+    Grejanje:<select id="grej" name="grej">
         <option></option>
         <option value="ne">Ne</option>
         <option value="nastruju">Na struju</option>
