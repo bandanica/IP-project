@@ -38,7 +38,7 @@ class Nekretnina
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="godina_izgradnje", type="date", nullable=true)
+     * @ORM\Column(name="godina_izgradnje", type="datetime", nullable=true)
      */
     private $godinaIzgradnje;
 
