@@ -45,7 +45,7 @@ class Karakteristike
     /**
      * @var string|null
      *
-     * @ORM\Column(name="franc.balkon", type="string", length=3, nullable=true)
+     * @ORM\Column(name="francbalkon", type="string", length=3, nullable=true)
      */
     private $franc_balkon;
 
@@ -66,7 +66,7 @@ class Karakteristike
     /**
      * @var string|null
      *
-     * @ORM\Column(name="sa bastom", type="string", length=3, nullable=true)
+     * @ORM\Column(name="sabastom", type="string", length=3, nullable=true)
      */
     private $saBastom;
 

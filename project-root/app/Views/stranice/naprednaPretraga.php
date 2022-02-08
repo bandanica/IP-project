@@ -14,3 +14,7 @@
     do:<input type="text" name="maxSprat"><br/>
     <input type="submit" id="naprednaP" value="Pretrazi">
 </form>
+<form method='post' action=<?php echo site_url() . "login/logout" ?>>
+    <input type="submit" name="logout" value="Odjavi se">
+
+</form>

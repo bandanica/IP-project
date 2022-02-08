@@ -11,7 +11,11 @@
             }
             ?>
         </select>
-    Lokacija:<input type="text" name="lok" value="Ovo treba drugacije">
+
+    Lokacija:
+            <input type="text" name="lok" aria-autocomplete="list" aria-haspopup="true" placeholder="Upisi lokaciju...">
+
+
     Cena DO (EUR):<input type="text" name="cenaDO">
     Kvadratura OD (m2): <input type="text" name="kvadrOD">
     Min. br. soba:<select name="brs">
