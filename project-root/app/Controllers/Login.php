@@ -18,17 +18,17 @@ class Login extends BaseController
         $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
 
         $poslednjeNekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findLatest();
-//        $poslednjiOglasi = [];
-//        //nalazenje poslednjih 5 nekretnina
-//        $i=0;
-//        foreach ($poslednjeNekretnine as $n){
-//            $i=$i+1;
-//            $nek1 = new Nekretnine($n);
-//            array_push($poslednjiOglasi,$nek1);
-//            if ($i==5){
-//                break;
-//            }
-//        }
+        $poslednjiOglasi = [];
+        //nalazenje poslednjih 5 nekretnina
+        $i=0;
+        foreach ($poslednjeNekretnine as $n){
+            $i=$i+1;
+            //$nek1 = new Nekretnine($n);
+            array_push($poslednjiOglasi,$n);
+            if ($i===5){
+                break;
+            }
+        }
         $indexAdmin = -1;
         foreach ($tipkorisnika as $t) {
             $indexAdmin += 1;
@@ -45,7 +45,7 @@ class Login extends BaseController
         $this->session->set("poruka1", '');
         $this->session->set("porukaLozinka", '');
         return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
-            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'nekretnine' => $poslednjeNekretnine]);
+            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'nekretnine' => $poslednjiOglasi]);
 
         //return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'poslednjOgl'=>$poslednjiOglasi]);
     }
