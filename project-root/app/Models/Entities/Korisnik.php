@@ -116,8 +116,8 @@ class Korisnik
      * Many Korisnik(kupac) have Many Nekretnina(omiljena).
      * @ORM\ManyToMany(targetEntity="App\Models\Entities\Nekretnina", inversedBy="kupci")
      * @ORM\JoinTable(name="omiljene",
-     *       joinColumns={@ORM\JoinColumn(name="idK", referencedColumnName="idKupca")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="idn", referencedColumnName="idNekretnine")}
+     *       joinColumns={@ORM\JoinColumn(name="idK", referencedColumnName="idK")},
+     *       inverseJoinColumns={@ORM\JoinColumn(name="idn", referencedColumnName="idn")}
      *      )
      */
     private $omiljene;

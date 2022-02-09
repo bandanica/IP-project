@@ -112,41 +112,44 @@ class Korisnik extends BaseController
 
         $Tip = $Tip->getIdtipnekretnine();
 
-        //$l = $this->request->getVar('Lokacija');
-        //$lokacijePretraga=[];
-//        $nek=[];
-//        foreach ($l as $l1){
-//            $string1 = explode("/",$l1);
-//            $string1 = end($string1);
-//            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$string1]);
-//            $x='ml';
-//            if ($obj==null){
-//                $x='op';
-//                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv'=>$string1]);
-//
-//            }
-//            else{
-//                //$nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($x,$c,$k,$s,$obj,$Tip));
-//                continue;
-//            }
-//            if ($obj==null){
-//                $x = 'gr';
-//                $this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv'=>$string1]);
-//            }
-//            else{
-//                //$nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($x,$c,$k,$s,$obj,$Tip));
-//                continue;
-//            }
-//            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($x,$c,$k,$s,$obj,$Tip));
-//
-//            //array_push($lokacijePretraga,$obj);
-//        }
+        $l = $this->request->getVar('Lokacija');
+        $lokacijePretraga=[];
+        $nek=[];
+        foreach ($l as $l1){
+            $string1 = explode("/",$l1);
+            $string1 = end($string1);
+            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$string1]);
+            $x='ml';
+            if ($obj==null){
+                $x='op';
+                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv'=>$string1]);
 
-//        $nek=[];
+            }
+            else{
+                $obj=$obj->getIdmikro();
+                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineLokacija($c,$k,$s,$obj,$Tip));
+                continue;
+            }
+            if ($obj==null){
+                $x = 'gr';
+                $obj=$this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv'=>$string1]);
+            }
+            else{
+                $obj=$obj->getIdopstine();
+                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineOpstina($c,$k,$s,$obj,$Tip));
+                continue;
+            }
+            $obj=$obj->getIdg();
+            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineGrad($c,$k,$s,$obj,$Tip));
+
+            //array_push($lokacijePretraga,$obj);
+        }
+
+        //$nek=[];
 //        foreach ($lokacijePretraga as $obj){
 //            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($x,$c,$k,$s,$obj,$Tip));
 //        }
-        $nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($c,$k,$s,$Tip);
+        //$nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($c,$k,$s,$Tip);
 
         return $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
     }

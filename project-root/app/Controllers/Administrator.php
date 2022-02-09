@@ -55,7 +55,11 @@ class Administrator extends BaseController
         }
         else if ($this->request->getVar('dugme1')=='Obrisi'){
             $korisnik = $this->request->getVar('idKor');
-            $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->findOneBy(['idK' => $korisnik]);
+            //echo $korisnik;
+            $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->find($korisnik);
+            //echo $korisnik->getIme();
+            //$korisnik = $this->doctrine->em->getRepository(Korisnik::class)->findOneBy(['idK' => $korisnik]);
+
             $this->doctrine->em->remove($korisnik);
             $this->doctrine->em->flush();
             return redirect()->to(site_url('administrator'));
