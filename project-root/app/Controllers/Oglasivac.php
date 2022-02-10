@@ -9,6 +9,7 @@ use App\Models\Entities\Karakteristike;
 use App\Models\Entities\Mikrolokacija;
 use App\Models\Entities\Nekretnina;
 use App\Models\Entities\Opstina;
+use App\Models\Entities\Tipkorisnika;
 use App\Models\Entities\Tipnekretnine;
 use App\Models\Entities\Ulica;
 use DateTime;
@@ -271,7 +272,19 @@ class Oglasivac extends BaseController
     }
 
     public function podaciIzmena(){
+        $id=$this->session->get('korisnik');
+        $korisnik = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($id);
+        $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
+        $indexAdmin = -1;
+        foreach ($tipkorisnika as $t) {
+            $indexAdmin += 1;
+            if ($t->getTipKorisnika() == "administrator") {
+                break;
+            }
+        }
+        unset($tipkorisnika[$indexAdmin]);
+        $ag = $this->doctrine->em->getRepository(Agencija::class)->findAll();
 
-
+        return $this->prikaz('podaciOglasivaca', ['podaci'=>$korisnik,'agencije'=>$ag,'tipkorisnika'=>$tipkorisnika]);
     }
 }

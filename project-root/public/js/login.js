@@ -104,3 +104,26 @@ function proveraLozinke(){
     // document.getElementById("regGreske").innerHTML = greske;
     f(greske,podaciOk);
 }
+
+function promenaTipa(){
+
+    if(document.getElementById('kupac').checked) {
+        console.log(document.getElementById('kupac').value);
+        document.getElementsByName("agencije1").disabled=true;
+        document.getElementsByName("brlicence").disabled=true;
+        //document.getElementsByName('brlicence').style.display=true;
+        //tip='kupac';
+    }
+    else if(document.getElementById('samostalni prodavac').checked) {
+        console.log(document.getElementById('samostalni prodavac').value);
+        document.getElementsByName("agencije1").disabled=true;
+        document.getElementsByName("brlicence").disabled=true;
+        //tip='prodavac';
+    }
+    else if(document.getElementById('agent').checked) {
+        console.log(document.getElementById('agent').value);
+        document.getElementsByName("agencije1").disabled=false;
+        document.getElementsByName("brlicence").disabled=false;
+        //tip='agent';
+    }
+}
