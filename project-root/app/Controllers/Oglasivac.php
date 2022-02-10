@@ -24,7 +24,7 @@ class Oglasivac extends BaseController
         //echo $id;
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK' => $id]);
         //echo $kor->getIme();
-        $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac' => $kor]);
+        $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac' => $kor,'status'=>'Aktivno']);
 //        $prosNek = [];
 //        foreach ($nekretnine as $n){
 //            $nek1 = new Nekretnine($n);
@@ -258,5 +258,20 @@ class Oglasivac extends BaseController
         $this->doctrine->em->flush();
         return redirect()->to(site_url("oglasivac"));
 
+    }
+
+    public function Obradi(){
+        if ($this->request->getVar('dugmeNek')=='prodato'){
+            $n = $this->request->getVar('idNek');
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($n);
+            $n->setStatus('Prodato');
+            $this->doctrine->em->flush();
+            return redirect()->to(site_url("oglasivac"));
+        }
+    }
+
+    public function podaciIzmena(){
+
+        return $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi]);
     }
 }

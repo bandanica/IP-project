@@ -7,6 +7,7 @@ use App\Models\Entities\Grad;
 use App\Models\Entities\Korisnik;
 use App\Models\Entities\Nekretnina;
 use App\Models\Entities\Tipkorisnika;
+use App\Models\Entities\Tipnekretnine;
 use function Webmozart\Assert\Assert;
 
 class Login extends BaseController
@@ -16,8 +17,8 @@ class Login extends BaseController
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
         $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
         $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
-
-        $poslednjeNekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findLatest();
+        $s = "Aktivno";
+        $poslednjeNekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findLatest($s);
         $poslednjiOglasi = [];
         //nalazenje poslednjih 5 nekretnina
         $i=0;
@@ -113,6 +114,8 @@ class Login extends BaseController
         $rodjenje = date_create_from_format("Y-m-d", $rodjenje);
         $tipKor = $this->request->getVar('tip');
 
+        $tipKor = $this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika'=>$tipKor]);
+
 
         //PROVERA DA LI POSTOJI KORISNIK SA KORISNICKIM IMENOM ILI MEJLOM U BAZI
         $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
@@ -137,9 +140,10 @@ class Login extends BaseController
         $korisnik->setDatumRodjenja($rodjenje);
         $korisnik->setEMail($mejl);
         $korisnik->setStatus(0);
-        if ($tipKor === 'kupac') {
+        $korisnik->setTip($tipKor);
+        if ($tipKor->getTipKorisnika() == 'kupac') {
             $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'kupac']));
-        } else if ($tipKor === 'samostalni prodavac') {
+        } else if ($tipKor->getTipKorisnika() == 'samostalni prodavac') {
             $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'samostalni prodavac']));
         } else {
             $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'agent']));
@@ -151,6 +155,7 @@ class Login extends BaseController
             $korisnik->setIdagencije($agencija);
 
         }
+
 
         echo $ime;
         echo $prez;

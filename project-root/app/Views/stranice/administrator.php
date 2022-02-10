@@ -84,17 +84,17 @@ if (isset($korisnici) && !empty($korisnici)) {
 ?>
 
 
-<form action="" method="post">
-    <input type="submit" name="noviKorisnik" value="Dodaj kupca ili oglasivaca">
+<form method="post" action=<?php echo site_url() . "administrator/noviKorisnikAdmin" ?>>
+    <input type="submit" name="noviKorisnik1" value="Dodaj kupca ili oglasivaca">
+</form>
+<form method="post" action=<?php echo site_url() . "administrator/novaAgencijaAdmin" ?>>
+    <input type="submit" name="novaAgencija1" value="Dodaj agenciju">
 </form>
 <form action="" method="post">
-    <input type="submit" name="novaAgencija" value="Dodaj agenciju">
-</form>
-<form action="" method="post">
-    <input type="submit" name="novaMikro" value="Dodaj mikrolokaciju">
+    <input type="submit" name="novaMikro1" value="Dodaj mikrolokaciju">
 </form>
 <form>
-    <input type="submit" name="novaUlica" value="Dodaj ulicu">
+    <input type="submit" name="novaUlica1" value="Dodaj ulicu">
 </form>
 <form method='post' action=<?php echo site_url() . "login/logout" ?>>
     <input type="submit" name="logout" value="Odjavi se">

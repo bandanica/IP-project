@@ -46,6 +46,12 @@ if (isset($mojenekretnine) && !empty($mojenekretnine)) {
     <input type="submit" id="dugmeLozinka" value="Promena lozinke">
 
 </form>
+
+<form action=<?php echo site_url() . "oglasivac/podaciIzmena" ?>>
+    <input type="submit" id="dugmePodaci" value="Osnovni podaci i izmena">
+
+</form>
+
 <form method='post' action=<?php echo site_url() . "login/logout" ?>>
     <input type="submit" name="logout" value="Odjavi se">
 
