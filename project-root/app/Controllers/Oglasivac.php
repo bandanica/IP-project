@@ -74,6 +74,7 @@ class Oglasivac extends BaseController
 
     public function novaNekretnina()
     {
+
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
         return $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi]);
     }
@@ -269,6 +270,11 @@ class Oglasivac extends BaseController
             $this->doctrine->em->flush();
             return redirect()->to(site_url("oglasivac"));
         }
+        else{
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+            $g = $this->doctrine->em->getRepository(Grad::class)->findAll();
+            return $this->prikaz('azuriranjeNekretnine',['nek'=>$n,'gradovi'=>$g]);
+        }
     }
 
     public function podaciIzmena(){
@@ -286,5 +292,9 @@ class Oglasivac extends BaseController
         $ag = $this->doctrine->em->getRepository(Agencija::class)->findAll();
 
         return $this->prikaz('podaciOglasivaca', ['podaci'=>$korisnik,'agencije'=>$ag,'tipkorisnika'=>$tipkorisnika]);
+    }
+
+    public function zavrsiAzuriranje(){
+
     }
 }
