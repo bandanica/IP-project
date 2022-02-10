@@ -272,6 +272,6 @@ class Oglasivac extends BaseController
 
     public function podaciIzmena(){
 
-        return $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi]);
+
     }
 }
