@@ -469,6 +469,28 @@ class Korisnik extends \App\Models\Entities\Korisnik implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
+    public function addOmiljene(\App\Models\Entities\Nekretnina $omiljena = NULL)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addOmiljene', [$omiljena]);
+
+        return parent::addOmiljene($omiljena);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeOmiljena(\App\Models\Entities\Nekretnina $omiljena)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeOmiljena', [$omiljena]);
+
+        return parent::removeOmiljena($omiljena);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getStatus(): int
     {
 

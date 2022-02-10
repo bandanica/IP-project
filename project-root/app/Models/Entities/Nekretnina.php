@@ -574,5 +574,17 @@ class Nekretnina
         $this->kupci = $kupci;
     }
 
+    public function addKupci(Korisnik $kupac = null)
+    {
+        $this->kupci->add($kupac);
+    }
+
+    /**
+     * brise nekretninu iz omiljenih
+     */
+    public function removeKupci(Korisnik $kupac)
+    {
+        $this->kupci->removeElement($kupac) ;
+    }
 
 }

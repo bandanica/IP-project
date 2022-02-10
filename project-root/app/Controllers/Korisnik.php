@@ -21,27 +21,27 @@ class Korisnik extends BaseController
         //dohvatanje svih lokacija
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
         $opstine = $this->doctrine->em->getRepository(Opstina::class)->findAll();
-        $mlokacije=$this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
-        $lokacije= [];
-        foreach ($gradovi as $g){
-            array_push($lokacije,$g->getNaziv());
+        $mlokacije = $this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
+        $lokacije = [];
+        foreach ($gradovi as $g) {
+            array_push($lokacije, $g->getNaziv());
         }
-        foreach($opstine as $o){
+        foreach ($opstine as $o) {
             $gr = $o->getGrad()->getNaziv();
             $op = $o->getNaziv();
-            $s = "$gr"."/"."$op";
-            array_push($lokacije,$s);
+            $s = "$gr" . "/" . "$op";
+            array_push($lokacije, $s);
         }
-        foreach($mlokacije as $lok){
+        foreach ($mlokacije as $lok) {
             $ml = $lok->getNaziv();
             $op = $lok->getOpstina()->getNaziv();
             $gr = $lok->getOpstina()->getGrad()->getNaziv();
-            $s = "$gr"."/"."$op"."/"."$ml";
-            array_push($lokacije,$s);
+            $s = "$gr" . "/" . "$op" . "/" . "$ml";
+            array_push($lokacije, $s);
         }
         $poruka = $this->session->get("poruka2");
         $this->session->set("poruka2", '');
-        return $this->prikaz('kupac', ['poruka2' => $poruka, 'tipoviN' => $tipN, 'lokacije'=>$lokacije]);
+        return $this->prikaz('kupac', ['poruka2' => $poruka, 'tipoviN' => $tipN, 'lokacije' => $lokacije]);
     }
 
     protected function prikaz($page, $data)
@@ -88,60 +88,55 @@ class Korisnik extends BaseController
         $k = $this->request->getVar('kvadrOD');
         $s = $this->request->getVar('brs');
 
-        if ($c==''){
-            $c=10000000;
+        if ($c == '') {
+            $c = 10000000;
+        } else {
+            $c = (int)$c;
         }
-        else{
-            $c=(int) $c;
+        if ($k == '') {
+            $k = 0;
+        } else {
+            $k = (int)$k;
         }
-        if ($k==''){
-            $k=0;
-        }
-        else{
-            $k=(int) $k;
-        }
-        if ($s==''){
-            $s=0;
-        }
-        else{
-            $s=(double) $s;
+        if ($s == '') {
+            $s = 0;
+        } else {
+            $s = (double)$s;
         }
 
 
-        $Tip = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa'=>$t]);
+        $Tip = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa' => $t]);
 
         $Tip = $Tip->getIdtipnekretnine();
 
         $l = $this->request->getVar('Lokacija');
-        $lokacijePretraga=[];
-        $nek=[];
-        foreach ($l as $l1){
-            $string1 = explode("/",$l1);
+        $lokacijePretraga = [];
+        $nek = [];
+        foreach ($l as $l1) {
+            $string1 = explode("/", $l1);
             $string1 = end($string1);
-            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$string1]);
-            $x='ml';
-            if ($obj==null){
-                $x='op';
-                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv'=>$string1]);
+            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv' => $string1]);
+            $x = 'ml';
+            if ($obj == null) {
+                $x = 'op';
+                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv' => $string1]);
 
-            }
-            else{
-                $obj=$obj->getIdmikro();
-                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineLokacija($c,$k,$s,$obj,$Tip));
+            } else {
+                $obj = $obj->getIdmikro();
+                $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineLokacija($c, $k, $s, $obj, $Tip));
                 continue;
             }
-            if ($obj==null){
+            if ($obj == null) {
                 $x = 'gr';
-                $obj=$this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv'=>$string1]);
-            }
-            else{
-                $obj=$obj->getIdopstine();
-                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineOpstina($c,$k,$s,$obj,$Tip));
+                $obj = $this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv' => $string1]);
+            } else {
+                $obj = $obj->getIdopstine();
+                $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineOpstina($c, $k, $s, $obj, $Tip));
                 continue;
             }
-            $obj=$obj->getIdg();
+            $obj = $obj->getIdg();
             //$nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineGrad($c,$k,$s,$obj,$Tip);
-            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineGrad($c,$k,$s,$obj,$Tip));
+            $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineGrad($c, $k, $s, $obj, $Tip));
 
             //array_push($lokacijePretraga,$obj);
         }
@@ -152,32 +147,40 @@ class Korisnik extends BaseController
 //        }
         //$nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($c,$k,$s,$Tip);
         //echo $nek;
-        return $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
+        return $this->prikaz('rezultatiPretrage', ['rezultati' => $nek]);
     }
-    public function naprednaPretraga(){
+
+    public function naprednaPretraga()
+    {
         $tipN = $this->doctrine->em->getRepository(Tipnekretnine::class)->findAll();
         //dohvatanje svih lokacija
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
         $opstine = $this->doctrine->em->getRepository(Opstina::class)->findAll();
-        $mlokacije=$this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
-        $lokacije= [];
-        foreach ($gradovi as $g){
-            array_push($lokacije,$g->getNaziv());
+        $mlokacije = $this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
+        $lokacije = [];
+        foreach ($gradovi as $g) {
+            array_push($lokacije, $g->getNaziv());
         }
-        foreach($opstine as $o){
+        foreach ($opstine as $o) {
             $gr = $o->getGrad()->getNaziv();
             $op = $o->getNaziv();
-            $s = "$gr"."/"."$op";
-            array_push($lokacije,$s);
+            $s = "$gr" . "/" . "$op";
+            array_push($lokacije, $s);
         }
-        foreach($mlokacije as $lok){
+        foreach ($mlokacije as $lok) {
             $ml = $lok->getNaziv();
             $op = $lok->getOpstina()->getNaziv();
             $gr = $lok->getOpstina()->getGrad()->getNaziv();
-            $s = "$gr"."/"."$op"."/"."$ml";
-            array_push($lokacije,$s);
+            $s = "$gr" . "/" . "$op" . "/" . "$ml";
+            array_push($lokacije, $s);
         }
-        return $this->prikaz('naprednaPretraga',['tipoviN' => $tipN, 'lokacije'=>$lokacije]);
+        return $this->prikaz('naprednaPretraga', ['tipoviN' => $tipN, 'lokacije' => $lokacije]);
+    }
+
+    public function Pogledaj()
+    {
+        $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+        return $this->prikaz('nekretninaDetalji', ['nek' => $n]);
     }
 
 //    public function izvrsiNapredno(){
@@ -253,4 +256,26 @@ class Korisnik extends BaseController
 //        return $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
 //
 //    }
+
+    public function dodajUOmiljene()
+    {
+        //$idkor = 2;
+        $idkor = $this->session->get('korisnik');
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($idkor);
+        $nekr = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+        //$o[] = $kor->getOmiljene();
+        //echo gettype($o);
+        //echo gettype($nekr);
+        //array_push($o,$nekr);
+        //echo gettype($o);
+        $kor->addOmiljene($nekr);
+
+        //$op[] = $kor->getOmiljene();
+        //echo gettype($op);
+//        foreach ($op as $o){
+//            echo gettype($o);
+//        }
+        echo "SVE OK";
+        $this->doctrine->em->flush($kor);
+    }
 }

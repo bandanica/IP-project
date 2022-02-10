@@ -117,7 +117,7 @@ class Korisnik
      * @ORM\ManyToMany(targetEntity="App\Models\Entities\Nekretnina", inversedBy="kupci")
      * @ORM\JoinTable(name="omiljene",
      *       joinColumns={@ORM\JoinColumn(name="idK", referencedColumnName="idK")},
-     *       inverseJoinColumns={@ORM\JoinColumn(name="idn", referencedColumnName="idn")}
+     *       inverseJoinColumns={@ORM\JoinColumn(name="idN", referencedColumnName="idN")}
      *      )
      */
     private $omiljene;
@@ -343,6 +343,21 @@ class Korisnik
         $this->omiljene = $omiljene;
     }
 
+    /**
+     * dodaje nekretninu u omiljene
+     */
+    public function addOmiljene(Nekretnina $omiljena = null)
+    {
+        $this->omiljene->add($omiljena);
+    }
+
+    /**
+     * brise nekretninu iz omiljenih
+     */
+    public function removeOmiljena(Nekretnina $omiljena)
+    {
+        $this->omiljene->removeElement($omiljena) ;
+    }
     /**
      * @return int
      */
