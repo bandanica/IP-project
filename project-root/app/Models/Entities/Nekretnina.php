@@ -194,6 +194,14 @@ class Nekretnina
 
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="putanjaSlike", type="string", length=100, nullable=true)
+     */
+    private $slike;
+
+
+    /**
      *
      * @var \App\Models\Entities\Korisnik[]
      *
@@ -556,6 +564,22 @@ class Nekretnina
     public function setGradid($gradid)
     {
         $this->gradid = $gradid;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSlike()
+    {
+        return $this->slike;
+    }
+
+    /**
+     * @param string|null $slike
+     */
+    public function setSlike($slike)
+    {
+        $this->slike = $slike;
     }
 
     /**

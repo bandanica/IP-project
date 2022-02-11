@@ -3,7 +3,18 @@
     <script src="<?php echo base_url(); ?>/js/novaNek.js"></script>
 </head>
 <body>
-<form method="post" action=<?php echo site_url() . "oglasivac/zavrsiDodavanjeNekretnine" ?>>
+<form method="post" action="<?php echo site_url() . "oglasivac/zavrsiDodavanjeNekretnine" ?>" enctype="multipart/form-data">
+    Tip:<select name="izabranTip" required>
+        <?php
+        if (isset($tipoviN)) {
+            foreach ($tipoviN as $n) {
+                ?>
+                <option><?php echo $n->getNazivTipa(); ?></option>
+                <?php
+            }
+        }
+        ?>
+    </select>
     Naziv nekretnine:<input type="text" name="nazivN"><br/>
     Grad:<select name="gr" onchange="promenaGrad()">
         <option></option>
@@ -85,6 +96,10 @@
     <label for="internet">Internet</label>
     <input type="checkbox" id="telefon" name="telefon">
     <label for="telefon">Telefon</label>
+    <br/>
+
+    <input type="file" name="izaberiSliku" id="izaberiSliku">
+    Učitajte slike neretnine
     <br/>
     <input type="submit" name="dodaj" value="Zavrsi">
 </form>

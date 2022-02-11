@@ -74,9 +74,9 @@ class Oglasivac extends BaseController
 
     public function novaNekretnina()
     {
-
+        $tipN = $this->doctrine->em->getRepository(Tipnekretnine::class)->findAll();
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        return $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi]);
+        return $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi, 'tipoviN'=>$tipN]);
     }
 
     public function opstineUGradu()
@@ -121,6 +121,12 @@ class Oglasivac extends BaseController
 
     public function zavrsiDodavanjeNekretnine()
     {
+        //$putanja = "slike/profilna.png";
+        //$ime = $_FILES["izaberiSliku"]["name"];
+        //echo $ime;
+
+
+
         $ime = $this->request->getVar('nazivN');
         $grad = $this->doctrine->em->getRepository(Grad::class)->find($this->request->getVar('gr'));
         $opstina = $this->doctrine->em->getRepository(Opstina::class)->find($this->request->getVar('opst'));
@@ -253,13 +259,65 @@ class Oglasivac extends BaseController
         $nekretninaN->setAgencija($oglasivac->getIdagencije());
 
 
-        $tipnekr = "stan";
+
+        //$idS = (int) $nekretninaN->getIdn();
+        //$idS=5;
+
+        //echo $putanja;
+        $tipnekr = $this->request->getVar("izabranTip");
+
         $tipnekr = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa' => $tipnekr]);
         $nekretninaN->setTip($tipnekr);
         $this->doctrine->em->persist($nekretninaN);
         $this->doctrine->em->flush();
+
+        $data=[];
+        $idS = (int) $nekretninaN->getIdn();
+        $putanja = 'slike/profilna.png';
+
+
+        if ($_FILES["izaberiSliku"]["size"] != 0) {
+            $putanja = $this->uzmiPutanju($data,$idS);
+        }
+        //echo "Uspesno";
+        //echo "<br/>";
+        //echo $putanja;
+        $nekretninaN->setSlike($putanja);
+        $this->doctrine->em->flush();
         return redirect()->to(site_url("oglasivac"));
 
+    }
+
+    protected function uzmiPutanju(&$greska, $id): string
+    {
+
+        $target_dir = "slike/nekretnina"."$id"."/";
+        mkdir($target_dir);
+        $target_file = $target_dir . basename($_FILES["izaberiSliku"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $check = getimagesize($_FILES["izaberiSliku"]["tmp_name"]);
+
+        if ($check == false) {
+            $greska['GreskaSlika'] = 'Fajl koji ste prilozili nije slika!';
+            return "";
+        }
+
+        if ($_FILES["izaberiSliku"]["size"] > 1000000) {
+            $greska['GreskaSlika'] = 'Slika koju ste prilozili je veca od 1mb!';
+            return "";
+        }
+
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            $greska['GreskaSlika'] = 'Slika nije u formatu JPG, JPEG ili PNG!';
+            return "";
+        }
+
+        if (move_uploaded_file($_FILES["izaberiSliku"]["tmp_name"], $target_file)) {
+            return $target_file;
+        } else {
+            $greska['GreskaSlika'] = 'Desila se greska pri ucitavanju slike!';
+            return "";
+        }
     }
 
     public function Obradi(){
