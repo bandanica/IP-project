@@ -90,10 +90,10 @@ if (isset($korisnici) && !empty($korisnici)) {
 <form method="post" action=<?php echo site_url() . "administrator/novaAgencijaAdmin" ?>>
     <input type="submit" name="novaAgencija1" value="Dodaj agenciju">
 </form>
-<form action="" method="post">
+<form method="post" action=<?php echo site_url() . "administrator/novaLokacijaAdmin" ?>>
     <input type="submit" name="novaMikro1" value="Dodaj mikrolokaciju">
 </form>
-<form>
+<form method="post" action=<?php echo site_url() . "administrator/novaUlicaAdmin" ?>>
     <input type="submit" name="novaUlica1" value="Dodaj ulicu">
 </form>
 <form method='post' action=<?php echo site_url() . "login/logout" ?>>
