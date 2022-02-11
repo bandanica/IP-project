@@ -25,7 +25,7 @@ class Oglasivac extends BaseController
         //echo $id;
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK' => $id]);
         //echo $kor->getIme();
-        $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac' => $kor,'status'=>'Aktivno']);
+        $nekretnine = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['oglasivac' => $kor]);
 //        $prosNek = [];
 //        foreach ($nekretnine as $n){
 //            $nek1 = new Nekretnine($n);

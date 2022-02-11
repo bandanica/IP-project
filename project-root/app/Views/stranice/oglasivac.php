@@ -22,9 +22,18 @@ if (isset($mojenekretnine) && !empty($mojenekretnine)) {
                     </td>
                     <td><?php echo $n1->getNaziv() ?></td>
                     <td><?php echo $n1->getCena() ?></td>
+                    <?php if ($n1->getStatus()=='Aktivno'){
+                        ?>
+                        <td><input type='submit' name='dugmeNek' value='izmeni'></td>
+                        <td><input type='submit' name='dugmeNek' value='prodato'></td>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <td colspan="2">Prodato</td>
+                        <?php
+                    }?>
 
-                    <td><input type='submit' name='dugmeNek' value='izmeni'></td>
-                    <td><input type='submit' name='dugmeNek' value='prodato'></td>
                 </tr>
             </form>
             <?php

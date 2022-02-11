@@ -1,9 +1,16 @@
+<html>
+<head>
+
+</head>
+<body>
+
 <h2>Rezultati pretrage:</h2>
 <?php
 if (isset($rezultati) && !empty($rezultati)) {
     ?>
     <table>
         <tr>
+            <th></th>
             <th>Slika</th>
             <th>Naziv</th>
             <th>Cena</th>
@@ -21,6 +28,11 @@ if (isset($rezultati) && !empty($rezultati)) {
                         <input type='hidden' value="<?php echo $n1->getIdn() ?>"
                                name='idNek'>
                     </td>
+                    <td><?php if ($n1->getSlike()!=null){
+                        ?>
+                            <img src="<?php echo base_url() . "/" . $n1->getSlike()?>" alt="slika nekretnine" width="100" height="100">
+                    <?php
+                        }?></td>
                     <td><?php echo $n1->getNaziv() ?></td>
                     <td><?php echo $n1->getCena() ?></td>
 
@@ -39,3 +51,8 @@ if (isset($rezultati) && !empty($rezultati)) {
     echo "Nema oglasa sa unetim karakteristikama";
 }
 ?>
+
+
+</body>
+</html>
+
