@@ -34,7 +34,7 @@ CREATE TABLE `agencija` (
   UNIQUE KEY `PIB_UNIQUE` (`PIB`),
   KEY `grad` (`idGrada`),
   CONSTRAINT `grad` FOREIGN KEY (`idGrada`) REFERENCES `grad` (`idG`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `agencija` (
 
 LOCK TABLES `agencija` WRITE;
 /*!40000 ALTER TABLE `agencija` DISABLE KEYS */;
-INSERT INTO `agencija` VALUES (1,'Felix','Tosin bunar','011/324511','0058649',1);
+INSERT INTO `agencija` VALUES (1,'Felix','Tosin bunar','011/324511','0058649',1),(2,'Mitos travel','Kralja Milutina 35','011542986','0064521354',1);
 /*!40000 ALTER TABLE `agencija` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +94,7 @@ CREATE TABLE `karakteristike` (
   `parking` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idkarakteristike`),
   UNIQUE KEY `idkarakteristike_UNIQUE` (`idkarakteristike`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `karakteristike` (
 
 LOCK TABLES `karakteristike` WRITE;
 /*!40000 ALTER TABLE `karakteristike` DISABLE KEYS */;
-INSERT INTO `karakteristike` VALUES (1,'da','ne','ne','da','da','ne','da','da','da','da','da'),(2,'da','ne','da','ne','da','da','ne','ne','da','da','ne'),(3,'ne','ne','da','ne','da','ne','ne','da','da','da','da');
+INSERT INTO `karakteristike` VALUES (1,'da','ne','ne','da','da','ne','da','da','da','da','da'),(2,'da','ne','da','ne','da','da','ne','ne','da','da','ne'),(3,'ne','ne','da','ne','da','ne','ne','da','da','da','da'),(10,'da','da','da','da','da','da','da','da','da','da','da'),(11,'da','ne','ne','ne','da','ne','da','ne','da','ne','da'),(12,'da','ne','ne','ne','da','ne','da','ne','da','ne','da'),(13,'ne','ne','da','ne','ne','ne','ne','da','da','da','da'),(14,'ne','ne','ne','ne','ne','ne','ne','ne','ne','da','ne'),(15,'da','da','da','da','da','da','da','da','da','da','da'),(16,'ne','ne','ne','ne','ne','ne','ne','ne','ne','ne','ne'),(17,'ne','ne','da','ne','ne','ne','da','da','ne','da','da'),(18,'da','ne','ne','ne','da','da','da','ne','da','da','da'),(19,'da','ne','ne','ne','da','da','da','da','ne','da','da');
 /*!40000 ALTER TABLE `karakteristike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `korisnik` (
   CONSTRAINT `gradid` FOREIGN KEY (`idGrada`) REFERENCES `grad` (`idG`),
   CONSTRAINT `idAgencije` FOREIGN KEY (`idAgencije`) REFERENCES `agencija` (`idA`),
   CONSTRAINT `tip` FOREIGN KEY (`tip`) REFERENCES `tipkorisnika` (`idT`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `korisnik` (
 
 LOCK TABLES `korisnik` WRITE;
 /*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-INSERT INTO `korisnik` VALUES (1,'mile123','Mile','Milic','sifra123','1985-05-05 00:00:00','0616672345','milence@gmail.com',1,NULL,NULL,1,1),(2,'luka123','Luka','Lukic','sifra123!Sifra','1990-03-01 00:00:00','06375751895','lulence@gmail.com',1,NULL,NULL,1,1),(3,'stana123','Stana','Stanic','sifra123','1976-01-04 00:00:00','0665619728','stanika@gmail.com',1,NULL,NULL,2,1),(6,'peki','Perar','Petrovic','peki123','1999-02-02 10:33:35','0656356539','peki@gmail.com',1,NULL,NULL,1,2),(19,'admin123','admin','admin','admin123','2022-02-06 12:23:37',NULL,NULL,1,NULL,NULL,4,3),(20,'danica123','Danica','Markovic','Dana123!dana','1999-05-05 13:16:31','011/123-1-143','danicabandovic@gmail.com',1,NULL,NULL,2,1);
+INSERT INTO `korisnik` VALUES (1,'mile123','Mile','Milic','sifra123','1985-05-05 00:00:00','0616672345','milence@gmail.com',1,NULL,NULL,1,1),(2,'luka123','Luka','Lukic','1','1990-03-01 00:00:00','06375751895','lulence@gmail.com',1,NULL,NULL,1,1),(3,'stana123','Stana','Stanic','sifra123','1976-01-04 00:00:00','0665619728','stanika@gmail.com',1,2,'004256398',3,1),(19,'admin123','admin','admin','admin123','2022-02-06 12:23:37',NULL,NULL,1,NULL,NULL,4,3),(20,'danica123','Danica','Markovic','Dana123!dana','1999-05-05 13:16:31','011/123-1-143','danicabandovic@gmail.com',1,NULL,NULL,2,1),(22,'sd','fsdf','fds','as12#MKleia','2022-02-03 01:35:12','0656356539','marko1@gmail.com',1,1,'01546789',3,2),(23,'sarita','sara','Markovic','mladenovac123A#','2022-02-02 01:39:57','011/123-1-143','sarasaric@yahoo.com',1,NULL,NULL,1,1),(24,'stefoni','Stefan','Stefic','stefX123#m','1995-03-20 02:06:42','0667458962','stefstef@gmail.com',1,NULL,NULL,2,1);
 /*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,7 @@ CREATE TABLE `mikrolokacija` (
   UNIQUE KEY `idmikro_UNIQUE` (`idmikro`),
   KEY `opstina` (`opstina`),
   CONSTRAINT `opstina` FOREIGN KEY (`opstina`) REFERENCES `opstina` (`idOpstine`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `mikrolokacija` (
 
 LOCK TABLES `mikrolokacija` WRITE;
 /*!40000 ALTER TABLE `mikrolokacija` DISABLE KEYS */;
-INSERT INTO `mikrolokacija` VALUES (1,'Neimar',1),(2,'Crveni krst',1),(3,'Kalenic',1);
+INSERT INTO `mikrolokacija` VALUES (1,'Neimar',1),(2,'Crveni krst',1),(3,'Kalenic',1),(4,'Gardos',3);
 /*!40000 ALTER TABLE `mikrolokacija` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,14 +190,14 @@ CREATE TABLE `nekretnina` (
   `idN` int unsigned NOT NULL AUTO_INCREMENT,
   `tip` int unsigned NOT NULL,
   `oglasivac` int unsigned NOT NULL,
-  `agencija` int unsigned NOT NULL,
+  `agencija` int unsigned DEFAULT NULL,
   `kvadratura` int DEFAULT NULL,
   `gradID` int unsigned NOT NULL,
   `opstina` int unsigned NOT NULL,
   `mikrolokacija` int unsigned NOT NULL,
   `ulica` int unsigned NOT NULL,
   `br_soba` int DEFAULT NULL,
-  `godina_izgradnje` date DEFAULT NULL,
+  `godina_izgradnje` datetime DEFAULT NULL,
   `sprat` int DEFAULT NULL,
   `ukupna_spratnost` int DEFAULT NULL,
   `parking` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -209,6 +209,7 @@ CREATE TABLE `nekretnina` (
   `karakteristike` int unsigned NOT NULL,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `cena` int NOT NULL,
+  `putanjaSlike` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idN`),
   UNIQUE KEY `idN_UNIQUE` (`idN`),
   KEY `agencijaID` (`agencija`),
@@ -227,7 +228,7 @@ CREATE TABLE `nekretnina` (
   CONSTRAINT `opst` FOREIGN KEY (`opstina`) REFERENCES `opstina` (`idOpstine`),
   CONSTRAINT `tipNekr` FOREIGN KEY (`tip`) REFERENCES `tipnekretnine` (`idTipnekretnine`),
   CONSTRAINT `ul` FOREIGN KEY (`ulica`) REFERENCES `ulica` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +237,7 @@ CREATE TABLE `nekretnina` (
 
 LOCK TABLES `nekretnina` WRITE;
 /*!40000 ALTER TABLE `nekretnina` DISABLE KEYS */;
-INSERT INTO `nekretnina` VALUES (1,1,3,1,45,1,1,1,3,2,'2015-01-01',2,5,'da','izvorno','na struju',12000,'Super lokacija, svetao stan, opremljen kuhinjom.','novogradnja',1,'Stan Hadzi Milentijeva 50',60000),(3,1,3,1,55,1,1,2,1,2,'2010-05-05',4,4,'da','dobro','na struju',7000,'za manju porodicu','novogradnja',1,'Stan Crveni krst povoljno',70000);
+INSERT INTO `nekretnina` VALUES (1,1,3,1,45,1,1,1,3,2,'2015-01-01 00:00:00',2,5,'da','izvorno','na struju',12000,'Super lokacija, svetao stan, opremljen kuhinjom.','Aktivno',1,'Stan Hadzi Milentijeva 50',60000,NULL),(3,1,3,1,55,1,1,2,1,2,'2010-05-05 00:00:00',4,4,'da','dobro','na struju',7000,'za manju porodicu','Aktivno',1,'Stan Crveni krst povoljno',70000,NULL),(7,1,3,1,33,1,1,2,2,1,'2022-02-08 10:19:26',3,7,'da','lux','Na struju',4500,'super nekretnian','Aktivno',13,'Super stan',47500,NULL),(8,1,3,1,33,1,1,2,2,4,'2022-02-08 10:34:17',3,7,'ne','renovirano','Na struju',4500,'super nekretnian','Aktivno',14,'frre',47500,NULL),(9,1,3,NULL,33,1,1,2,1,3,'2025-11-26 10:56:09',3,7,'da','lux','centralno',4500,'super nekretnian','Aktivno',15,'dojiwqjdiqo',1000000,NULL),(10,1,3,NULL,213,1,1,2,1,2,'2022-02-19 10:58:19',3,7,'ne','izvorno','podno',4684,'wqdwqdqwdqwd','Aktivno',16,'db',45645,NULL),(11,1,3,NULL,123,1,1,2,1,4,'2022-02-02 10:59:37',3,3,'da','renovirano','nastruju',13,'dq','Prodato',17,'dqw',124,NULL),(13,2,3,2,125,1,1,2,2,4,'1999-10-01 16:35:51',2,2,'da','renovirano','centralno',12000,'Lepa kucica u srci Vracara','Aktivno',19,'Kuca lepa',150000,'slike/nekretnina13/kucaVracar.jpg');
 /*!40000 ALTER TABLE `nekretnina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,15 +250,15 @@ DROP TABLE IF EXISTS `omiljene`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `omiljene` (
   `idO` int unsigned NOT NULL AUTO_INCREMENT,
-  `idKupca` int unsigned NOT NULL,
-  `idNekretnine` int unsigned NOT NULL,
+  `idK` int unsigned NOT NULL,
+  `idN` int unsigned NOT NULL,
   PRIMARY KEY (`idO`),
   UNIQUE KEY `idO_UNIQUE` (`idO`),
-  KEY `idkupca_idx` (`idKupca`),
-  KEY `idnekretnine_idx` (`idNekretnine`),
-  CONSTRAINT `idkupca` FOREIGN KEY (`idKupca`) REFERENCES `korisnik` (`idK`),
-  CONSTRAINT `idnekretnine` FOREIGN KEY (`idNekretnine`) REFERENCES `nekretnina` (`idN`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+  KEY `idkupca_idx` (`idK`),
+  KEY `idnekretnine_idx` (`idN`),
+  CONSTRAINT `idkupca` FOREIGN KEY (`idK`) REFERENCES `korisnik` (`idK`),
+  CONSTRAINT `idnekretnine` FOREIGN KEY (`idN`) REFERENCES `nekretnina` (`idN`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,6 +267,7 @@ CREATE TABLE `omiljene` (
 
 LOCK TABLES `omiljene` WRITE;
 /*!40000 ALTER TABLE `omiljene` DISABLE KEYS */;
+INSERT INTO `omiljene` VALUES (1,2,1),(2,2,7);
 /*!40000 ALTER TABLE `omiljene` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +364,7 @@ CREATE TABLE `ulica` (
   UNIQUE KEY `idU_UNIQUE` (`idU`),
   KEY `mikrolokacija` (`mikrolokacija`),
   CONSTRAINT `mikrolokacija` FOREIGN KEY (`mikrolokacija`) REFERENCES `mikrolokacija` (`idmikro`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,7 +373,7 @@ CREATE TABLE `ulica` (
 
 LOCK TABLES `ulica` WRITE;
 /*!40000 ALTER TABLE `ulica` DISABLE KEYS */;
-INSERT INTO `ulica` VALUES (1,2,'Cetinjska'),(2,2,'Danila Kisa'),(3,1,'Hadzi Milentijeva');
+INSERT INTO `ulica` VALUES (1,2,'Cetinjska'),(2,2,'Danila Kisa'),(3,1,'Hadzi Milentijeva'),(4,4,'Gardoska ulica');
 /*!40000 ALTER TABLE `ulica` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -384,4 +386,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-08 16:32:31
+-- Dump completed on 2022-02-11 23:39:47
