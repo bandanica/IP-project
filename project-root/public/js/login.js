@@ -1,4 +1,4 @@
-function f(greske="",podaciOk=true) {
+function f(greske = "", podaciOk = true) {
     //console.log("log");
     //podaciOk = true;
     //greske = "";
@@ -12,32 +12,30 @@ function f(greske="",podaciOk=true) {
     telefon = document.getElementsByName('tel')[0].value;
     mejl = document.getElementsByName('mejl')[0].value;
     //tipkor = document.getElementsByName('tip');
-    tip='';
-    if(document.getElementById('kupac').checked) {
-         console.log(document.getElementById('kupac').value);
-         document.getElementById("agencija").hidden=true;
-         //document.getElementsByName('brlicence').style.display=true;
-        tip='kupac';
-    }
-    else if(document.getElementById('samostalni prodavac').checked) {
+    tip = '';
+    if (document.getElementById('kupac').checked) {
+        console.log(document.getElementById('kupac').value);
+        document.getElementById("agencija").hidden = true;
+        //document.getElementsByName('brlicence').style.display=true;
+        tip = 'kupac';
+    } else if (document.getElementById('samostalni prodavac').checked) {
         console.log(document.getElementById('samostalni prodavac').value);
-        document.getElementById("agencija").hidden=true;
-        tip='prodavac';
-    }
-    else if(document.getElementById('agent').checked) {
+        document.getElementById("agencija").hidden = true;
+        tip = 'prodavac';
+    } else if (document.getElementById('agent').checked) {
         console.log(document.getElementById('agent').value);
-        document.getElementById("agencija").hidden=false;
-        tip='agent';
+        document.getElementById("agencija").hidden = false;
+        tip = 'agent';
     }
     //else{
     //    document.getElementById("agencija").hidden=true;
     //}
 
 
-    console.log(ime,prezime,korime,grad,lozinka,datum,telefon,mejl);
-    if (ime==='' || prezime==='' || korime==='' || grad==='' || lozinka==='' || telefon==='' || mejl==='' || tip===''){
-        greske=greske.concat("Sva polja su obavezna!");
-        podaciOk=false;
+    console.log(ime, prezime, korime, grad, lozinka, datum, telefon, mejl);
+    if (ime === '' || prezime === '' || korime === '' || grad === '' || lozinka === '' || telefon === '' || mejl === '' || tip === '') {
+        greske = greske.concat("Sva polja su obavezna!");
+        podaciOk = false;
     }
 
     if (podaciOk) {
@@ -47,28 +45,29 @@ function f(greske="",podaciOk=true) {
     document.getElementById("regGreske").innerHTML = greske;
 
 }
-function proveraMejla(){
+
+function proveraMejla() {
     podaciOk = true;
-    greske="";
+    greske = "";
     document.getElementById("regGreske").innerHTML = greske;
     mejl = document.getElementsByName('mejl')[0].value;
     regMejl = /^\w+@\w\.\w{2,3}$/;
-    if (!regMejl.test(mejl)){
+    if (!regMejl.test(mejl)) {
         greske = greske.concat("Mejl nije dobar!\n")
-        podaciOk=false;
+        podaciOk = false;
     }
     //if (podaciOk) {
     //    document.getElementById("regDugme").disabled = false;
     //}
     //document.getElementById("regGreske").innerHTML = greske;
-    f(greske,podaciOk);
+    f(greske, podaciOk);
 }
 
-function proveraLozinke(){
-    podaciOk=true;
-    greske="";
+function proveraLozinke() {
+    podaciOk = true;
+    greske = "";
     document.getElementById("regGreske").innerHTML = greske;
-    lozinka=document.getElementsByName('loz')[0].value;
+    lozinka = document.getElementsByName('loz')[0].value;
     //regLozinka = new RegExp("^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])).{8,})");
 
     //DODATI SPECIJALNE KARAKTERE
@@ -79,51 +78,44 @@ function proveraLozinke(){
     regKarkter = /([!@#$%^&\\*])+/;
     regDuzinaPocetak = /^([A-Z]|[a-z]){1}.{7,}$/;
 
-    if (!regBroj.test(lozinka) || !regMaloSlovo.test(lozinka) || !regKarkter.test(lozinka) || !regVelSlovo.test(lozinka) || !regDuzinaPocetak.test(lozinka)){
+    if (!regBroj.test(lozinka) || !regMaloSlovo.test(lozinka) || !regKarkter.test(lozinka) || !regVelSlovo.test(lozinka) || !regDuzinaPocetak.test(lozinka)) {
         greske = greske.concat("Lozinka nije u dobrom formatu!<br/>")
-        podaciOk=false;
+        podaciOk = false;
     }
-    if (!regBroj.test(lozinka)){
+    if (!regBroj.test(lozinka)) {
         greske = greske.concat("broj<br/>");
     }
-    if (!regDuzinaPocetak.test(lozinka)){
+    if (!regDuzinaPocetak.test(lozinka)) {
         greske = greske.concat("duz poc<br/>");
     }
-    if (!regMaloSlovo.test(lozinka)){
+    if (!regMaloSlovo.test(lozinka)) {
         greske = greske.concat("malo slovo<br/>");
     }
-    if (!regVelSlovo.test(lozinka)){
+    if (!regVelSlovo.test(lozinka)) {
         greske = greske.concat("vel slovo<br/>");
     }
-    if (!regKarkter.test(lozinka)){
+    if (!regKarkter.test(lozinka)) {
         greske = greske.concat("spec<br/>");
     }
     // if (podaciOk) {
     //     document.getElementById("regDugme").disabled = false;
     // }
     // document.getElementById("regGreske").innerHTML = greske;
-    f(greske,podaciOk);
+    f(greske, podaciOk);
 }
 
-function promenaTipa(){
+function promenaTipa() {
 
-    if(document.getElementById('kupac').checked) {
-        console.log(document.getElementById('kupac').value);
-        document.getElementsByName("agencije1").disabled=true;
-        document.getElementsByName("brlicence").disabled=true;
-        //document.getElementsByName('brlicence').style.display=true;
-        //tip='kupac';
-    }
-    else if(document.getElementById('samostalni prodavac').checked) {
+    if (document.getElementById('samostalni prodavac').checked) {
         console.log(document.getElementById('samostalni prodavac').value);
-        document.getElementsByName("agencije1").disabled=true;
-        document.getElementsByName("brlicence").disabled=true;
+        document.getElementById("ListaAgencija").disabled = true;
+        document.getElementById("brlicence").disabled = true;
         //tip='prodavac';
-    }
-    else if(document.getElementById('agent').checked) {
+    } else if (document.getElementById('agent').checked) {
         console.log(document.getElementById('agent').value);
-        document.getElementsByName("agencije1").disabled=false;
-        document.getElementsByName("brlicence").disabled=false;
+        document.getElementById("ListaAgencija").disabled = false;
+        document.getElementById("brlicence").disabled = false;
         //tip='agent';
     }
 }
+

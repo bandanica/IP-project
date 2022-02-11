@@ -7,6 +7,7 @@
     <h2>Vasi podaci:</h2>
     <?php if (isset($podaci)) {
         ?>
+            <input type="hidden" name="idKor" value="<?php echo $podaci->getIdK();?>">
         Ime: <?php echo $podaci->getIme(); ?><br/>
         Prezime: <?php echo $podaci->getPrezime(); ?><br/>
         Korisnicko ime: <?php echo $podaci->getKorIme(); ?><br/>
@@ -25,11 +26,11 @@
                 if ($t == $podaci->getTip()) {
                     ?>
                     <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
-                           value="<?php echo $t->getTipKorisnika() ?>" checked> <?php echo $t->getTipKorisnika() ?>
+                           value="<?php echo $t->getTipKorisnika() ?>" checked onclick="promenaTipa()"> <?php echo $t->getTipKorisnika() ?>
                     <?php
                 } else {
                     ?>
-                    <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                    <input type="radio" name="tip" onclick="promenaTipa()" id="<?php echo $t->getTipKorisnika() ?>"
                            value="<?php echo $t->getTipKorisnika() ?>" > <?php echo $t->getTipKorisnika() ?>
                     <?php
                 }
@@ -40,13 +41,13 @@
 
         <div id="agencija">
             Agencija:
-            <select name="agencije1" id="ListaAgencija">
+            <select name="agencije1" id="ListaAgencija"  disabled>
                 <option></option>
 
                 <?php
                 if (isset($agencije)) {
                     foreach ($agencije as $a) {
-                        if (($podaci->getTip() == 'agent') && ($podaci->getIdagencije() == $a)) {
+                        if (($podaci->getTip()->getTipKorisnika() == 'agent') && ($podaci->getIdagencije() == $a)) {
                             ?>
                             <option selected> <?php echo $a->getNaziv() ?></option>
                             <?php
@@ -61,8 +62,8 @@
             </select>
             <br/>
 
-            Broj licence agenta:<input type="text" name="brlicence" value="<?php
-            if ($podaci->getTip() == 'agent') {
+            Broj licence agenta:<input type="text" id="brlicence" name="brlicence1" disabled value="<?php
+            if ($podaci->getTip()->getTipKorisnika() == 'agent') {
                 echo $podaci->getBrLicence();
             } else {
                 echo "";

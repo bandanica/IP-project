@@ -183,79 +183,111 @@ class Korisnik extends BaseController
         return $this->prikaz('nekretninaDetalji', ['nek' => $n]);
     }
 
-//    public function izvrsiNapredno(){
-//        $t = $this->request->getVar('izabranTip');
-//        $cmin = $this->request->getVar('minC');
-//        $cmaks = $this->request->getVar('maxC');
-//        $kmaks = $this->request->getVar('maxK');
-//        $kmin = $this->request->getVar('minK');
-//        $smin = $this->request->getVar('minS');
-//        $smaks = $this->request->getVar('maxS');
-//
-//
-//        if ($cmaks==''){
-//            //promeniti
-//            $cmaks=10000000;
-//        }
-//        else{
-//            $cmaks=(int) $c;
-//        }
-//        if ($k==''){
-//            $k=0;
-//        }
-//        else{
-//            $k=(int) $k;
-//        }
-//        if ($s==''){
-//            $s=0;
-//        }
-//        else{
-//            $s=(double) $s;
-//        }
-//
-//
-//        $Tip = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa'=>$t]);
-//
-//        $Tip = $Tip->getIdtipnekretnine();
-//
-//        $l = $this->request->getVar('Lokacija');
-//        $lokacijePretraga=[];
-//        $nek=[];
-//        foreach ($l as $l1){
-//            $string1 = explode("/",$l1);
-//            $string1 = end($string1);
-//            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$string1]);
-//            $x='ml';
-//            if ($obj==null){
-//                $x='op';
-//                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv'=>$string1]);
-//
-//            }
-//            else{
-//                $obj=$obj->getIdmikro();
-//                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineLokacija($c,$k,$s,$obj,$Tip));
-//                continue;
-//            }
-//            if ($obj==null){
-//                $x = 'gr';
-//                $obj=$this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv'=>$string1]);
-//            }
-//            else{
-//                $obj=$obj->getIdopstine();
-//                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineOpstina($c,$k,$s,$obj,$Tip));
-//                continue;
-//            }
-//            $obj=$obj->getIdg();
-//            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineGrad($c,$k,$s,$obj,$Tip));
-//
-//
-//        }
-//
-//
-//
-//        return $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
-//
-//    }
+    public function izvrsiNapredno(){
+        $t = $this->request->getVar('izabranTip');
+        $cmin = $this->request->getVar('minC');
+        $cmaks = $this->request->getVar('maxC');
+        $kmaks = $this->request->getVar('maxK');
+        $kmin = $this->request->getVar('minK');
+        $smin = $this->request->getVar('minS');
+        $smaks = $this->request->getVar('maxS');
+        $minSpr = $this->request->getVar('minSprat');
+        $maxSpr = $this->request->getVar('maxSprat');
+        $stanje='LUX';
+
+        if ($cmaks==''){
+            //promeniti
+            $cmaks=10000000;
+        }
+        else{
+            $cmaks=(int) $cmaks;
+        }
+        if ($cmin==''){
+            $cmin=0;
+        }
+        else{
+            $cmin=(int) $cmin;
+        }
+        if ($kmaks==''){
+            $kmaks=100000;
+        }
+        else{
+            $kmaks=(double) $kmaks;
+        }
+        if ($kmin==''){
+            $kmin=0;
+        }
+        else{
+            $kmin=(int) $kmin;
+        }
+        if ($smaks==''){
+            $smaks=100000;
+        }
+        else{
+            $smaks=(double) $smaks;
+        }
+        if ($smin==''){
+            $smin=0;
+        }
+        else{
+            $smin=(int) $smin;
+        }
+        if ($maxSpr==''){
+            $maxSpr=100000;
+        }
+        else{
+            $maxSpr=(double) $maxSpr;
+        }
+        if ($minSpr==''){
+            $minSpr=0;
+        }
+        else{
+            $minSpr=(int) $minSpr;
+        }
+
+
+        $Tip = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa'=>$t]);
+
+        $Tip = $Tip->getIdtipnekretnine();
+
+        $l = $this->request->getVar('Lokacija');
+        $lokacijePretraga=[];
+        $nek=[];
+        foreach ($l as $l1){
+            $string1 = explode("/",$l1);
+            $string1 = end($string1);
+            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$string1]);
+            $x='ml';
+            if ($obj==null){
+                $x='op';
+                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv'=>$string1]);
+
+            }
+            else{
+                $obj=$obj->getIdmikro();
+                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->naprednaLokacije($cmin,$cmaks,$kmin,$kmaks,$smin,$smaks,$minSpr,$maxSpr,$obj,$Tip));
+                continue;
+            }
+            if ($obj==null){
+                $x = 'gr';
+                $obj=$this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv'=>$string1]);
+            }
+            else{
+                $obj=$obj->getIdopstine();
+                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->naprednaOpstine($cmin,$cmaks,$kmin,$kmaks,$smin,$smaks,$obj,$Tip));
+                continue;
+            }
+            $obj=$obj->getIdg();
+            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->naprednaGradovi($cmin,$cmaks,$kmin,$kmaks,$smin,$minSpr,$maxSpr,$smaks,$obj,$Tip));
+
+
+        }
+
+
+
+        return $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
+
+    }
 
     public function dodajUOmiljene()
     {

@@ -281,14 +281,32 @@ class Oglasivac extends BaseController
         $id=$this->session->get('korisnik');
         $korisnik = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($id);
         $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
-        $indexAdmin = -1;
+        $indexAdmin = 0;
+        $indexKupac = 0;
+        $kk=0;
+        $ka=0;
         foreach ($tipkorisnika as $t) {
-            $indexAdmin += 1;
-            if ($t->getTipKorisnika() == "administrator") {
+            if (($t->getTipKorisnika() != "kupac") && ($kk==0)) {
+                $indexKupac +=1;
+            }
+            else if ($t->getTipKorisnika() == "kupac"){
+
+                $kk=1;
+            }
+
+            if (($t->getTipKorisnika() != "administrator") && ($ka==0)) {
+                $indexAdmin += 1;
+            }
+            else if ($t->getTipKorisnika() == "administrator"){
+                $ka=1;
+            }
+            if ($ka!=0 && $kk!=0){
                 break;
             }
+
         }
         unset($tipkorisnika[$indexAdmin]);
+        unset($tipkorisnika[$indexKupac]);
         $ag = $this->doctrine->em->getRepository(Agencija::class)->findAll();
 
         return $this->prikaz('podaciOglasivaca', ['podaci'=>$korisnik,'agencije'=>$ag,'tipkorisnika'=>$tipkorisnika]);
@@ -296,5 +314,33 @@ class Oglasivac extends BaseController
 
     public function zavrsiAzuriranje(){
 
+    }
+
+    public function promenaSubmit(){
+        //$idK = $this->request->getVar('idKor');
+        $idK = $this->session->get('korisnik');
+        $korisnik = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($idK);
+        $tel = $this->request->getVar('tel');
+        $mejl = $this->request->getVar('mejl');
+        $tip = $this->request->getVar('tip');
+        $tip = $this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika'=>$tip]);
+        if ($tip->getTipkorisnika()=='agent'){
+
+            $a = $this->request->getVar('agencije1');
+            $a = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv'=>$a]);
+            $br = $this->request->getVar('brlicence1');
+            $korisnik->setIdagencije($a);
+            $korisnik->setBrLicence($br);
+        }
+        else{
+            $korisnik->setIdagencije(null);
+            $korisnik->setBrLicence(null);
+
+        }
+        $korisnik->setTelefon($tel);
+        $korisnik->setEMail($mejl);
+        $korisnik->setTip($tip);
+        $this->doctrine->em->flush();
+        echo "SVE OK";
     }
 }
