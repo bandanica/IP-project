@@ -3,7 +3,8 @@
     <script src="<?php echo base_url(); ?>/js/novaNek.js"></script>
 </head>
 <body>
-<form method="post" action="<?php echo site_url() . "oglasivac/zavrsiDodavanjeNekretnine" ?>" enctype="multipart/form-data">
+<form method="post" action="<?php echo site_url() . "oglasivac/zavrsiDodavanjeNekretnine" ?>"
+      enctype="multipart/form-data">
     Tip:<select name="izabranTip" required>
         <?php
         if (isset($tipoviN)) {
@@ -98,9 +99,16 @@
     <label for="telefon">Telefon</label>
     <br/>
 
-    <input type="file" name="izaberiSliku" id="izaberiSliku">
-    Učitajte slike neretnine
+    Ucitajte slike neretnine (minimum 3):<br/>
+    <input type="file" name="izaberiSliku[]" multiple>
+    <!--        <input type="file" name="izaberiSliku" id="slika2">-->
+    <!--        <input type="file" name="izaberiSliku" id="slika3">-->
+    <!--        <input type="file" name="izaberiSliku" id="slika4">-->
+    <!--        <input type="file" name="izaberiSliku" id="slika5">-->
+    <!--        <input type="file" name="izaberiSliku" id="slika6">-->
+
     <br/>
+
     <input type="submit" name="dodaj" value="Zavrsi">
 </form>
 

@@ -310,4 +310,13 @@ class Korisnik extends BaseController
         echo "SVE OK";
         $this->doctrine->em->flush($kor);
     }
+
+    public function proba(){
+
+        //$dir    = base_url()."/slike/nekretnina16";
+        $dir    = "slike/nekretnina16";
+        $files1 = scandir($dir);
+        //$files1 = Storage::disk('public')->allFiles('img/animals');
+        print_r($files1);
+    }
 }

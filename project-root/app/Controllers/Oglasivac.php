@@ -275,34 +275,65 @@ class Oglasivac extends BaseController
         $idS = (int) $nekretninaN->getIdn();
         $putanja = 'slike/profilna.png';
 
+        $fajlovi = $_FILES["izaberiSliku"]['name'];
 
-        if ($_FILES["izaberiSliku"]["size"] != 0) {
-            $putanja = $this->uzmiPutanju($data,$idS);
+        //OVO URADITI U JS!!!
+        if (count($fajlovi)<3){
+            echo "MORAJU DA SE UNESU BAR 3 SLIKE";
         }
+        if (count($fajlovi)>6){
+            echo "NAJVISE DOZVOLJENO 6 slika";
+        }
+
+        if (count($fajlovi)>=3 && count($fajlovi)<=6){
+            $names = $_FILES['izaberiSliku']['name'];
+            $sizes = $_FILES['izaberiSliku']['size'];
+            $tmp_names = $_FILES['izaberiSliku']['tmp_name'];
+            $m = count($names);
+            for ($i=0;$i<$m;$i++){
+                if ($sizes[$i]!=0){
+                    $putanja = $this->uzmiPutanju($data,$idS,$names[$i],$sizes[$i],$tmp_names[$i]);
+                    //echo $putanja;
+                    //echo "<br/>";
+                }
+            }
+
+        }
+
+        //$fileNames = array_filter($_FILES['izaveriSliku']['name']);
+        //echo gettype($fileNames);
+        //echo "SVE Ok";
+//        if ($_FILES["izaberiSliku"]["size"] != 0) {
+//            $putanja = $this->uzmiPutanju($data,$idS);
+//        }
         //echo "Uspesno";
         //echo "<br/>";
         //echo $putanja;
+
+        $putanja= "slike/nekretnina"."$idS"."/";
         $nekretninaN->setSlike($putanja);
         $this->doctrine->em->flush();
         return redirect()->to(site_url("oglasivac"));
 
     }
 
-    protected function uzmiPutanju(&$greska, $id): string
+    protected function uzmiPutanju(&$greska, $id,$name,$size,$tmp_name): string
     {
 
         $target_dir = "slike/nekretnina"."$id"."/";
-        mkdir($target_dir);
-        $target_file = $target_dir . basename($_FILES["izaberiSliku"]["name"]);
+        if (!is_dir($target_dir)){
+            mkdir($target_dir);
+        }
+        $target_file = $target_dir . basename($name);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $check = getimagesize($_FILES["izaberiSliku"]["tmp_name"]);
+        $check = getimagesize($tmp_name);
 
         if ($check == false) {
             $greska['GreskaSlika'] = 'Fajl koji ste prilozili nije slika!';
             return "";
         }
 
-        if ($_FILES["izaberiSliku"]["size"] > 1000000) {
+        if ($size > 1000000) {
             $greska['GreskaSlika'] = 'Slika koju ste prilozili je veca od 1mb!';
             return "";
         }
@@ -312,7 +343,7 @@ class Oglasivac extends BaseController
             return "";
         }
 
-        if (move_uploaded_file($_FILES["izaberiSliku"]["tmp_name"], $target_file)) {
+        if (move_uploaded_file($tmp_name, $target_file)) {
             return $target_file;
         } else {
             $greska['GreskaSlika'] = 'Desila se greska pri ucitavanju slike!';

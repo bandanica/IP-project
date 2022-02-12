@@ -29,8 +29,25 @@ if (isset($rezultati) && !empty($rezultati)) {
                                name='idNek'>
                     </td>
                     <td><?php if ($n1->getSlike()!=null){
-                        ?>
-                            <img src="<?php echo base_url() . "/" . $n1->getSlike()?>" alt="slika nekretnine" width="100" height="100">
+                            //$dir_path = base_url()."/".$n1->getSlike();
+                            $dir_path = $n1->getSlike();
+                            //echo $dir_path;
+                            $slike = scandir($dir_path);
+                            $files = array_diff(scandir($dir_path), array('.', '..'));
+                            foreach($files as $file){
+                                ?>
+                                <img src="<?php echo base_url() . "/" . $dir_path."/".$file;?>" alt="slika nekretnine" width="100" height="100">
+                                    <?php
+                                //echo $file;
+                                break;
+                            }
+                            ?>
+<!--                            <div class="fotorama">-->
+<!--                                <div data-img="--><?php //echo base_url() . "/" . $n1->getSlike()."stanVracar1.jpg";?><!--">One</div>-->
+<!--                                <div data-img="--><?php //echo base_url() . "/" . $n1->getSlike()."stanVracar3.jpg";?><!--"><strong>Two</strong></div>-->
+<!--                                <div data-img="--><?php //echo base_url() . "/" . $n1->getSlike()."stanVracar1.jpg";?><!--"><em>Three</em></div>-->
+<!--                            </div>-->
+
                     <?php
                         }?></td>
                     <td><?php echo $n1->getNaziv() ?></td>

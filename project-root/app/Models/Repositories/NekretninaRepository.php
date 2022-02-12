@@ -47,7 +47,7 @@ class NekretninaRepository extends EntityRepository
     }
     public function traziNekretnineOpstina($cena, $kvadr, $sobe, $opstina, $tip)
     {
-        $status= 'Aktivno';
+        $status= "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
         $upit->select('n')
@@ -56,7 +56,7 @@ class NekretninaRepository extends EntityRepository
             ->innerJoin("App\Models\Entities\Opstina",'o','WITH','o.idopstine= n.opstina')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
-                $upit->expr()->eq('n.status', "$status"),
+                $upit->expr()->eq('n.status', $status),
                 $upit->expr()->lte('n.cena', "$cena"),
                 $upit->expr()->gte('n.kvadratura', "$kvadr"),
                 $upit->expr()->gte('n.brSoba', "$sobe"),
@@ -67,7 +67,7 @@ class NekretninaRepository extends EntityRepository
     }
     public function traziNekretnineLokacija($cena, $kvadr, $sobe, $lokacija, $tip)
     {
-        $status= 'Aktivno';
+        $status= "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
         $upit->select('n')
@@ -77,7 +77,7 @@ class NekretninaRepository extends EntityRepository
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->lte('n.cena', "$cena"),
-                $upit->expr()->eq('n.status', "$status"),
+                $upit->expr()->eq('n.status', $status),
                 $upit->expr()->gte('n.kvadratura', "$kvadr"),
                 $upit->expr()->gte('n.brSoba', "$sobe"),
                 $upit->expr()->eq('n.mikrolokacija', "$lokacija")
