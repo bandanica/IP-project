@@ -94,7 +94,7 @@ CREATE TABLE `karakteristike` (
   `parking` varchar(3) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idkarakteristike`),
   UNIQUE KEY `idkarakteristike_UNIQUE` (`idkarakteristike`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `karakteristike` (
 
 LOCK TABLES `karakteristike` WRITE;
 /*!40000 ALTER TABLE `karakteristike` DISABLE KEYS */;
-INSERT INTO `karakteristike` VALUES (1,'da','ne','ne','da','da','ne','da','da','da','da','da'),(2,'da','ne','da','ne','da','da','ne','ne','da','da','ne'),(3,'ne','ne','da','ne','da','ne','ne','da','da','da','da'),(10,'da','da','da','da','da','da','da','da','da','da','da'),(11,'da','ne','ne','ne','da','ne','da','ne','da','ne','da'),(12,'da','ne','ne','ne','da','ne','da','ne','da','ne','da'),(13,'ne','ne','da','ne','ne','ne','ne','da','da','da','da'),(14,'ne','ne','ne','ne','ne','ne','ne','ne','ne','da','ne'),(15,'da','da','da','da','da','da','da','da','da','da','da'),(16,'ne','ne','ne','ne','ne','ne','ne','ne','ne','ne','ne'),(17,'ne','ne','da','ne','ne','ne','da','da','ne','da','da'),(18,'da','ne','ne','ne','da','da','da','ne','da','da','da'),(19,'da','ne','ne','ne','da','da','da','da','ne','da','da');
+INSERT INTO `karakteristike` VALUES (1,'da','ne','ne','da','da','ne','da','da','da','da','da'),(2,'da','ne','da','ne','da','da','ne','ne','da','da','ne'),(3,'ne','ne','da','ne','da','ne','ne','da','da','da','da'),(10,'da','da','da','da','da','da','da','da','da','da','da'),(11,'da','ne','ne','ne','da','ne','da','ne','da','ne','da'),(12,'da','ne','ne','ne','da','ne','da','ne','da','ne','da'),(13,'ne','ne','da','ne','ne','ne','ne','da','da','da','da'),(14,'ne','ne','ne','ne','ne','ne','ne','ne','ne','da','ne'),(15,'da','da','da','da','da','da','da','da','da','da','da'),(16,'ne','ne','ne','ne','ne','ne','ne','ne','ne','ne','ne'),(17,'ne','ne','da','ne','ne','ne','da','da','ne','da','da'),(18,'da','ne','ne','ne','da','da','da','ne','da','da','da'),(19,'da','ne','ne','ne','da','da','da','da','ne','da','da'),(20,'ne','ne','da','da','da','da','ne','da','da','da','ne'),(21,'ne','ne','da','da','da','da','ne','da','da','da','ne'),(22,'ne','ne','da','da','da','da','ne','da','da','da','ne');
 /*!40000 ALTER TABLE `karakteristike` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `nekretnina` (
   CONSTRAINT `opst` FOREIGN KEY (`opstina`) REFERENCES `opstina` (`idOpstine`),
   CONSTRAINT `tipNekr` FOREIGN KEY (`tip`) REFERENCES `tipnekretnine` (`idTipnekretnine`),
   CONSTRAINT `ul` FOREIGN KEY (`ulica`) REFERENCES `ulica` (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +237,7 @@ CREATE TABLE `nekretnina` (
 
 LOCK TABLES `nekretnina` WRITE;
 /*!40000 ALTER TABLE `nekretnina` DISABLE KEYS */;
-INSERT INTO `nekretnina` VALUES (1,1,3,1,45,1,1,1,3,2,'2015-01-01 00:00:00',2,5,'da','izvorno','na struju',12000,'Super lokacija, svetao stan, opremljen kuhinjom.','Aktivno',1,'Stan Hadzi Milentijeva 50',60000,NULL),(3,1,3,1,55,1,1,2,1,2,'2010-05-05 00:00:00',4,4,'da','dobro','na struju',7000,'za manju porodicu','Aktivno',1,'Stan Crveni krst povoljno',70000,NULL),(7,1,3,1,33,1,1,2,2,1,'2022-02-08 10:19:26',3,7,'da','lux','Na struju',4500,'super nekretnian','Aktivno',13,'Super stan',47500,NULL),(8,1,3,1,33,1,1,2,2,4,'2022-02-08 10:34:17',3,7,'ne','renovirano','Na struju',4500,'super nekretnian','Aktivno',14,'frre',47500,NULL),(9,1,3,NULL,33,1,1,2,1,3,'2025-11-26 10:56:09',3,7,'da','lux','centralno',4500,'super nekretnian','Aktivno',15,'dojiwqjdiqo',1000000,NULL),(10,1,3,NULL,213,1,1,2,1,2,'2022-02-19 10:58:19',3,7,'ne','izvorno','podno',4684,'wqdwqdqwdqwd','Aktivno',16,'db',45645,NULL),(11,1,3,NULL,123,1,1,2,1,4,'2022-02-02 10:59:37',3,3,'da','renovirano','nastruju',13,'dq','Prodato',17,'dqw',124,NULL),(13,2,3,2,125,1,1,2,2,4,'1999-10-01 16:35:51',2,2,'da','renovirano','centralno',12000,'Lepa kucica u srci Vracara','Aktivno',19,'Kuca lepa',150000,'slike/nekretnina13/kucaVracar.jpg');
+INSERT INTO `nekretnina` VALUES (1,1,3,1,45,1,1,1,3,2,'2015-01-01 00:00:00',2,5,'da','izvorno','na struju',12000,'Super lokacija, svetao stan, opremljen kuhinjom.','Aktivno',1,'Stan Hadzi Milentijeva 50',60000,NULL),(3,1,3,1,55,1,1,2,1,2,'2010-05-05 00:00:00',4,4,'da','dobro','na struju',7000,'za manju porodicu','Aktivno',1,'Stan Crveni krst povoljno',70000,NULL),(7,1,3,1,33,1,1,2,2,1,'2022-02-08 10:19:26',3,7,'da','lux','Na struju',4500,'super nekretnian','Aktivno',13,'Super stan',47500,NULL),(8,1,3,1,33,1,1,2,2,4,'2022-02-08 10:34:17',3,7,'ne','renovirano','Na struju',4500,'super nekretnian','Aktivno',14,'frre',47500,NULL),(9,1,3,NULL,33,1,1,2,1,3,'2025-11-26 10:56:09',3,7,'da','lux','centralno',4500,'super nekretnian','Aktivno',15,'dojiwqjdiqo',1000000,NULL),(10,1,3,NULL,213,1,1,2,1,2,'2022-02-19 10:58:19',3,7,'ne','izvorno','podno',4684,'wqdwqdqwdqwd','Aktivno',16,'db',45645,NULL),(11,1,3,NULL,123,1,1,2,1,4,'2022-02-02 10:59:37',3,3,'da','renovirano','nastruju',13,'dq','Prodato',17,'dqw',124,NULL),(13,2,3,2,125,1,1,2,2,4,'1999-10-01 16:35:51',2,2,'da','renovirano','centralno',12000,'Lepa kucica u srci Vracara','Aktivno',19,'Kuca lepa',150000,'slike/nekretnina13'),(16,1,3,2,60,1,1,2,2,2,'1982-01-01 02:00:49',3,4,'ne','renovirano','centralno',10000,'Lep stancic, povoljno','Aktivno',22,'Crveni krst Danila Kisa',104000,'slike/nekretnina16');
 /*!40000 ALTER TABLE `nekretnina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `omiljene` (
   KEY `idnekretnine_idx` (`idN`),
   CONSTRAINT `idkupca` FOREIGN KEY (`idK`) REFERENCES `korisnik` (`idK`),
   CONSTRAINT `idnekretnine` FOREIGN KEY (`idN`) REFERENCES `nekretnina` (`idN`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +267,7 @@ CREATE TABLE `omiljene` (
 
 LOCK TABLES `omiljene` WRITE;
 /*!40000 ALTER TABLE `omiljene` DISABLE KEYS */;
-INSERT INTO `omiljene` VALUES (1,2,1),(2,2,7);
+INSERT INTO `omiljene` VALUES (1,2,1),(2,2,7),(3,2,13);
 /*!40000 ALTER TABLE `omiljene` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -386,4 +386,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-11 23:39:47
+-- Dump completed on 2022-02-12 11:40:36
