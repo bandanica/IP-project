@@ -1,6 +1,8 @@
 <html>
 <head>
     <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url(); ?>/css/detaljiNekretnine.css">
 </head>
 <body>
@@ -17,48 +19,71 @@ if (isset($nek)) {
     //echo $dir_path;
     $slike = scandir($dir_path);
     $files = array_diff(scandir($dir_path), array('.', '..'));
-    ?>
-
-<!--    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">-->
-<!--        <ol class="carousel-indicators">-->
-<!--            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>-->
-<!--            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>-->
-<!--            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>-->
-<!--        </ol>-->
-<!--        <div class="carousel-inner">-->
-<!--            <div class="carousel-item active">-->
-<!--                <img class="d-block w-100" src="..." alt="First slide">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img class="d-block w-100" src="..." alt="Second slide">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img class="d-block w-100" src="..." alt="Third slide">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">-->
-<!--            <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--            <span class="sr-only">Previous</span>-->
-<!--        </a>-->
-<!--        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">-->
-<!--            <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--            <span class="sr-only">Next</span>-->
-<!--        </a>-->
-<!--    </div>-->
-    <?php
     $dir_path = $nek->getSlike();
-//echo $dir_path;
     $slike = scandir($dir_path);
     $files = array_diff(scandir($dir_path), array('.', '..'));
-    foreach ($files as $file) {
-        ?>
-        <img src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>" alt="slika nekretnine" width="100"
-             height="100">
-        <?php
-//echo $file;
-        break;
-    }
+
     ?>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <?php
+            $i = 0;
+            foreach ($files as $file) {
+                if ($i == 0) {
+                    $i += 1;
+                    ?>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <?php
+                } else {
+                    ?>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>"></li>
+                    <?php
+                    $i += 1;
+                }
+                ?>
+
+                <?php
+            }
+            ?>
+
+
+        </ol>
+        <div class="carousel-inner">
+            <?php
+            $i = 0;
+            foreach ($files as $file) {
+                if ($i == 0) {
+                    $i += 1;
+                    ?>
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
+                             alt="First slide">
+                    </div>
+                    <?php
+                } else {
+                    ?>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
+                             alt="Second slide">
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
 
     Tip:<?php echo $nek->getTip()->getNazivTipa(); ?>
     Kvadratura: <?php echo $nek->getKvadratura(); ?>m2
