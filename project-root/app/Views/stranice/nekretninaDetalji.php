@@ -1,11 +1,17 @@
-<html>
+<html lang="en">
 <head>
-    <title></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+    <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>/css/detaljiNekretnine.css">
+    <title></title>
 </head>
 <body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
 <?php
@@ -25,63 +31,71 @@ if (isset($nek)) {
 
     ?>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <?php
-            $i = 0;
-            foreach ($files as $file) {
-                if ($i == 0) {
-                    $i += 1;
-                    ?>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <?php
-                } else {
-                    ?>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i; ?>"></li>
-                    <?php
-                    $i += 1;
-                }
-                ?>
-
-                <?php
-            }
-            ?>
-
-
-        </ol>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+<!--        <ol class="carousel-indicators">-->
+<!--            --><?php
+//            $i = 0;
+//            foreach ($files as $file) {
+//                if ($i == 0) {
+//                    $i += 1;
+//                    ?>
+<!--                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>-->
+<!--                    --><?php
+//                } else {
+//                    ?>
+<!--                    <li data-target="#carouselExampleIndicators" data-slide-to="--><?php //echo "$i"; ?><!--"></li>-->
+<!--                    --><?php
+//                    $i += 1;
+//                }
+//                ?>
+<!---->
+<!--                --><?php
+//            }
+//            ?>
+<!---->
+<!---->
+<!--        </ol>-->
         <div class="carousel-inner">
+
             <?php
             $i = 0;
             foreach ($files as $file) {
                 if ($i == 0) {
+
                     $i += 1;
                     ?>
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
+                        <img class="d-block w-100" src="
+                        <?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
                              alt="First slide">
+
                     </div>
                     <?php
                 } else {
+
                     ?>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
+
+                        <img class="d-block w-100" src="
+                        <?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
                              alt="Second slide">
                     </div>
                     <?php
+                    $i += 1;
                 }
             }
             ?>
 
 
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
 
@@ -98,5 +112,17 @@ if (isset($nek)) {
 }
 
 ?>
+
+
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"-->
+<!--        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"-->
+<!--        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"-->
+<!--        crossorigin="anonymous"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
 </body>
 </html>
