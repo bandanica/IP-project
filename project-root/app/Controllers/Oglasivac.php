@@ -190,31 +190,7 @@ class Oglasivac extends BaseController
             $tel = "da";
         }
 
-        //echo $grejanje;
-//        echo "<br/>";
-//        echo $p;
-//        echo "<br/>";
-//        echo $t;
-//        echo "<br/>";
-//        echo $g;
-//        echo "<br/>";
-//        echo $l;
-//        echo "<br/>";
-//        echo $lift;
-//        echo "<br/>";
-//        echo $fb;
-//        echo "<br/>";
-//        echo $pod;
-//        echo "<br/>";
-//        echo $bast;
-//        echo "<br/>";
-//        echo $k;
-//        echo "<br/>";
-//        echo $in;
-//        echo "<br/>";
-//        echo $tel;
-//        echo "<br/>";
-        //
+
         $kar = new Karakteristike();
         $kar->setTelefon($tel);
         $kar->setFrancBalkon($fb);
@@ -402,6 +378,97 @@ class Oglasivac extends BaseController
     }
 
     public function zavrsiAzuriranje(){
+        $nekretninaN = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idN'));
+        $kar = $nekretninaN->getKarakteristike();
+        $ime = $this->request->getVar('nazivN');
+        $kv = (int)$this->request->getVar('kvadratura');
+        $sobe = (int)$this->request->getVar('brsoba');
+        $gi = $this->request->getVar('dizgradnje');
+        $gi = date_create_from_format("Y-m-d", $gi);
+        $stanjen = $this->request->getVar('stanje');
+        $sprat = (int)$this->request->getVar('sprat');
+        $uks = (int)$this->request->getVar('ukspratnost');
+        $opis = $this->request->getVar('opisNek');
+        $mtroskovi = $this->request->getVar('mesTroskovi');
+        $c = (int)$this->request->getVar('cenaNekretnine');
+        $p = "ne";
+        $t = "ne";
+        $g = "ne";
+        $l = "ne";
+        $lift = "ne";
+        $fb = "ne";
+        $pod = 'ne';
+        $bast = 'ne';
+        $k = 'ne';
+        $in = 'ne';
+        $tel = 'ne';
+        $grejanje = $this->request->getVar('grej');
+        if ($this->request->getVar('parking') != '') {
+            $p = "da";
+        }
+        if ($this->request->getVar('terasa') != '') {
+            $t = "da";
+        }
+        if ($this->request->getVar('garaza') != '') {
+            $g = "da";
+        }
+        if ($this->request->getVar('lodja') != '') {
+            $l = "da";
+        }
+        if ($this->request->getVar('lift') != '') {
+            $lift = "da";
+        }
+        if ($this->request->getVar('balkon') != '') {
+            $fb = "da";
+        }
+        if ($this->request->getVar('podrum') != '') {
+            $pod = "da";
+        }
+        if ($this->request->getVar('basta') != '') {
+            $bast = "da";
+        }
+        if ($this->request->getVar('klima') != '') {
+            $k = "da";
+        }
+        if ($this->request->getVar('internet') != '') {
+            $in = "da";
+        }
+        if ($this->request->getVar('telefon') != '') {
+            $tel = "da";
+        }
+        //$kar = new Karakteristike();
+        $kar->setTelefon($tel);
+        $kar->setFrancBalkon($fb);
+        $kar->setGaraza($g);
+        $kar->setInternet($in);
+        $kar->setKlima($k);
+        $kar->setLift($lift);
+        $kar->setLodja($l);
+        $kar->setParking($p);
+        $kar->setPodrum($pod);
+        $kar->setSaBastom($bast);
+        $kar->setTerasa($t);
+
+        $nekretninaN->setParking($p);
+
+        $nekretninaN->setBrSoba($sobe);
+        $nekretninaN->setCena($c);
+        $nekretninaN->setGodinaIzgradnje($gi);
+        $nekretninaN->setGrejanje($grejanje);
+        $nekretninaN->setKarakteristike($kar);
+        //$nekretninaN->setGradid($grad);
+        $nekretninaN->setNaziv($ime);
+        $nekretninaN->setKvadratura($kv);
+        $nekretninaN->setStanje($stanjen);
+        $nekretninaN->setSprat($sprat);
+        $nekretninaN->setUkupnaSpratnost($uks);
+        $nekretninaN->setOpis($opis);
+        $nekretninaN->setMesecniTroskovi($mtroskovi);
+        //$nekretninaN->setOpstina($opstina);
+        //$nekretninaN->setMikrolokacija($lokacija);
+        //$nekretninaN->setUlica($ulica);
+        $this->doctrine->em->flush();
+        return redirect()->to(site_url("oglasivac"));
 
     }
 
