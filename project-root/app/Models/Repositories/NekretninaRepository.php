@@ -19,7 +19,7 @@ class NekretninaRepository extends EntityRepository
      */
     public function findLatest($s)
     {
-        return $this->findBy(['status'=>$s], ['idn' => 'ASC']);
+        return $this->findBy(['status'=>$s], ['idn' => 'DESC']);
     }
 
     /*

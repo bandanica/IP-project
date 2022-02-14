@@ -41,18 +41,21 @@ class Korisnik extends BaseController
         }
         $poruka = $this->session->get("poruka2");
         $this->session->set("poruka2", '');
-        return $this->prikaz('kupac', ['poruka2' => $poruka, 'tipoviN' => $tipN, 'lokacije' => $lokacije]);
+        $this->prikaz('kupac', ['poruka2' => $poruka, 'tipoviN' => $tipN, 'lokacije' => $lokacije]);
     }
 
     protected function prikaz($page, $data)
     {
         $data['controller'] = 'Korisnik';
-        return view("stranice/$page", $data);
+        echo view("sabloni/header");
+        echo view("stranice/$page", $data);
+        echo view("sabloni/footer");
+        //return view("stranice/$page", $data);
     }
 
     public function promenaLozinke()
     {
-        return $this->prikaz('promenaSifre', []);
+        $this->prikaz('promenaSifre', []);
     }
 
     public function zameniLozinku()
@@ -147,7 +150,7 @@ class Korisnik extends BaseController
 //        }
         //$nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($c,$k,$s,$Tip);
         //echo $nek;
-        return $this->prikaz('rezultatiPretrage', ['rezultati' => $nek]);
+        $this->prikaz('rezultatiPretrage', ['rezultati' => $nek]);
     }
 
     public function naprednaPretraga()
@@ -174,13 +177,13 @@ class Korisnik extends BaseController
             $s = "$gr" . "/" . "$op" . "/" . "$ml";
             array_push($lokacije, $s);
         }
-        return $this->prikaz('naprednaPretraga', ['tipoviN' => $tipN, 'lokacije' => $lokacije]);
+        $this->prikaz('naprednaPretraga', ['tipoviN' => $tipN, 'lokacije' => $lokacije]);
     }
 
     public function Pogledaj()
     {
         $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
-        return $this->prikaz('nekretninaDetalji', ['nek' => $n]);
+        $this->prikaz('nekretninaDetalji', ['nek' => $n]);
     }
 
     public function izvrsiNapredno(){
@@ -285,7 +288,7 @@ class Korisnik extends BaseController
 
 
 
-        return $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
+        $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
 
     }
 

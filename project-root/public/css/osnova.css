@@ -1,0 +1,142 @@
+body {
+    background-color: #FFE8D1;
+    position: relative;
+    overflow: auto;
+    align-content: center;
+    /*display: flex;*/
+
+}
+.container-fluid{
+    width: 100%;
+    background-color: #FFE8D1;
+    justify-content: center;
+}
+.row{
+    width:100%;
+    justify-content: center;
+}
+
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 10%;
+    left: 0px;
+    background: #568EA3;
+    /*top: 0px;*/
+    /*height: 10%;*/
+    /*top:0px;*/
+    text-align: center;
+    color:#FFE8D1;
+    font-family: "Roboto Light";
+
+
+
+
+}
+
+#hlogo{
+    color: #FFE8D1;
+}
+
+#dugmeLog{
+    color: #FFE8D1;
+    background-color: #68C3D4;
+    border-color: #68C3D4;
+}
+#dugmeReg{
+    color: #FFE8D1;
+    background-color: #68C3D4;
+    border-color: #68C3D4;
+}
+#pocL{
+    color:#FFE8D1;
+    font-family: "Roboto Light";
+}
+#pocL2{
+    color:#FFE8D1;
+    font-family: "Roboto Light";
+}
+#pocL3{
+    color:#FFE8D1;
+    font-family: "Roboto Light";
+}
+#footer {
+    background: #568EA3;
+    /*position: fixed;*/
+    bottom:0;
+    height: 5%;
+    text-align: center;
+    color: #FFE8D1;
+    font-family: 'Courier New';
+}
+
+#styleOne{
+    border:0;
+    height:3px;
+    background: #568EA3;
+}
+
+#loginForma{
+    background: #68C3D4;
+    border: 2px solid #735751;
+    box-sizing: border-box;
+    border-radius: 9px;
+    text-align: center;
+}
+#regForma {
+    background: #68C3D4;
+    border: 2px solid #735751;
+    box-sizing: border-box;
+    border-radius: 9px;
+    text-align: center;
+}
+
+.modal-login{
+    color: #68C3D4;
+    width:350px;
+    margin: 80px auto 0;
+}
+
+.modal-login .modal-content{
+    padding:20px;
+    border-radius:5px;
+    border:none;
+}
+
+.modal-login .modal-header{
+    border-bottom: none;
+    position:relative;
+    justify-content: center;
+}
+
+.modal-login h4{
+    text-align: center;
+    font-size: 26px;
+    margin:30px 0 -15px;
+    color: black;
+}
+
+.modal-login .form-control:focus{
+    border-color: black;
+}
+
+.modal-login .form-control .modal-login .btn{
+    min-height: 40px;
+    border-radius:3px;
+}
+
+.modal-login .close{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+}
+
+.modal-login .btn:hover, .modal-login .btn:focus{
+    background: #45aba6;
+    outline:none;
+}
+.trigger-btn{
+    display: inline-block;
+    margin: 100px auto;
+}

@@ -1,94 +1,120 @@
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/css/pretragaNekretnina.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/css/kupacStil.css">
     <script src="<?php echo base_url(); ?>/js/kupac.js"></script>
 </head>
 <body>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <h5>Pretraga nekretnina:</h5>
+        </div>
+    </div>
+    <div class="row">
+        <form name="Forma za pretragu" method="post" action=<?php echo site_url() . "korisnik/pretragaNekretnine" ?>>
 
-<h2>Pretraga nekretnina:</h2>
-<form name="Forma za pretragu" method="post" action=<?php echo site_url() . "korisnik/pretragaNekretnine" ?>>
-    Tip:<select name="izabranTip" required>
-        <?php
-        if (isset($tipoviN)) {
-            foreach ($tipoviN as $n) {
-                ?>
-                <option><?php echo $n->getNazivTipa(); ?></option>
+            Tip:<select name="izabranTip" required>
                 <?php
-            }
-        }
-        ?>
-    </select>
-<!--    <section class="main">-->
-<!--        Lokacija:-->
-<!--        <div class="search" autocomplete="off" method="post" action="">-->
-<!--            <input autocomplete="false" name="hidden" type="text" style="display:none;">-->
-<!--            <input type="text" name="q" placeholder="Unesite lokaciju..." id="searchBox"/>-->
-<!--            <ul class="results" id="suggestionsList">-->
-<!---->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </section>-->
-
-    Lokacija:<select name="Lokacija[]" multiple>
-        <option></option>
-        <?php
-        if (isset($lokacije)) {
-            foreach ($lokacije as $l) {
+                if (isset($tipoviN)) {
+                    foreach ($tipoviN as $n) {
+                        ?>
+                        <option><?php echo $n->getNazivTipa(); ?></option>
+                        <?php
+                    }
+                }
                 ?>
-                <option><?php echo $l; ?></option>
-                <script>
-                    save("<?php echo $l?>");
-                </script>
+            </select>
+
+
+            Lokacija:<select multiple name="Lokacija[]">
+                <option></option>
                 <?php
-            }
-        }
-        ?>
+                if (isset($lokacije)) {
+                    $j = 0;
+                    foreach ($lokacije as $l) {
+                        $j += 1;
+                        ?>
+                        <option><?php echo $l; ?></option>
+                        <script>
+                            save("<?php echo $l?>");
+                        </script>
+                        <?php
+                    }
+                }
+                ?>
 
-    </select>
-
-    <!--            <input type="text" name="lok" aria-autocomplete="list" aria-haspopup="true" placeholder="Upisi lokaciju...">-->
+            </select>
 
 
-    Cena DO (EUR):<input type="text" name="cenaDO">
-    Kvadratura OD (m2): <input type="text" name="kvadrOD">
-    Min. br. soba:<select name="brs">
-        <option></option>
-        <option>1</option>
-        <option>1.5</option>
-        <option>2</option>
-        <option>2.5</option>
-        <option>3</option>
-        <option>3.5</option>
-        <option>4</option>
-        <option>4.5</option>
-        <option>5</option>
-        <option>5+</option>
-    </select>
-    <input type="submit" id="pret" value="Pretrazi">
+            <!--    <section class="main">-->
+            <!--        Lokacija:-->
+            <!--        <div class="search" autocomplete="off" method="post" action="">-->
+            <!--            <input autocomplete="false" name="hidden" type="text" style="display:none;">-->
+            <!--            <input type="text" name="q" placeholder="Unesite lokaciju..." id="searchBox"/>-->
+            <!--            <ul class="results" id="suggestionsList">-->
+            <!---->
+            <!--            </ul>-->
+            <!--        </div>-->
+            <!--    </section>-->
 
-</form>
 
-<form action=<?php echo site_url() . "korisnik/naprednaPretraga" ?>>
-    <input type="submit" id="dugmeNapredno" value="Napredna pretraga">
+            <!--            <input type="text" name="lok" aria-autocomplete="list" aria-haspopup="true" placeholder="Upisi lokaciju...">-->
 
-</form>
 
-<form action=<?php echo site_url() . "korisnik/promenaLozinke" ?>>
-    <input type="submit" id="dugmeLozinka" value="Promena lozinke">
+            Cena DO (EUR):<input type="text" name="cenaDO">
 
-</form>
-<form method='post' action=<?php echo site_url() . "login/logout" ?>>
-    <input type="submit" name="logout" value="Odjavi se">
 
-</form>
-<?php if (isset($poruka2)) {
-    echo $poruka2;
+            Kvadratura OD (m2): <input type="text" name="kvadrOD">
 
-} ?>
 
+            Min. br. soba:<select name="brs">
+                <option></option>
+                <option>1</option>
+                <option>1.5</option>
+                <option>2</option>
+                <option>2.5</option>
+                <option>3</option>
+                <option>3.5</option>
+                <option>4</option>
+                <option>4.5</option>
+                <option>5</option>
+                <option>5+</option>
+            </select>
+
+
+            <input type="submit" id="pret" value="Pretrazi">
+
+        </form>
+
+    </div>
+
+
+    <form action=<?php echo site_url() . "korisnik/naprednaPretraga" ?>>
+        <input type="submit" id="dugmeNapredno" value="Napredna pretraga">
+
+    </form>
+
+    <form action=<?php echo site_url() . "korisnik/promenaLozinke" ?>>
+        <input type="submit" id="dugmeLozinka" value="Promena lozinke">
+
+    </form>
+    <form method='post' action=<?php echo site_url() . "login/logout" ?>>
+        <input type="submit" name="logout" value="Odjavi se">
+
+    </form>
+    <?php if (isset($poruka2)) {
+        echo $poruka2;
+
+    } ?>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 </html>

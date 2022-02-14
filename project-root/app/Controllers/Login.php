@@ -45,8 +45,12 @@ class Login extends BaseController
         $this->session->set("poruka", '');
         $this->session->set("poruka1", '');
         $this->session->set("porukaLozinka", '');
-        return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
-            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'nekretnine' => $poslednjiOglasi]);
+
+        $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
+            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'poslednjOgl' => $poslednjiOglasi]);
+
+//        echo $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
+//            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'nekretnine' => $poslednjiOglasi]);
 
         //return $this->prikaz('index', ['gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL, 'poslednjOgl'=>$poslednjiOglasi]);
     }
@@ -54,12 +58,14 @@ class Login extends BaseController
     protected function prikaz($page, $data)
     {
         $data['controller'] = 'Login';
-        return view("stranice/$page", $data);
+        echo view("sabloni/header");
+        echo view("stranice/$page", $data);
+        echo view("sabloni/footer");
     }
 
     public function log($puruka = null)
     {
-        return $this->prikaz('index', ['poruka' => $puruka]);
+        $this->prikaz('index', ['poruka' => $puruka]);
     }
 
     public function login()
@@ -176,7 +182,7 @@ class Login extends BaseController
 
     public function registrovan()
     {
-        return $this->prikaz("kreiranKorisnik", []);
+        $this->prikaz("kreiranKorisnik", []);
     }
 
     public function logout()

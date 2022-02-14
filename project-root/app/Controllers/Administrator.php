@@ -26,14 +26,17 @@ class Administrator extends BaseController
 //        }
 
         //echo $this->session->get('korisnik');
-        return $this->prikaz('administrator', ['zahtevi' => $regzahtevi, 'korisnici' => $korisnici]);
+        $this->prikaz('administrator', ['zahtevi' => $regzahtevi, 'korisnici' => $korisnici]);
 
     }
 
     protected function prikaz($page, $data)
     {
         $data['controller'] = 'Administrator';
-        return view("stranice/$page", $data);
+        echo view("sabloni/header");
+        echo view("stranice/$page", $data);
+        echo view("sabloni/footer");
+
     }
 
     public function obradi()
@@ -64,7 +67,7 @@ class Administrator extends BaseController
             $id = $this->request->getVar('idKor');
             $zaAzuriranje = $this->doctrine->em->getRepository(Korisnik::class)->find($id);
             //return redirect()->to(site_url('adminitrator/azuriranjeKorisnika'));
-            return $this->prikaz('azuriranjeKorisnika', ['gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'ka' => $zaAzuriranje]);
+            $this->prikaz('azuriranjeKorisnika', ['gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'ka' => $zaAzuriranje]);
 
         } else if ($this->request->getVar('dugme1') == 'Obrisi') {
             $korisnik = $this->request->getVar('idKor');
@@ -169,7 +172,7 @@ class Administrator extends BaseController
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
         $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
         $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
-        return $this->prikaz('noviKorisnik', ['gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije]);
+        $this->prikaz('noviKorisnik', ['gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije]);
     }
 
     public function kreirajKorisnika()
@@ -250,7 +253,7 @@ class Administrator extends BaseController
     public function novaAgencijaAdmin()
     {
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        return $this->prikaz('novaAgencija', ['gradovi' => $gradovi]);
+        $this->prikaz('novaAgencija', ['gradovi' => $gradovi]);
     }
 
     public function kreirajAgenciju()
@@ -278,7 +281,7 @@ class Administrator extends BaseController
     public function novaLokacijaAdmin()
     {
         $grad = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        return $this->prikaz('dodajMikrolokaciju', ['gradovi' => $grad]);
+        $this->prikaz('dodajMikrolokaciju', ['gradovi' => $grad]);
     }
 
     public function dodajMikro()
@@ -326,7 +329,7 @@ class Administrator extends BaseController
 
     public function novaUlicaAdmin(){
         $grad = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        return $this->prikaz('dodajUlicu', ['gradovi' => $grad]);
+        $this->prikaz('dodajUlicu', ['gradovi' => $grad]);
 
     }
 
