@@ -17,8 +17,8 @@
         </ul>
 
         <div class="col-md-3 text-end">
-            <button type="button" id="dugmeLog" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#loginModal">Login</button>
-            <button type="button" id="dugmeReg" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Sign-up</button>
+            <button type="button" id="dugmeLog" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#loginModal">Prijava</button>
+            <button type="button" id="dugmeReg" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Registruj se</button>
         </div>
     </header>
 <!--    <nav id="header" class="navbar navbar-expand-md navbar-light">-->

@@ -34,7 +34,7 @@
                 <div class="modal-footer">
 
 
-                    <button type="submit" class="logindugme">
+                    <button type="submit" class="btn btn-primary">
                         Login
                     </button>
                 </div>
@@ -44,7 +44,114 @@
 </div>
 
 
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="modalzaloginformu" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registracija</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
+            <form id="regForma" method='post' action=<?php echo site_url() . "login/login" ?>>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="ime" placeholder="Ime" required="required" onchange="f()">
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="prez" placeholder="Prezime" required="required" onchange="f()">
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="kor_ime" placeholder="Korisnicko ime" required="required"
+                               onchange="f()">
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="loz" placeholder="Lozinka" required="required"
+                               onchange="proveraLozinke()">
+
+                    </div>
+                    <div class="form-group">
+                        Grad:
+                        <select name="gradici" onchange="f()">
+                            <?php
+                            if (isset($gradovi)) {
+                                foreach ($gradovi as $g) {
+                                    ?>
+                                    <option><?php echo $g->getNaziv() ?> </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+
+                    </div >
+                    <div class="form-group">
+                        Datum rodjenja:
+                        <input type="date" name="rodjenje" max=<?php echo date("Y-m-d") ?> onchange="f()"><br/>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="tel" placeholder="Telefon" required="required"
+                               onchange="f()">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="mejl" placeholder="Email" required="required"
+                               onchange="f()">
+                    </div>
+                    <div class="form-group">
+                        Tip korisnika:
+                        <?php
+                        if (isset($tipkorisnika)) {
+                            foreach ($tipkorisnika as $t) {
+
+                                ?>
+
+                                <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                                       value="<?php echo $t->getTipKorisnika() ?>"
+                                       onchange="f()"> <?php echo $t->getTipKorisnika() ?>
+
+
+                                <?php
+                            }
+                        }
+                        ?>
+
+                    </div>
+                    <div class="form-group">
+                        <div id="agencija" hidden>
+                            Agencija:
+                            <select name="agencije1" id="ListaAgencija" onchange="f()">
+
+                                <?php
+                                if (isset($agencije)) {
+                                    foreach ($agencije as $a) {
+                                        ?>
+                                        <option><?php echo $a->getNaziv() ?> </option>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <input type="text" name="brlicence" placeholder="Broj licence" required="required">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
+
+                    <button type="submit" class="btn btn-primary" disabled id="regDugme">
+                        Registruj se
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <div class="container-fluid">

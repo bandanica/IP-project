@@ -77,23 +77,28 @@ body {
     background: #568EA3;
 }
 
-#loginForma{
-    background: #68C3D4;
-    border: 2px solid #735751;
-    box-sizing: border-box;
-    border-radius: 9px;
-    text-align: center;
-}
-#regForma {
-    background: #68C3D4;
-    border: 2px solid #735751;
-    box-sizing: border-box;
-    border-radius: 9px;
-    text-align: center;
+/*#loginForma{*/
+/*    background: #68C3D4;*/
+/*    border: 2px solid #735751;*/
+/*    box-sizing: border-box;*/
+/*    border-radius: 9px;*/
+/*    text-align: center;*/
+/*}*/
+/*#regForma {*/
+/*    background: #68C3D4;*/
+/*    border: 2px solid #735751;*/
+/*    box-sizing: border-box;*/
+/*    border-radius: 9px;*/
+/*    text-align: center;*/
+/*}*/
+
+#loginModal .modal-dialog{
+    background-color: #68C3D4;
 }
 
 .modal-login{
     color: #68C3D4;
+    background: #68C3D4;
     width:350px;
     margin: 80px auto 0;
 }
@@ -105,6 +110,7 @@ body {
 }
 
 .modal-login .modal-header{
+    background-color: #68C3D4;
     border-bottom: none;
     position:relative;
     justify-content: center;
@@ -114,7 +120,7 @@ body {
     text-align: center;
     font-size: 26px;
     margin:30px 0 -15px;
-    color: black;
+    color: white;
 }
 
 .modal-login .form-control:focus{
