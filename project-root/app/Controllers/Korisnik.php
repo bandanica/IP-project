@@ -41,13 +41,15 @@ class Korisnik extends BaseController
         }
         $poruka = $this->session->get("poruka2");
         $this->session->set("poruka2", '');
+        //echo view("sabloni/headerKupac");
         $this->prikaz('kupac', ['poruka2' => $poruka, 'tipoviN' => $tipN, 'lokacije' => $lokacije]);
+        //echo view("sabloni/footer");
     }
 
     protected function prikaz($page, $data)
     {
         $data['controller'] = 'Korisnik';
-        echo view("sabloni/header");
+        echo view("sabloni/headerKupac");
         echo view("stranice/$page", $data);
         echo view("sabloni/footer");
         //return view("stranice/$page", $data);
@@ -55,7 +57,9 @@ class Korisnik extends BaseController
 
     public function promenaLozinke()
     {
+        //echo view("sabloni/headerKupac");
         $this->prikaz('promenaSifre', []);
+        //echo view("sabloni/footer");
     }
 
     public function zameniLozinku()
@@ -86,6 +90,7 @@ class Korisnik extends BaseController
 
     public function pretragaNekretnine()
     {
+
         $t = $this->request->getVar('izabranTip');
         $c = $this->request->getVar('cenaDO');
         $k = $this->request->getVar('kvadrOD');
@@ -150,9 +155,55 @@ class Korisnik extends BaseController
 //        }
         //$nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($c,$k,$s,$Tip);
         //echo $nek;
-        $this->prikaz('rezultatiPretrage', ['rezultati' => $nek]);
+        //echo view("sabloni/headerKupac");
+        $page = 1;
+        $n = count($nek);
+        $numpages = ceil($n/5);
+        $zaprvu = [];
+        $i=0;
+        foreach ($nek as $n1){
+            array_push($zaprvu,$n1);
+            $i+=1;
+            if ($i==5){
+                break;
+            }
+
+        }
+        $ids = [];
+        foreach ($nek as $n1){
+            array_push($ids,$n1->getIdn());
+    }
+        $this->session->set('sveN',$ids);
+        $this->prikaz('rezultatiPretrage', ['rezultati' => $zaprvu,'sve'=>$ids,'page'=>$page,'nump'=>$numpages]);
+        //echo view("sabloni/footer");
     }
 
+    public function promenaStranice(){
+        if (isset($_GET['page'])){
+            $tmpPage = $_GET['page'];
+            $sve = $this->session->get('sveN');
+            $n = count($sve);
+            $nump = ceil($n/5);
+            $nek = [];
+            foreach ($sve as $id){
+                //echo $id;
+                //echo "<br/>";
+                array_push($nek,$this->doctrine->em->getRepository(Nekretnina::class)->find($id));
+            }
+            $zaprikaz=[];
+            $i=-1;
+            foreach ($nek as $n1){
+                $i+=1;
+                if (($i<(($tmpPage-1)*5)) || ($i>=(5*$tmpPage))){
+                    continue;
+                }
+                array_push($zaprikaz,$n1);
+            }
+        }
+        $this->prikaz('rezultatiPretrage',['rezultati'=>$zaprikaz,'sve'=>$sve,'page'=>$tmpPage,'nump'=>$nump]);
+
+
+    }
     public function naprednaPretraga()
     {
         $tipN = $this->doctrine->em->getRepository(Tipnekretnine::class)->findAll();
@@ -177,6 +228,7 @@ class Korisnik extends BaseController
             $s = "$gr" . "/" . "$op" . "/" . "$ml";
             array_push($lokacije, $s);
         }
+
         $this->prikaz('naprednaPretraga', ['tipoviN' => $tipN, 'lokacije' => $lokacije]);
     }
 

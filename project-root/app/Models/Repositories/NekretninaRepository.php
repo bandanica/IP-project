@@ -19,41 +19,43 @@ class NekretninaRepository extends EntityRepository
      */
     public function findLatest($s)
     {
-        return $this->findBy(['status'=>$s], ['idn' => 'DESC']);
+        return $this->findBy(['status' => $s], ['idn' => 'DESC']);
     }
 
     /*
      * funkcija koja vraca rezultate pretrage kupca
      */
 
-    public function traziNekretnineGrad($cena, $kvadr, $sobe,$gradic, $tip)
+    public function traziNekretnineGrad($cena, $kvadr, $sobe, $gradic, $tip)
     {
-        $status= "'Aktivno'";
+        $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
         $upit->select('n')
             ->from('App\Models\Entities\Nekretnina', 'n')
             ->innerJoin('App\Models\Entities\Tipnekretnine', 't', 'WITH', 't.idtipnekretnine = n.tip')
-            ->innerJoin("App\Models\Entities\Grad",'g','WITH','g.idg= n.gradid')
+            ->innerJoin("App\Models\Entities\Grad", 'g', 'WITH', 'g.idg= n.gradid')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
                 $upit->expr()->lte('n.cena', "$cena"),
                 $upit->expr()->gte('n.kvadratura', "$kvadr"),
                 $upit->expr()->gte('n.brSoba', "$sobe"),
-                $upit->expr()->eq('n.gradid', "$gradic")));
+                $upit->expr()->eq('n.gradid', "$gradic")))
+            ->orderBy('n.idn', 'desc');
         //return  $upit->getQuery()->getDQL();
         return $upit->getQuery()->getResult();
     }
+
     public function traziNekretnineOpstina($cena, $kvadr, $sobe, $opstina, $tip)
     {
-        $status= "'Aktivno'";
+        $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
         $upit->select('n')
             ->from('App\Models\Entities\Nekretnina', 'n')
             ->join('App\Models\Entities\Tipnekretnine', 't', 'WITH', 't.idtipnekretnine = n.tip')
-            ->innerJoin("App\Models\Entities\Opstina",'o','WITH','o.idopstine= n.opstina')
+            ->innerJoin("App\Models\Entities\Opstina", 'o', 'WITH', 'o.idopstine= n.opstina')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
@@ -65,15 +67,16 @@ class NekretninaRepository extends EntityRepository
 
         return $upit->getQuery()->getResult();
     }
+
     public function traziNekretnineLokacija($cena, $kvadr, $sobe, $lokacija, $tip)
     {
-        $status= "'Aktivno'";
+        $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
         $upit->select('n')
             ->from('App\Models\Entities\Nekretnina', 'n')
             ->join('App\Models\Entities\Tipnekretnine', 't', 'WITH', 't.idtipnekretnine = n.tip')
-            ->innerJoin("App\Models\Entities\Mikrolokacija",'m','WITH','m.idmikro= n.mikrolokacija')
+            ->innerJoin("App\Models\Entities\Mikrolokacija", 'm', 'WITH', 'm.idmikro= n.mikrolokacija')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->lte('n.cena', "$cena"),
@@ -86,15 +89,16 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
-    public function naprednaGradovi($minc,$maxc,$mink,$maxk,$mins,$maxs,$minSprat,$maxSprat, $gradic, $tip){
-        $status= "'Aktivno'";
+    public function naprednaGradovi($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $gradic, $tip)
+    {
+        $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
 
         $upit->select('n')
             ->from('App\Models\Entities\Nekretnina', 'n')
             ->innerJoin('App\Models\Entities\Tipnekretnine', 't', 'WITH', 't.idtipnekretnine = n.tip')
-            ->innerJoin("App\Models\Entities\Grad",'g','WITH','g.idg= n.gradid')
+            ->innerJoin("App\Models\Entities\Grad", 'g', 'WITH', 'g.idg= n.gradid')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
@@ -111,15 +115,16 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
-    public function naprednaOpstine($minc,$maxc,$mink,$maxk,$mins,$maxs,$ming,$maxg,$stanje,$minSprat,$maxSprat, $opstina, $tip){
-        $status= "'Aktivno'";
+    public function naprednaOpstine($minc, $maxc, $mink, $maxk, $mins, $maxs, $ming, $maxg, $stanje, $minSprat, $maxSprat, $opstina, $tip)
+    {
+        $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
 
         $upit->select('n')
             ->from('App\Models\Entities\Nekretnina', 'n')
             ->innerJoin('App\Models\Entities\Tipnekretnine', 't', 'WITH', 't.idtipnekretnine = n.tip')
-            ->innerJoin("App\Models\Entities\Opstina",'o','WITH','o.idopstine= n.opstina')
+            ->innerJoin("App\Models\Entities\Opstina", 'o', 'WITH', 'o.idopstine= n.opstina')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
@@ -139,15 +144,16 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
-    public function naprednaLokacije($minc,$maxc,$mink,$maxk,$mins,$maxs,$ming,$maxg,$stanje,$minSprat,$maxSprat, $lokacija, $tip){
-        $status= "'Aktivno'";
+    public function naprednaLokacije($minc, $maxc, $mink, $maxk, $mins, $maxs, $ming, $maxg, $stanje, $minSprat, $maxSprat, $lokacija, $tip)
+    {
+        $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
 
 
         $upit->select('n')
             ->from('App\Models\Entities\Nekretnina', 'n')
             ->innerJoin('App\Models\Entities\Tipnekretnine', 't', 'WITH', 't.idtipnekretnine = n.tip')
-            ->innerJoin("App\Models\Entities\Mikrolokacija",'m','WITH','m.idmikro= n.mikrolokacija')
+            ->innerJoin("App\Models\Entities\Mikrolokacija", 'm', 'WITH', 'm.idmikro= n.mikrolokacija')
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
@@ -166,7 +172,6 @@ class NekretninaRepository extends EntityRepository
         //return  $upit->getQuery()->getDQL();
         return $upit->getQuery()->getResult();
     }
-
 
 
 }

@@ -166,7 +166,7 @@
                 //$file = $files[0];
                 foreach ($files as $file) {
                     ?>
-                    <div class="col-2 offset-0">
+                    <div class="col-6 offset-0">
                         <div class="card">
                             <img src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>" alt="Slika nekr">
                             <div class="card-body">
@@ -194,174 +194,174 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-4">
-            <form id="loginForma" method='post' action=<?php echo site_url() . "login/login" ?>>
-                <h5>Prijava na sajt</h5>
-                <div class="row">
-                    <div class="col">
-                        Korisnicko ime:
-                    </div>
-                    <div class="col">
-                        <input type="text" name="kor_ime"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Lozinka:
-                    </div>
-                    <div class="col">
-                        <input type="password" name="lozinka"><br/>
-                    </div>
-                </div>
-
-
-                <input type='submit' name='submit' value='Prijava'><br/>
-                <?php if (isset($porukaL)) echo "$porukaL";
-                echo "<br/>"; ?>
-                <span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
-            </form>
-        </div>
-        <div class="col-4">
-            <form id="regForma" method='post' action=<?php echo site_url() . "login/registerSubmit" ?>>
-                <h5>Registracija na sajt</h5>
-                <div class="row">
-                    <div class="col">
-                        Ime:
-                    </div>
-                    <div class="col">
-                        <input type="text" name="ime" onchange="f()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Prezime:
-                    </div>
-                    <div class="col">
-                        <input type="text" name="prez" onchange="f()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Korisnicko ime:
-                    </div>
-                    <div class="col">
-                        <input type="text" name="korime" onchange="f()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Lozinka:
-                    </div>
-                    <div class="col">
-                        <input type="password" name="loz" onchange="proveraLozinke()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Grad:
-                    </div>
-                    <div class="col">
-                        <select name="gradici" onchange="f()">
-                            <?php
-                            if (isset($gradovi)) {
-                                foreach ($gradovi as $g) {
-                                    ?>
-                                    <option><?php echo $g->getNaziv() ?> </option>
-                                    <?php
-                                }
-                            }
-                            ?>
-
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Datum rodjenja:
-                    </div>
-                    <div class="col">
-                        <input type="date" name="rodjenje" max=<?php echo date("Y-m-d") ?> onchange="f()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        Kontakt telefon:
-                    </div>
-                    <div class="col">
-                        <input type="text" name="tel" onchange="f()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        I-mejl:
-                    </div>
-                    <div class="col">
-                        <input type="text" name="mejl" onchange="f()"><br/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        Tip korisnika:
-                    </div>
-                    <div class="col-9">
-                        <?php
-                        if (isset($tipkorisnika)) {
-                            foreach ($tipkorisnika as $t) {
-
-                                ?>
-
-                                <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
-                                       value="<?php echo $t->getTipKorisnika() ?>"
-                                       onchange="f()"> <?php echo $t->getTipKorisnika() ?>
-
-
-                                <?php
-                            }
-                        }
-                        ?>
-                    </div>
-                </div>
-
-                <div id="agencija" hidden>
-                    <div class="row">
-                        <div class="col">
-                            Agencija:
-                        </div>
-                        <div class="col">
-                            <select name="agencije1" id="ListaAgencija" onchange="f()">
-
-                                <?php
-                                if (isset($agencije)) {
-                                    foreach ($agencije as $a) {
-                                        ?>
-                                        <option><?php echo $a->getNaziv() ?> </option>
-                                        <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            Broj licence agenta:
-                        </div>
-                        <div class="col">
-                            <input type="text" name="brlicence"><br/>
-                        </div>
-                    </div>
-
-
-                </div>
-                <input type='submit' name='submit' disabled value='Registracija' id="regDugme">
-                <br/>
-
-                <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
-            </form>
-
-        </div>
-    </div>
+<!--    <div class="row">-->
+<!--        <div class="col-4">-->
+<!--            <form id="loginForma" method='post' action=--><?php //echo site_url() . "login/login" ?><!--
+                <h5>Prijava na sajt</h5>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Korisnicko ime:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="text" name="kor_ime"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Lozinka:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="password" name="lozinka"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!---->
+<!--                <input type='submit' name='submit' value='Prijava'><br/>-->
+<!--                --><?php //if (isset($porukaL)) echo "$porukaL";
+//                echo "<br/>"; ?>
+<!--                <span style="color: red"> --><?php //if (isset($poruka)) echo $poruka ?><!--</span>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--            <form id="regForma" method='post' action=--><?php //echo site_url() . "login/registerSubmit" ?><!--
+                <h5>Registracija na sajt</h5>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Ime:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="text" name="ime" onchange="f()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Prezime:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="text" name="prez" onchange="f()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Korisnicko ime:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="text" name="korime" onchange="f()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Lozinka:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="password" name="loz" onchange="proveraLozinke()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Grad:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <select name="gradici" onchange="f()">-->
+<!--                            --><?php
+//                            if (isset($gradovi)) {
+//                                foreach ($gradovi as $g) {
+//                                    ?>
+<!--                                    <option>--><?php //echo $g->getNaziv() ?><!-- </option>-->
+<!--                                    --><?php
+//                                }
+//                            }
+//                            ?>
+<!---->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Datum rodjenja:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="date" name="rodjenje" max=--><?php //echo date("Y-m-d") ?><!-- onchange="f()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        Kontakt telefon:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="text" name="tel" onchange="f()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col">-->
+<!--                        I-mejl:-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <input type="text" name="mejl" onchange="f()"><br/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    <div class="col-3">-->
+<!--                        Tip korisnika:-->
+<!--                    </div>-->
+<!--                    <div class="col-9">-->
+<!--                        --><?php
+//                        if (isset($tipkorisnika)) {
+//                            foreach ($tipkorisnika as $t) {
+//
+//                                ?>
+<!---->
+<!--                                <input type="radio" name="tip" id="--><?php //echo $t->getTipKorisnika() ?><!--"-->
+<!--                                       value="--><?php //echo $t->getTipKorisnika() ?><!--"-->
+<!--                                       onchange="f()"> --><?php //echo $t->getTipKorisnika() ?>
+<!---->
+<!---->
+<!--                                --><?php
+//                            }
+//                        }
+//                        ?>
+<!--                    </div>-->
+<!--                </div>-->
+<!---->
+<!--                <div id="agencija" hidden>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col">-->
+<!--                            Agencija:-->
+<!--                        </div>-->
+<!--                        <div class="col">-->
+<!--                            <select name="agencije1" id="ListaAgencija" onchange="f()">-->
+<!---->
+<!--                                --><?php
+//                                if (isset($agencije)) {
+//                                    foreach ($agencije as $a) {
+//                                        ?>
+<!--                                        <option>--><?php //echo $a->getNaziv() ?><!-- </option>-->
+<!--                                        --><?php
+//                                    }
+//                                }
+//                                ?>
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col">-->
+<!--                            Broj licence agenta:-->
+<!--                        </div>-->
+<!--                        <div class="col">-->
+<!--                            <input type="text" name="brlicence"><br/>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!---->
+<!---->
+<!--                </div>-->
+<!--                <input type='submit' name='submit' disabled value='Registracija' id="regDugme">-->
+<!--                <br/>-->
+<!---->
+<!--                <span id="regGreske" style="color: red">--><?php //if (isset($poruka1)) echo $poruka1 ?><!--</span>-->
+<!--            </form>-->
+<!---->
+<!--        </div>-->
+<!--    </div>-->
 
 
 </div>

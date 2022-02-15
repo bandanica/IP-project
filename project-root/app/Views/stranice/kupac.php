@@ -87,26 +87,26 @@
             </select>
 
 
-            <input type="submit" id="pret" value="Pretrazi">
+            <input type="submit" id="pret" name="dP" value="Pretrazi">
 
         </form>
 
     </div>
 
 
-    <form action=<?php echo site_url() . "korisnik/naprednaPretraga" ?>>
-        <input type="submit" id="dugmeNapredno" value="Napredna pretraga">
-
-    </form>
-
-    <form action=<?php echo site_url() . "korisnik/promenaLozinke" ?>>
-        <input type="submit" id="dugmeLozinka" value="Promena lozinke">
-
-    </form>
-    <form method='post' action=<?php echo site_url() . "login/logout" ?>>
-        <input type="submit" name="logout" value="Odjavi se">
-
-    </form>
+    <!--    <form action=--><?php //echo site_url() . "korisnik/naprednaPretraga" ?><!--
+        <input type="submit" id="dugmeNapredno" value="Napredna pretraga">-->
+    <!---->
+    <!--    </form>-->
+    <!---->
+    <!--    <form action=--><?php //echo site_url() . "korisnik/promenaLozinke" ?><!--
+        <input type="submit" id="dugmeLozinka" value="Promena lozinke">-->
+    <!---->
+    <!--    </form>-->
+    <!--    <form method='post' action=--><?php //echo site_url() . "login/logout" ?><!--
+        <input type="submit" name="logout" value="Odjavi se">-->
+    <!---->
+    <!--    </form>-->
     <?php if (isset($poruka2)) {
         echo $poruka2;
 
