@@ -64,7 +64,7 @@
     <input type="radio" name="stanje" value="lux">LUX<br/>
     Sprat:<input type="text" name="sprat">
     Ukupna spratnost:<input type="text" name="ukspratnost">
-    Kratak opis:<input type="text" name="opisNek"><br/>
+    Kratak opis:<textarea rows="15" cols="30" name="opisNek" onchange="proveraOpisa()"></textarea><br/>
     Mesecni troskovi:<input type="text" name="mesTroskovi">
     Cena:<input type="text" name="cenaNekretnine"><br/>
     <h3>Karakteristike:</h3>
@@ -109,7 +109,7 @@
 
     <br/>
 
-    <input type="submit" name="dodaj" value="Zavrsi">
+    <input type="submit" name="dodaj" id = "zavDugme" value="Zavrsi">
 </form>
 
 <form method='post' action=<?php echo site_url() . "login/logout" ?>>

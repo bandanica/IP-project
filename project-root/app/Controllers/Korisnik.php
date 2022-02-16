@@ -355,17 +355,55 @@ class Korisnik extends BaseController
         //echo gettype($nekr);
         //array_push($o,$nekr);
         //echo gettype($o);
-        $kor->addOmiljene($nekr);
-
-        //$op[] = $kor->getOmiljene();
-        //echo gettype($op);
-//        foreach ($op as $o){
-//            echo gettype($o);
+        $o = $kor->getOmiljene();
+        //echo $o->count();
+        $fleg=0;
+        foreach ($o as $obj){
+            if ($obj->getIdn()==($nekr->getIdn())){
+                $fleg=-1;
+                break;
+            };
+        }
+        if (($fleg!=-1) && ($o->count()<5)){
+            $kor->addOmiljene($nekr);
+            //echo "SVE OK";
+            $this->doctrine->em->flush($kor);
+        }
+        else{
+            //echo "NE MOZE DA SE DODA";
+        }
+//        if ($o->count()==4){
+//            echo "Ne mozete da dodate vise nekretnina u omiljene";
 //        }
-        echo "SVE OK";
-        $this->doctrine->em->flush($kor);
+//        else{
+//            $kor->addOmiljene($nekr);
+//            echo "SVE OK";
+//            $this->doctrine->em->flush($kor);
+//        }
+        $this->prikaz('nekretninaDetalji', ['nek' => $nekr]);
+
     }
 
+    public function pogledajOmiljenje(){
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get('korisnik'));
+        $o = $kor->getOmiljene();
+        $this->prikaz('omiljeneNekretnine',['rezultati'=>$o]);
+    }
+
+    public function omiljenaObrada(){
+        if ($this->request->getVar('dugmeOm')=='Pogledaj'){
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+            $this->prikaz('nekretninaDetalji', ['nek' => $n]);
+        }
+        else{
+            $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get('korisnik'));
+            $kor->removeOmiljena($this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek')));
+            $this->doctrine->em->flush();
+            $this->pogledajOmiljenje();
+
+
+        }
+    }
     public function proba(){
 
         //$dir    = base_url()."/slike/nekretnina16";

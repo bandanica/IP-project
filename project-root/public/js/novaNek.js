@@ -74,3 +74,15 @@ function promenaLokacije(){
     xhttp.send("idL=" + l);
     console.log(l);
 }
+
+function proveraOpisa(){
+    opis = document.getElementsByName('opisNek')[0].value;
+    brojReci = opis.split(' ').length;
+    console.log(brojReci);
+    if (brojReci>50){
+        document.getElementById('zavDugme').disabled=true;
+    }
+    else{
+        document.getElementById('zavDugme').disabled=false;
+    }
+}

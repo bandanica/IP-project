@@ -26,7 +26,7 @@
 
                     </div>
                     <div class="form-group">
-                        <input type="text" name="lozinka" placeholder="Lozinka" required="required">
+                        <input type="password" name="lozinka" placeholder="Lozinka" required="required">
 
                     </div>
 
