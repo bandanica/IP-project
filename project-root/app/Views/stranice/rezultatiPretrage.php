@@ -9,7 +9,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row text-center">
         <h2>Rezultati pretrage:</h2>
     </div>
 
@@ -31,7 +31,7 @@
                 //OVO TREBA DA SE DORADI!!! treba fja koja ce da redirektuje na oglas
                 ?>
                 <form method='post' action=<?php echo site_url() . "korisnik/pogledaj" ?>>
-                <div class="card mb-3 offset-3" style="max-width: 700px;"">
+                <div class="card mb-3 offset-3 text-dark bg-light" style="max-width: 700px;"">
                     <div class="row">
                         <div class="col-4">
                             <?php if ($n1->getSlike() != null) {
@@ -92,12 +92,32 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         <li class="page-item">
-            <a class="page-link" href="#">Previous</a>
+            <?php
+            if (isset($nump) && isset($page)){
+                if ($page>1){
+                    $prev = $page-1;
+                }
+                else{
+                    $prev=1;
+                }
+                if ($page<$nump){
+                    $next = $page+1;
+                }
+                else{
+                    $next = $page;
+                }
+            }?>
+            <a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$prev; ?>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+<!--                <span class="sr-only">Previous</span>-->
+            </a>
+<!--            <a class="page-link" href="#">Previous</a>-->
         </li>
         <?php
         if (isset($nump) && isset($page)){
             for ($i=1;$i<=$nump;$i++){
                 if ($i==$page){
+
                     ?>
                     <li class="page-item active"><a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$i; ?>"><?php echo $i;?></a></li>
                     <?php
@@ -112,12 +132,16 @@
             }
         }
 
+
         ?>
 <!--        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
 <!--        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
 <!--        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
         <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$next; ?>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+<!--            <a class="page-link" href="#">Next</a>-->
         </li>
     </ul>
 </nav>

@@ -15,26 +15,24 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Prijava</h5>
+                <h5 class="modal-title text-center" id="exampleModalLabel">Prijava</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form id="loginForma" method='post' action=<?php echo site_url() . "login/login" ?>>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="kor_ime" placeholder="Korisnicko ime" required="required">
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="password" name="lozinka" placeholder="Lozinka" required="required">
 
                     </div>
 
                 </div>
-                <div class="modal-footer">
-
-
-                    <button type="submit" class="btn btn-primary">
+                <div class="modal-footer text-center">
+                    <button type="submit" id="LogSubmit" class="btn btn-primary text-center">
                         Login
                     </button>
                 </div>
@@ -54,25 +52,25 @@
 
             <form id="regForma" method='post' action=<?php echo site_url() . "login/login" ?>>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="ime" placeholder="Ime" required="required" onchange="f()">
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="prez" placeholder="Prezime" required="required" onchange="f()">
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="kor_ime" placeholder="Korisnicko ime" required="required"
                                onchange="f()">
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="loz" placeholder="Lozinka" required="required"
                                onchange="proveraLozinke()">
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         Grad:
                         <select name="gradici" onchange="f()">
                             <?php
@@ -87,20 +85,20 @@
                         </select>
 
                     </div >
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         Datum rodjenja:
                         <input type="date" name="rodjenje" max=<?php echo date("Y-m-d") ?> onchange="f()"><br/>
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="tel" placeholder="Telefon" required="required"
                                onchange="f()">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <input type="text" name="mejl" placeholder="Email" required="required"
                                onchange="f()">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         Tip korisnika:
                         <?php
                         if (isset($tipkorisnika)) {
@@ -119,7 +117,7 @@
                         ?>
 
                     </div>
-                    <div class="form-group">
+                    <div class="form-group text-center">
                         <div id="agencija" hidden>
                             Agencija:
                             <select name="agencije1" id="ListaAgencija" onchange="f()">
@@ -141,7 +139,7 @@
 
 
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer text-center">
                     <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
 
                     <button type="submit" class="btn btn-primary" disabled id="regDugme">
@@ -167,7 +165,7 @@
                 foreach ($files as $file) {
                     ?>
                     <div class="col-6 offset-0">
-                        <div class="card">
+                        <div class="card text-dark bg-light">
                             <img src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>" alt="Slika nekr">
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $n1->getNaziv(); ?></h5>

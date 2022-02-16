@@ -9,106 +9,132 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <div class="container-fluid">
 
-    <h2>Korisnicki zahtevi:</h2>
-    <?php
-    if (isset($zahtevi) && !empty($zahtevi)) {
-        ?>
-        <table>
-            <tr>
-                <th>IdK</th>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Korisnicko ime</th>
-                <th>Odbijanje</th>
-                <th>Prihvatanje</th>
-            </tr>
+    <div class="row">
+
+        <div class="col">
+
             <?php
-
-            foreach ($zahtevi as $z) {
+            if (isset($korisnici) && !empty($korisnici)) {
                 ?>
-                <form method='post' action=<?php echo site_url() . "administrator/obradi" ?>>
+                <table class="table table-striped table-bordered caption-top" style="width: 100%">
+                    <caption>Lista svih korisnici</caption>
+                    <thead>
+
                     <tr>
-                        <td><?php echo $z->getIdK() ?>
-                            <input type='hidden' value="<?php echo $z->getIdK() ?>"
-                                   name='idKor'>
-                        </td>
-                        <td><?php echo $z->getIme() ?></td>
-                        <td><?php echo $z->getPrezime() ?></td>
-                        <td><?php echo $z->getKorIme() ?></td>
-                        <td><input type='submit' name='dugme' value='odbij'></td>
-                        <td><input type='submit' name='dugme' value='prihvati'></td>
+                        <th>IdK</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Korisnicko ime</th>
+                        <th>Status</th>
+                        <th>Azuriranje</th>
+                        <th>Brisanje</th>
                     </tr>
-                </form>
+                    </thead>
+                    <tbody>
+                    <?php
+
+                    foreach ($korisnici as $k) {
+                        ?>
+                        <form method='post' action=<?php echo site_url() . "administrator/azuriranje" ?>>
+                            <tr>
+                                <td><?php echo $k->getIdK() ?>
+                                    <input type='hidden' value="<?php echo $k->getIdK() ?>"
+                                           name='idKor'>
+                                </td>
+                                <td><?php echo $k->getIme() ?></td>
+                                <td><?php echo $k->getPrezime() ?></td>
+                                <td><?php echo $k->getKorIme() ?></td>
+                                <td><?php echo $k->getStatus() ?></td>
+                                <td><input type='submit' name='dugme1' value='Azuriraj'></td>
+                                <td><input type='submit' name='dugme1' value='Obrisi'></td>
+                            </tr>
+                        </form>
+                        <?php
+                    }
+
+
+                    ?>
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+
+                </table>
                 <?php
+            } else {
+                echo "Nema korisnika.";
             }
-
-
             ?>
-        </table>
-        <?php
-    } else {
-        echo "Nema zahteva za registracijom.";
-    }
-    ?>
-    <h2>Svi korisnici</h2>
-    <?php
-    if (isset($korisnici) && !empty($korisnici)) {
-        ?>
-        <table>
-            <tr>
-                <th>IdK</th>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Korisnicko ime</th>
-                <th>Status</th>
-                <th>Azuriranje</th>
-                <th>Brisanje</th>
-            </tr>
+        </div>
+        <div class="col">
+
             <?php
-
-            foreach ($korisnici as $k) {
+            if (isset($zahtevi) && !empty($zahtevi)) {
                 ?>
-                <form method='post' action=<?php echo site_url() . "administrator/azuriranje" ?>>
+                <table class="table table-striped table-bordered caption-top" style="width: 100%">
+                    <caption>Korisnicki zahtevi</caption>
+                    <thead>
                     <tr>
-                        <td><?php echo $k->getIdK() ?>
-                            <input type='hidden' value="<?php echo $k->getIdK() ?>"
-                                   name='idKor'>
-                        </td>
-                        <td><?php echo $k->getIme() ?></td>
-                        <td><?php echo $k->getPrezime() ?></td>
-                        <td><?php echo $k->getKorIme() ?></td>
-                        <td><?php echo $k->getStatus() ?></td>
-                        <td><input type='submit' name='dugme1' value='Azuriraj'></td>
-                        <td><input type='submit' name='dugme1' value='Obrisi'></td>
+                        <th>IdK</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Korisnicko ime</th>
+                        <th>Odbijanje</th>
+                        <th>Prihvatanje</th>
                     </tr>
-                </form>
+                    </thead>
+                    <tbody>
+                    <?php
+
+                    foreach ($zahtevi as $z) {
+                        ?>
+                        <form method='post' action=<?php echo site_url() . "administrator/obradi" ?>>
+                            <tr>
+                                <td><?php echo $z->getIdK() ?>
+                                    <input type='hidden' value="<?php echo $z->getIdK() ?>"
+                                           name='idKor'>
+                                </td>
+                                <td><?php echo $z->getIme() ?></td>
+                                <td><?php echo $z->getPrezime() ?></td>
+                                <td><?php echo $z->getKorIme() ?></td>
+                                <td><input type='submit' name='dugme' value='odbij'></td>
+                                <td><input type='submit' name='dugme' value='prihvati'></td>
+                            </tr>
+                        </form>
+                        <?php
+                    }
+
+
+                    ?>
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+
+
+                </table>
                 <?php
+            } else {
+                echo "Nema zahteva za registracijom.";
             }
-
-
             ?>
-        </table>
-        <?php
-    } else {
-        echo "Nema korisnika.";
-    }
-    ?>
+        </div>
+    </div>
 
-
-    <form method="post" action=<?php echo site_url() . "administrator/noviKorisnikAdmin" ?>>
-        <input type="submit" name="noviKorisnik1" value="Dodaj kupca ili oglasivaca">
-    </form>
-    <form method="post" action=<?php echo site_url() . "administrator/novaAgencijaAdmin" ?>>
-        <input type="submit" name="novaAgencija1" value="Dodaj agenciju">
-    </form>
-    <form method="post" action=<?php echo site_url() . "administrator/novaLokacijaAdmin" ?>>
-        <input type="submit" name="novaMikro1" value="Dodaj mikrolokaciju">
-    </form>
-    <form method="post" action=<?php echo site_url() . "administrator/novaUlicaAdmin" ?>>
-        <input type="submit" name="novaUlica1" value="Dodaj ulicu">
-    </form>
-    <form method='post' action=<?php echo site_url() . "login/logout" ?>>
-        <input type="submit" name="logout" value="Odjavi se">
+    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/noviKorisnikAdmin" ?><!--
+        <input type="submit" name="noviKorisnik1" value="Dodaj kupca ili oglasivaca">-->
+    <!--    </form>-->
+    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/novaAgencijaAdmin" ?><!--
+        <input type="submit" name="novaAgencija1" value="Dodaj agenciju">-->
+    <!--    </form>-->
+    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/novaLokacijaAdmin" ?><!--
+        <input type="submit" name="novaMikro1" value="Dodaj mikrolokaciju">-->
+    <!--    </form>-->
+    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/novaUlicaAdmin" ?><!--
+        <input type="submit" name="novaUlica1" value="Dodaj ulicu">-->
+    <!--    </form>-->
+    <!--    <form method='post' action=--><?php //echo site_url() . "login/logout" ?><!--
+        <input type="submit" name="logout" value="Odjavi se">-->
 
     </form>
 </div>

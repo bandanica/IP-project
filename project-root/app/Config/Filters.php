@@ -2,6 +2,10 @@
 
 namespace Config;
 
+use App\Filters\AdminFilter;
+use App\Filters\GostFilter;
+use App\Filters\KorisnikFilter;
+use App\Filters\OglasivacFilter;
 use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
@@ -23,6 +27,10 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'gost'=> \App\Filters\GostFilter::class,
+        'korisnik'=>\App\Filters\KorisnikFilter::class,
+        'oglasivac'=>\App\Filters\OglasivacFilter::class,
+        'administrator'=>\App\Filters\AdminFilter::class
     ];
 
     /**
@@ -64,5 +72,10 @@ class Filters extends BaseConfig
      *
      * @var array
      */
-    public $filters = [];
+    public $filters = [
+//        'gost' => ['before' => ['/','Login/','/logout','/registrovan/*']],
+//        'korisnik' => ['before' => ['Korisnik/*', 'korisnik']],
+//        'oglasivac' => ['before' => ['Oglasivac/*', 'oglasivac']],
+//        'administrator' => ['before' => ['Administrator/*', 'Administrator']]
+    ];
 }

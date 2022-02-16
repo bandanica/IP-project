@@ -87,6 +87,13 @@ class Karakteristike
     /**
      * @var string|null
      *
+     * @ORM\Column(name="interfon", type="string", length=3, nullable=true)
+     */
+    private $interfon;
+
+    /**
+     * @var string|null
+     *
      * @ORM\Column(name="telefon", type="string", length=3, nullable=true)
      */
     private $telefon;
@@ -256,6 +263,22 @@ class Karakteristike
     public function setInternet($internet)
     {
         $this->internet = $internet;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getInterfon()
+    {
+        return $this->interfon;
+    }
+
+    /**
+     * @param string|null $interfon
+     */
+    public function setInterfon($interfon)
+    {
+        $this->interfon = $interfon;
     }
 
     /**

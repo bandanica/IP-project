@@ -1,5 +1,5 @@
 body {
-    background-color: #FFE8D1;
+    /*background-color: #FFE8D1;*/
     position: relative;
     overflow: auto;
     align-content: center;
@@ -9,7 +9,7 @@ body {
 .container-fluid{
     width: 100%;
     /*height: 85%;*/
-    background-color: #FFE8D1;
+    /*background-color: #FFE8D1;*/
     overflow: auto;
     justify-content: center;
 }
@@ -21,6 +21,7 @@ body {
 
 #header {
     position: relative;
+    overflow: hidden;
     width: 100%;
     height: 10%;
     left: 0px;
@@ -29,7 +30,8 @@ body {
     /*height: 10%;*/
     /*top:0px;*/
     text-align: center;
-    color:#FFE8D1;
+    /*color:#FFE8D1;*/
+    color: white;
     font-family: "Roboto Light";
 
 
@@ -38,30 +40,40 @@ body {
 }
 
 #hlogo{
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: floralwhite;
+
 }
 
 #dugmeLog{
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: white;
     background-color: #68C3D4;
     border-color: #68C3D4;
 }
 #dugmeReg{
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color:white;
     background-color: #68C3D4;
     border-color: #68C3D4;
 }
 #pocL{
-    color:#FFE8D1;
-    font-family: "Roboto Light";
+    /*color:#FFE8D1;*/
+    color: white;
+    font-size:20px;
+    font-family: "Helvetica";
 }
 #pocL2{
-    color:#FFE8D1;
-    font-family: "Roboto Light";
+    /*color:#FFE8D1;*/
+    color: white;
+    font-family: "Helvetica";
+    font-size:20px;
 }
 #pocL3{
-    color:#FFE8D1;
-    font-family: "Roboto Light";
+    /*color:#FFE8D1;*/
+    color: white;
+    font-size:20px;
+    font-family: "Helvetica";
 }
 #footer {
     background: #568EA3;
@@ -71,7 +83,8 @@ body {
     bottom:0;
     height: 5%;
     text-align: center;
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: white;
     font-family: 'Courier New';
 }
 
@@ -98,6 +111,7 @@ body {
 
 #loginModal .modal-dialog{
     background-color: #68C3D4;
+    justify-content: center;
 }
 
 .modal-login{
@@ -105,23 +119,26 @@ body {
     background: #68C3D4;
     width:350px;
     margin: 80px auto 0;
+    justify-content: center;
 }
 
 .modal-login .modal-content{
     padding:20px;
     border-radius:5px;
     border:none;
+    justify-content: center;
 }
 
 .modal-login .modal-header{
     background-color: #68C3D4;
     border-bottom: none;
     position:relative;
-    justify-content: center;
+    text-align: center;
 }
 
 .modal-login h4{
     text-align: center;
+    justify-content: center;
     font-size: 26px;
     margin:30px 0 -15px;
     color: white;
@@ -149,4 +166,11 @@ body {
 .trigger-btn{
     display: inline-block;
     margin: 100px auto;
+}
+
+#LogSubmit{
+    background-color: #68C3D4;
+}
+#regDugme{
+    background-color: #68C3D4;
 }

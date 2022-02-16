@@ -32,18 +32,20 @@ class Oglasivac extends BaseController
 //            array_push($prosNek,$nek1);
 //        }
 
-        return $this->prikaz('oglasivac', ['poruka2' => $poruka, 'mojenekretnine' => $nekretnine]);
+        $this->prikaz('oglasivac', ['poruka2' => $poruka, 'mojenekretnine' => $nekretnine]);
     }
 
     protected function prikaz($page, $data)
     {
         $data['controller'] = 'Oglasivac';
-        return view("stranice/$page", $data);
+        echo view("sabloni/headerOglasivac");
+        echo view("stranice/$page", $data);
+        echo view("sabloni/footer");
     }
 
     public function promenaLozinke()
     {
-        return $this->prikaz('promenaSifre', []);
+        $this->prikaz('promenaSifre', []);
     }
 
     public function zameniLozinku()
@@ -76,7 +78,7 @@ class Oglasivac extends BaseController
     {
         $tipN = $this->doctrine->em->getRepository(Tipnekretnine::class)->findAll();
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        return $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi, 'tipoviN'=>$tipN]);
+        $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi, 'tipoviN'=>$tipN]);
     }
 
     public function opstineUGradu()
@@ -338,7 +340,7 @@ class Oglasivac extends BaseController
         else{
             $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
             $g = $this->doctrine->em->getRepository(Grad::class)->findAll();
-            return $this->prikaz('azuriranjeNekretnine',['nek'=>$n,'gradovi'=>$g]);
+            $this->prikaz('azuriranjeNekretnine',['nek'=>$n,'gradovi'=>$g]);
         }
     }
 
@@ -374,7 +376,7 @@ class Oglasivac extends BaseController
         unset($tipkorisnika[$indexKupac]);
         $ag = $this->doctrine->em->getRepository(Agencija::class)->findAll();
 
-        return $this->prikaz('podaciOglasivaca', ['podaci'=>$korisnik,'agencije'=>$ag,'tipkorisnika'=>$tipkorisnika]);
+        $this->prikaz('podaciOglasivaca', ['podaci'=>$korisnik,'agencije'=>$ag,'tipkorisnika'=>$tipkorisnika]);
     }
 
     public function zavrsiAzuriranje(){

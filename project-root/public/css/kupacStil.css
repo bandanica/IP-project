@@ -1,9 +1,9 @@
 body {
-    background-color: #FFE8D1;
+    /*background-color: #FFE8D1;*/
     position: relative;
     overflow: auto;
     align-content: center;
-
+    background-color: white;
     /*display: flex;*/
 
 }
@@ -12,7 +12,8 @@ body {
 
     /*z-index: 2;*/
     /*min-height: 85%;*/
-    background-color: #FFE8D1;
+    /*background-color: #FFE8D1;*/
+    background-color: white;
     justify-content: center;
     /*display: flex;*/
 }
@@ -32,7 +33,8 @@ body {
     /*height: 10%;*/
     /*top:0px;*/
     text-align: center;
-    color:#FFE8D1;
+    /*color:#FFE8D1;*/
+    color:white;
     font-family: "Roboto Light";
 
 }
@@ -48,33 +50,43 @@ body {
     bottom:0;
     height: 5%;
     text-align: center;
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: white;
     font-family: 'Courier New';
 }
 
 #hlogo{
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: white;
 }
 
 #dugmeLog{
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: white;
     background-color: #68C3D4;
     border-color: #68C3D4;
 }
 #dugmeReg{
-    color: #FFE8D1;
+    /*color: #FFE8D1;*/
+    color: white;
     background-color: #68C3D4;
     border-color: #68C3D4;
 }
 #pocL{
-    color:#FFE8D1;
-    font-family: "Roboto Light";
+    /*color:#FFE8D1;*/
+    color: white;
+    font-size:20px;
+    font-family: "Helvetica";
 }
 #pocL2{
-    color:#FFE8D1;
-    font-family: "Roboto Light";
+    /*color:#FFE8D1;*/
+    color: white;
+    font-size:20px;
+    font-family: "Helvetica";
 }
 #pocL3{
-    color:#FFE8D1;
-    font-family: "Roboto Light";
+    /*color:#FFE8D1;*/
+    color: white;
+    font-size:20px;
+    font-family: "Helvetica";
 }

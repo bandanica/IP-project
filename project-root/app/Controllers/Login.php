@@ -94,6 +94,7 @@ class Login extends BaseController
         $zaSesiju = $korisnik->getIdK();
 
         $this->session->set('korisnik', $zaSesiju);
+        $this->session->set('vrstaKor', $korisnik->getTip());
 
         if ($korisnik->getTip()->getTipKorisnika() == "kupac") {
             return redirect()->to(site_url('korisnik'));

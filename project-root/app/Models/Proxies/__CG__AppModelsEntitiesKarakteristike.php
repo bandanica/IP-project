@@ -66,10 +66,10 @@ class Karakteristike extends \App\Models\Entities\Karakteristike implements \Doc
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'idkarakteristike', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'terasa', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lodja', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lift', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'franc_balkon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'podrum', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'garaza', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'saBastom', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'klima', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'internet', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'telefon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'parking'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'idkarakteristike', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'terasa', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lodja', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lift', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'franc_balkon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'podrum', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'garaza', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'saBastom', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'klima', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'internet', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'interfon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'telefon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'parking'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'idkarakteristike', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'terasa', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lodja', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lift', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'franc_balkon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'podrum', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'garaza', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'saBastom', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'klima', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'internet', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'telefon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'parking'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'idkarakteristike', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'terasa', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lodja', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'lift', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'franc_balkon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'podrum', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'garaza', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'saBastom', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'klima', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'internet', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'interfon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'telefon', '' . "\0" . 'App\\Models\\Entities\\Karakteristike' . "\0" . 'parking'];
     }
 
     /**
@@ -398,6 +398,28 @@ class Karakteristike extends \App\Models\Entities\Karakteristike implements \Doc
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInternet', [$internet]);
 
         return parent::setInternet($internet);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getInterfon()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInterfon', []);
+
+        return parent::getInterfon();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setInterfon($interfon)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInterfon', [$interfon]);
+
+        return parent::setInterfon($interfon);
     }
 
     /**

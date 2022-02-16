@@ -10,7 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row text-center">
         <h2>Omiljene nekretnine:</h2>
     </div>
 
@@ -35,8 +35,7 @@
             ?>
             <form method='post' action=<?php echo site_url() . "korisnik/omiljenaObrada" ?>>
                 <div class="row">
-                    <div class="card mb-3" style="max-width: 700px;"
-                    ">
+                    <div class="card mb-3 text-dark bg-light" style="max-width: 700px;"">
 
                     <div class="col-4">
                         <?php if ($n1->getSlike() != null) {
