@@ -98,7 +98,7 @@ body {
 #footer {
     width:100%;
     background: #568EA3;
-    position: relative;
+    position: fixed;
     bottom:0;
     height: 5%;
     text-align: center;
@@ -159,4 +159,12 @@ body {
 
 #desnoTekst{
     text-align: right;
+}
+.oglas{
+    z-index: 4;
+    background-color: white
+}
+.sredina{
+    margin-bottom: 50px;
+;
 }

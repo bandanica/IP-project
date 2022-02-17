@@ -46,7 +46,7 @@ body {
 #footer {
     width:100%;
     background: #568EA3;
-    position: relative;
+    position: fixed;
     bottom:0;
     height: 5%;
     text-align: center;
@@ -89,4 +89,12 @@ body {
     color: white;
     font-size:20px;
     font-family: "Helvetica";
+}
+.oglas{
+    z-index: 4;
+    background-color: white
+}
+.sredina{
+    margin-bottom: 50px;
+;
 }

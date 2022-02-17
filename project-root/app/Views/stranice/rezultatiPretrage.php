@@ -8,7 +8,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-<div class="container-fluid">
+<div class="container-fluid sredina">
     <div class="row text-center">
         <h2>Rezultati pretrage:</h2>
     </div>
@@ -32,7 +32,7 @@
                 ?>
                 <form method='post' action=<?php echo site_url() . "korisnik/pogledaj" ?>>
                 <div class="card mb-3 offset-3 text-dark bg-light" style="max-width: 700px;"">
-                    <div class="row">
+                    <div class="row g-0">
                         <div class="col-4">
                             <?php if ($n1->getSlike() != null) {
                                 //$dir_path = base_url()."/".$n1->getSlike();
@@ -60,11 +60,17 @@
                             </div>
                         <div class="col-8">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $n1->getNaziv() ?></h5>
+                                <h5 class="card-title"><?php echo $n1->getNaziv()."," ?> <?php echo $n1->getCena() ?>EUR</h5>
+                                <h6 class="card-subtitle mb-2 text-muted"><?php echo $n1->getGradid()->getNaziv() . " - opstina " . $n1->getOpstina()->getNaziv() . " - " . $n1->getMikrolokacija()->getNaziv(); ?></h6>
                                 <input type='hidden' value="<?php echo $n1->getIdn() ?>"
                                        name='idNek'>
 <!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
-                                <p class="card-text"><small class="text-muted"><?php echo $n1->getCena() ?>EUR</small></p>
+
+                                <p class="card-text"><small class="text-muted">Kvadratura: <?php echo $n1->getKvadratura() ?>m2|
+                                        Sobe: <?php echo $n1->getBrSoba() ?>|
+                                        Sprat: <?php echo $n1->getSprat() ?><br/>
+                                        <?php echo $n1->getOpis() ?></small></p>
+
                                 <input type='submit' name='dugmeO' value='Pogledaj'>
                             </div>
                         </div>

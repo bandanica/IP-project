@@ -10,8 +10,8 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
+    <div class="row oglas">
+        <div class="col d-flex">
             <?php
             if (isset($mojenekretnine) && !empty($mojenekretnine)) {
                 ?>

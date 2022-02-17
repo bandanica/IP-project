@@ -191,4 +191,10 @@ class Login extends BaseController
         $this->session->remove('korisnik');
         return redirect()->to(site_url());
     }
+
+    public function Pogledaj()
+    {
+        $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+        $this->prikaz('nekretninaDetalji', ['nek' => $n]);
+    }
 }

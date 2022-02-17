@@ -39,20 +39,20 @@
     $dir_path = $nek->getSlike();
     $slike = scandir($dir_path);
     $files = array_diff(scandir($dir_path), array('.', '..'));
-    $max = count($files);
-    $s1 = rand(0,$max);
+    $max = count($files)-1;
+    $s1 = rand(0, $max);
     $s2 = $s1;
-    while ($s1==$s2){
-        $s2 = rand(0,$max);
+    while ($s1 == $s2) {
+        $s2 = rand(0, $max);
     }
-    $s3=$s2;
-    while ($s1==$s3 || $s2==$s3){
-        $s3 = rand(0,$max);
+    $s3 = $s2;
+    while ($s1 == $s3 || $s2 == $s3) {
+        $s3 = rand(0, $max);
     }
 
-    echo $s1;
-    echo $s2;
-    echo $s3;
+//    echo $s1;
+//    echo $s2;
+//    echo $s3;
     ?>
     <div class="row" id="drugiRed">
         <div class="col-6 d-inline">
@@ -60,12 +60,12 @@
                 <div class="carousel-inner" id="slajdovi">
                     <?php
                     $i = -1;
-                    $j=0;
+                    $j = 0;
                     foreach ($files as $file) {
-                        $i+=1;
-                        if ($i==$s1 || $i==$s2 || $i==$s3){
-                            if ($i == $s1) {
-
+                        $i += 1;
+                        if ($i == $s1 || $i == $s2 || $i == $s3) {
+                            if ($j == 0) {
+                                $j=1;
                                 ?>
                                 <div class="carousel-item active text-center">
                                     <img class="d-inline w-80" src="
@@ -316,14 +316,14 @@
                 <div class="col-2">
                     <?php $agencija = $nek->getAgencija()->getNaziv();
                     $grad = $nek->getAgencija()->getIdgrada()->getNaziv();
-                    $pib = $nek->getAgencija()->getPib();?>
+                    $pib = $nek->getAgencija()->getPib(); ?>
                     <p><?php echo $agencija; ?></p>
                 </div>
                 <div class="col-2">
-                    <p><?php echo "Grad: ". "$grad";?></p>
+                    <p><?php echo "Grad: " . "$grad"; ?></p>
                 </div>
                 <div class="col-2">
-                    <p><?php echo "PIB: ". "$pib";?></p>
+                    <p><?php echo "PIB: " . "$pib"; ?></p>
                 </div>
                 <div class="col-2">
                     <?php

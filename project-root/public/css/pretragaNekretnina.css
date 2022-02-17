@@ -180,3 +180,12 @@ input {
 }
 
 .lt-ie9 .search input { line-height: 26px }
+
+.oglas{
+    z-index: 4;
+    background-color: white
+}
+.sredina{
+    margin-bottom: 50px;
+;
+}

@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 .row{
-    width:100%;
+    /*width:100%;*/
     justify-content: center;
 }
 
@@ -79,7 +79,8 @@ body {
     background: #568EA3;
     background-color: #568EA3;
     width: 100%;
-    position: relative;
+    /*position: relative;*/
+    position: fixed;
     bottom:0;
     height: 5%;
     text-align: center;
@@ -173,4 +174,35 @@ body {
 }
 #regDugme{
     background-color: #68C3D4;
+}
+
+.oglas{
+    z-index: 4;
+    background-color: white
+}
+.sredina{
+    margin-bottom: 50px;
+    ;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+}
+.link-button:focus {
+    outline: none;
+}
+.link-button:active {
+    color:red;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 18vw;
+    object-fit: cover;
 }
