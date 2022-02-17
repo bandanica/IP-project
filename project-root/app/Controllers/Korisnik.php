@@ -41,6 +41,9 @@ class Korisnik extends BaseController
         }
         $poruka = $this->session->get("poruka2");
         $this->session->set("poruka2", '');
+
+        //$this->session->remove('nump');
+        //$this->session->remove('page');
         //echo view("sabloni/headerKupac");
         $this->prikaz('kupac', ['poruka2' => $poruka, 'tipoviN' => $tipN, 'lokacije' => $lokacije]);
         //echo view("sabloni/footer");
@@ -117,7 +120,7 @@ class Korisnik extends BaseController
 
         $Tip = $Tip->getIdtipnekretnine();
 
-        $l = $this->request->getVar('Lokacija');
+        $l = explode("\t", $this->request->getVar('Lokacija'));
         $lokacijePretraga = [];
         $nek = [];
         foreach ($l as $l1) {
@@ -158,53 +161,120 @@ class Korisnik extends BaseController
         //echo view("sabloni/headerKupac");
         $page = 1;
         $n = count($nek);
-        $numpages = ceil($n/5);
+        $numpages = ceil($n / 5);
         $zaprvu = [];
-        $i=0;
-        foreach ($nek as $n1){
-            array_push($zaprvu,$n1);
-            $i+=1;
-            if ($i==5){
+        $i = 0;
+        foreach ($nek as $n1) {
+            array_push($zaprvu, $n1);
+            $i += 1;
+            if ($i == 5) {
                 break;
             }
 
         }
         $ids = [];
-        foreach ($nek as $n1){
-            array_push($ids,$n1->getIdn());
-    }
-        $this->session->set('sveN',$ids);
+        foreach ($nek as $n1) {
+            array_push($ids, $n1->getIdn());
+        }
+        $this->session->set('sveN', $ids);
+        //$this->session->set('page',$page);
+        //$this->session->set('nump',$numpages);
+        $sveNekr = [];
+        array_push($sveNekr, ['html' => $this->prikazPagin($numpages, $page)]);
+        foreach ($zaprvu as $n) {
+            array_push($sveNekr, [
+                'html' => $this->prikazJedne($n->getIdn())
+//                "naziv" => $n->getNaziv(),
+//                "kvadrat"=>$n->getKvadratura(),
+//                "sobe" => $n->getBrSoba(),
+//                "cena"=>$n->getCena(),
+//                "sprat"=>$n->getSprat(),
+//                "opis"=>$n->getOpis(),
+//                "lok"=>$n->getMikrolokacija()->getNaziv(),
+//                "opst"=>$n->getOpstina()->getNaziv(),
+//                "grad"=>$n->getGradid()->getNaziv(),
+//                "slike"=>$n->getSlike()
+            ]);
+        }
+
+
+        return json_encode($sveNekr);
+
         //$this->prikaz('rezultatiPretrage', ['rezultati' => $zaprvu,'sve'=>$ids,'page'=>$page,'nump'=>$numpages]);
         //echo view("sabloni/footer");
-        return redirect()->to(site_url("korisnik/promenaStranice?page=1"));
+        //return redirect()->to(site_url("korisnik/promenaStranice?page=1"));
     }
 
-    public function promenaStranice(){
-        if (isset($_GET['page'])){
-            $tmpPage = $_GET['page'];
-            $sve = $this->session->get('sveN');
-            $n = count($sve);
-            $nump = ceil($n/5);
-            $nek = [];
-            foreach ($sve as $id){
-                //echo $id;
-                //echo "<br/>";
-                array_push($nek,$this->doctrine->em->getRepository(Nekretnina::class)->find($id));
-            }
-            $zaprikaz=[];
-            $i=-1;
-            foreach ($nek as $n1){
-                $i+=1;
-                if (($i<(($tmpPage-1)*5)) || ($i>=(5*$tmpPage))){
-                    continue;
-                }
-                array_push($zaprikaz,$n1);
-            }
+    private function prikazJedne($idn)
+    {
+        $nek = $this->doctrine->em->getRepository(Nekretnina::class)->find($idn);
+        return view("stranice/komponentaN", ['n1' => $nek]);
+    }
+
+    private function prikazPagin($nump, $page)
+    {
+        return view("stranice/komponentaPaginacija", ['nump' => $nump, 'page' => $page]);
+    }
+
+    public function promenaStranice()
+    {
+        $tmpPage = $this->request->getVar('page');
+        $sve = $this->session->get('sveN');
+        $n = count($sve);
+        $nek = [];
+        foreach ($sve as $id) {
+            //echo $id;
+            //echo "<br/>";
+            array_push($nek, $this->doctrine->em->getRepository(Nekretnina::class)->find($id));
         }
-        $this->prikaz('rezultatiPretrage',['rezultati'=>$zaprikaz,'sve'=>$sve,'page'=>$tmpPage,'nump'=>$nump]);
+        $n = count($nek);
+        $numpages = ceil($n / 5);
+        $zaprikaz = [];
+        $i = -1;
+        foreach ($nek as $n1) {
+            $i += 1;
+            if (($i < (($tmpPage - 1) * 5)) || ($i >= (5 * $tmpPage))) {
+                continue;
+            }
+            array_push($zaprikaz, $n1);
+        }
+        $sveNekr = [];
+        array_push($sveNekr, ['html' => $this->prikazPagin($numpages, $tmpPage)]);
+        foreach ($zaprikaz as $n2) {
+            array_push($sveNekr, [
+                'html' => $this->prikazJedne($n2->getIdn())
+            ]);
+        }
+
+        return json_encode($sveNekr);
+//        if (isset($_GET['page'])){
+//            $tmpPage = $_GET['page'];
+//            $sve = $this->session->get('sveN');
+//            $n = count($sve);
+//            $nump = ceil($n/5);
+//            $nek = [];
+//            foreach ($sve as $id){
+//                //echo $id;
+//                //echo "<br/>";
+//                array_push($nek,$this->doctrine->em->getRepository(Nekretnina::class)->find($id));
+//            }
+//            $zaprikaz=[];
+//            $i=-1;
+//            foreach ($nek as $n1){
+//                $i+=1;
+//                if (($i<(($tmpPage-1)*5)) || ($i>=(5*$tmpPage))){
+//                    continue;
+//                }
+//                array_push($zaprikaz,$n1);
+//            }
+//        }
+
+
+        //$this->prikaz('rezultatiPretrage',['rezultati'=>$zaprikaz,'sve'=>$sve,'page'=>$tmpPage,'nump'=>$nump]);
 
 
     }
+
     public function naprednaPretraga()
     {
         $tipN = $this->doctrine->em->getRepository(Tipnekretnine::class)->findAll();
@@ -239,7 +309,8 @@ class Korisnik extends BaseController
         $this->prikaz('nekretninaDetalji', ['nek' => $n]);
     }
 
-    public function izvrsiNapredno(){
+    public function izvrsiNapredno()
+    {
         $t = $this->request->getVar('izabranTip');
         $cmin = $this->request->getVar('minC');
         $cmaks = $this->request->getVar('maxC');
@@ -249,99 +320,87 @@ class Korisnik extends BaseController
         $smaks = $this->request->getVar('maxS');
         $minSpr = $this->request->getVar('minSprat');
         $maxSpr = $this->request->getVar('maxSprat');
-        $stanje='LUX';
+        $stanje = 'LUX';
 
-        if ($cmaks==''){
+        if ($cmaks == '') {
             //promeniti
-            $cmaks=10000000;
+            $cmaks = 10000000;
+        } else {
+            $cmaks = (int)$cmaks;
         }
-        else{
-            $cmaks=(int) $cmaks;
+        if ($cmin == '') {
+            $cmin = 0;
+        } else {
+            $cmin = (int)$cmin;
         }
-        if ($cmin==''){
-            $cmin=0;
+        if ($kmaks == '') {
+            $kmaks = 100000;
+        } else {
+            $kmaks = (double)$kmaks;
         }
-        else{
-            $cmin=(int) $cmin;
+        if ($kmin == '') {
+            $kmin = 0;
+        } else {
+            $kmin = (int)$kmin;
         }
-        if ($kmaks==''){
-            $kmaks=100000;
+        if ($smaks == '') {
+            $smaks = 100000;
+        } else {
+            $smaks = (double)$smaks;
         }
-        else{
-            $kmaks=(double) $kmaks;
+        if ($smin == '') {
+            $smin = 0;
+        } else {
+            $smin = (int)$smin;
         }
-        if ($kmin==''){
-            $kmin=0;
+        if ($maxSpr == '') {
+            $maxSpr = 100000;
+        } else {
+            $maxSpr = (double)$maxSpr;
         }
-        else{
-            $kmin=(int) $kmin;
-        }
-        if ($smaks==''){
-            $smaks=100000;
-        }
-        else{
-            $smaks=(double) $smaks;
-        }
-        if ($smin==''){
-            $smin=0;
-        }
-        else{
-            $smin=(int) $smin;
-        }
-        if ($maxSpr==''){
-            $maxSpr=100000;
-        }
-        else{
-            $maxSpr=(double) $maxSpr;
-        }
-        if ($minSpr==''){
-            $minSpr=0;
-        }
-        else{
-            $minSpr=(int) $minSpr;
+        if ($minSpr == '') {
+            $minSpr = 0;
+        } else {
+            $minSpr = (int)$minSpr;
         }
 
 
-        $Tip = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa'=>$t]);
+        $Tip = $this->doctrine->em->getRepository(Tipnekretnine::class)->findOneBy(['nazivTipa' => $t]);
 
         $Tip = $Tip->getIdtipnekretnine();
 
         $l = $this->request->getVar('Lokacija');
-        $lokacijePretraga=[];
-        $nek=[];
-        foreach ($l as $l1){
-            $string1 = explode("/",$l1);
+        $lokacijePretraga = [];
+        $nek = [];
+        foreach ($l as $l1) {
+            $string1 = explode("/", $l1);
             $string1 = end($string1);
-            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$string1]);
-            $x='ml';
-            if ($obj==null){
-                $x='op';
-                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv'=>$string1]);
+            $obj = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv' => $string1]);
+            $x = 'ml';
+            if ($obj == null) {
+                $x = 'op';
+                $obj = $this->doctrine->em->getRepository(Opstina::class)->findOneBy(['naziv' => $string1]);
 
-            }
-            else{
-                $obj=$obj->getIdmikro();
-                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->naprednaLokacije($cmin,$cmaks,$kmin,$kmaks,$smin,$smaks,$minSpr,$maxSpr,$obj,$Tip));
+            } else {
+                $obj = $obj->getIdmikro();
+                $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->naprednaLokacije($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip));
                 continue;
             }
-            if ($obj==null){
+            if ($obj == null) {
                 $x = 'gr';
-                $obj=$this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv'=>$string1]);
-            }
-            else{
-                $obj=$obj->getIdopstine();
-                $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->naprednaOpstine($cmin,$cmaks,$kmin,$kmaks,$smin,$smaks,$obj,$Tip));
+                $obj = $this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv' => $string1]);
+            } else {
+                $obj = $obj->getIdopstine();
+                $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->naprednaOpstine($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $obj, $Tip));
                 continue;
             }
-            $obj=$obj->getIdg();
-            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->naprednaGradovi($cmin,$cmaks,$kmin,$kmaks,$smin,$minSpr,$maxSpr,$smaks,$obj,$Tip));
+            $obj = $obj->getIdg();
+            $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $minSpr, $maxSpr, $smaks, $obj, $Tip));
 
 
         }
 
-
-
-        $this->prikaz('rezultatiPretrage',['rezultati'=>$nek]);
+        $this->prikaz('rezultatiPretrage', ['rezultati' => $nek]);
 
     }
 
@@ -358,19 +417,18 @@ class Korisnik extends BaseController
         //echo gettype($o);
         $o = $kor->getOmiljene();
         //echo $o->count();
-        $fleg=0;
-        foreach ($o as $obj){
-            if ($obj->getIdn()==($nekr->getIdn())){
-                $fleg=-1;
+        $fleg = 0;
+        foreach ($o as $obj) {
+            if ($obj->getIdn() == ($nekr->getIdn())) {
+                $fleg = -1;
                 break;
             };
         }
-        if (($fleg!=-1) && ($o->count()<5)){
+        if (($fleg != -1) && ($o->count() < 5)) {
             $kor->addOmiljene($nekr);
             //echo "SVE OK";
             $this->doctrine->em->flush($kor);
-        }
-        else{
+        } else {
             //echo "NE MOZE DA SE DODA";
         }
 //        if ($o->count()==4){
@@ -385,18 +443,19 @@ class Korisnik extends BaseController
 
     }
 
-    public function pogledajOmiljenje(){
+    public function pogledajOmiljenje()
+    {
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get('korisnik'));
         $o = $kor->getOmiljene();
-        $this->prikaz('omiljeneNekretnine',['rezultati'=>$o]);
+        $this->prikaz('omiljeneNekretnine', ['rezultati' => $o]);
     }
 
-    public function omiljenaObrada(){
-        if ($this->request->getVar('dugmeOm')=='Pogledaj'){
+    public function omiljenaObrada()
+    {
+        if ($this->request->getVar('dugmeOm') == 'Pogledaj') {
             $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
             $this->prikaz('nekretninaDetalji', ['nek' => $n]);
-        }
-        else{
+        } else {
             $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get('korisnik'));
             $kor->removeOmiljena($this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek')));
             $this->doctrine->em->flush();
@@ -405,10 +464,12 @@ class Korisnik extends BaseController
 
         }
     }
-    public function proba(){
+
+    public function proba()
+    {
 
         //$dir    = base_url()."/slike/nekretnina16";
-        $dir    = "slike/nekretnina16";
+        $dir = "slike/nekretnina16";
         $files1 = scandir($dir);
         //$files1 = Storage::disk('public')->allFiles('img/animals');
         print_r($files1);
