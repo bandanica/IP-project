@@ -180,22 +180,13 @@ class Korisnik extends BaseController
         //$this->session->set('page',$page);
         //$this->session->set('nump',$numpages);
         $sveNekr = [];
-        array_push($sveNekr, ['html' => $this->prikazPagin($numpages, $page)]);
+
         foreach ($zaprvu as $n) {
             array_push($sveNekr, [
                 'html' => $this->prikazJedne($n->getIdn())
-//                "naziv" => $n->getNaziv(),
-//                "kvadrat"=>$n->getKvadratura(),
-//                "sobe" => $n->getBrSoba(),
-//                "cena"=>$n->getCena(),
-//                "sprat"=>$n->getSprat(),
-//                "opis"=>$n->getOpis(),
-//                "lok"=>$n->getMikrolokacija()->getNaziv(),
-//                "opst"=>$n->getOpstina()->getNaziv(),
-//                "grad"=>$n->getGradid()->getNaziv(),
-//                "slike"=>$n->getSlike()
             ]);
         }
+        array_push($sveNekr, ['html' => $this->prikazPagin($numpages, $page)]);
 
 
         return json_encode($sveNekr);
@@ -239,12 +230,13 @@ class Korisnik extends BaseController
             array_push($zaprikaz, $n1);
         }
         $sveNekr = [];
-        array_push($sveNekr, ['html' => $this->prikazPagin($numpages, $tmpPage)]);
+
         foreach ($zaprikaz as $n2) {
             array_push($sveNekr, [
                 'html' => $this->prikazJedne($n2->getIdn())
             ]);
         }
+        array_push($sveNekr, ['html' => $this->prikazPagin($numpages, $tmpPage)]);
 
         return json_encode($sveNekr);
 //        if (isset($_GET['page'])){

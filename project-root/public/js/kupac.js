@@ -44,7 +44,7 @@ function NadjiNekretnine() {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
         lista.innerHTML = "";
-        nekretnine = JSON.parse(xhttp.responseText.split("\n")[0]).reverse();
+        nekretnine = JSON.parse(xhttp.responseText.split("\n")[0]);
         nekretnine.forEach(oglas => {
             lista.innerHTML = lista.innerHTML + oglas.html;
         })
@@ -62,7 +62,7 @@ function promenaStrane(broj){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
         lista.innerHTML = "";
-        nekretnine = JSON.parse(xhttp.responseText.split("\n")[0]).reverse();
+        nekretnine = JSON.parse(xhttp.responseText.split("\n")[0]);
         nekretnine.forEach(oglas => {
             lista.innerHTML = lista.innerHTML + oglas.html;
         })

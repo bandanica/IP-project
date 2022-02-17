@@ -38,6 +38,7 @@
                         Sobe: <?php echo $n1->getBrSoba() ?>|
                         Sprat: <?php echo $n1->getSprat() ?><br/>
                         <?php echo $n1->getOpis() ?></small></p>
+                <p> <?php echo $n1->getIdn(); ?></p>
 
                 <input type='submit' name='dugmeO' value='Pogledaj'>
             </div>
