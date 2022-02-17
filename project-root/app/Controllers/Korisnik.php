@@ -387,8 +387,9 @@ class Korisnik extends BaseController
                 continue;
             }
             $obj = $obj->getIdg();
-            $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $minSpr, $maxSpr, $smaks, $obj, $Tip));
-
+            $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)
+                ->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip));
+            //return $this->doctrine->em->getRepository(Nekretnina::class)->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr,  $obj, $Tip);
 
         }
 

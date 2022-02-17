@@ -99,6 +99,8 @@
     <ul class="pagination justify-content-center">
         <li class="page-item">
             <?php
+            $prev = "$";
+            $next = "$";
             if (isset($nump) && isset($page)){
                 if ($page>1){
                     $prev = $page-1;
