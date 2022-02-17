@@ -6,6 +6,7 @@ use App\Models\Entities\Agencija;
 use App\Models\Entities\Grad;
 use App\Models\Entities\Korisnik;
 use App\Models\Entities\Mikrolokacija;
+use App\Models\Entities\Nekretnina;
 use App\Models\Entities\Opstina;
 use App\Models\Entities\Tipkorisnika;
 use App\Models\Entities\Ulica;
@@ -280,8 +281,18 @@ class Administrator extends BaseController
 
     public function novaLokacijaAdmin()
     {
+        $sveLok = $this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
+        $prazne=[];
+        foreach ($sveLok as $l){
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['mikrolokacija'=>$l]);
+            if ($n==null){
+                array_push($prazne,$l);
+
+            }
+        }
+
         $grad = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        $this->prikaz('dodajMikrolokaciju', ['gradovi' => $grad]);
+        $this->prikaz('dodajMikrolokaciju', ['gradovi' => $grad,'prazneLok'=>$prazne]);
     }
 
     public function dodajMikro()
@@ -328,8 +339,18 @@ class Administrator extends BaseController
     }
 
     public function novaUlicaAdmin(){
+        $ulice =$this->doctrine->em->getRepository(Ulica::class)->findAll();
         $grad = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        $this->prikaz('dodajUlicu', ['gradovi' => $grad]);
+
+        $prazne=[];
+        foreach ($ulice as $u){
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['ulica'=>$u]);
+            if ($n==null){
+                array_push($prazne,$u);
+
+            }
+        }
+        $this->prikaz('dodajUlicu', ['gradovi' => $grad,'prazneUlice'=>$prazne]);
 
     }
 
@@ -347,4 +368,19 @@ class Administrator extends BaseController
     }
 
 
+    public function brisanjeMikrolokacije(){
+        $lokacija = $this->doctrine->em->getRepository(Mikrolokacija::class)->find($this->request->getVar('idLok'));
+        $this->doctrine->em->remove($lokacija);
+        $this->doctrine->em->flush();
+        return redirect()->to(site_url("administrator/novaLokacijaAdmin"));
+
+
+    }
+
+    public function brisanjeUlice(){
+        $ulica = $this->doctrine->em->getRepository(Ulica::class)->find($this->request->getVar('idU'));
+        $this->doctrine->em->remove($ulica);
+        $this->doctrine->em->flush();
+        return redirect()->to(site_url("administrator/novaUlicaAdmin"));
+    }
 }

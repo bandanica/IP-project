@@ -12,8 +12,6 @@
 
 <div class="container-fluid">
     <div class="row">
-
-
         <form method="post" action=<?php echo site_url() . "administrator/dodajMikro" ?>>
             Grad:<select name="gr" onchange="promenaGrad()">
                 <option></option>
@@ -36,6 +34,62 @@
             <input type="submit" id="dugmeDodaj">
         </form>
 
+    </div>
+    <div class="row">
+        <div class="oglas">
+            <?php if (isset($prazneLok)) {
+
+                ?>
+                <table class="table table-striped table-bordered caption-top" style="width: 100%">
+                    <caption>Mikrolokacije na kojima nema nekretnina</caption>
+                    <thead>
+
+                    <tr>
+                        <th></th>
+                        <th>Naziv</th>
+                        <th>Opstina</th>
+                        <th>Grad</th>
+                        <th>Brisanje</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+
+                    foreach ($prazneLok as $lok) {
+                        {
+                            ?>
+                            <form method='post' action=<?php echo site_url() . "administrator/brisanjeMikrolokacije" ?>>
+                                <tr>
+                                    <td><?php //echo $lok->getIdmikro()
+                                        ?>
+                                        <input type='hidden' value="<?php echo $lok->getIdmikro() ?>"
+                                               name='idLok'>
+                                    </td>
+                                    <td><?php echo $lok->getNaziv() ?></td>
+                                    <td><?php $o = $lok->getOpstina();
+                                        echo $o->getNaziv(); ?></td>
+                                    <td><?php $gr = $o->getGrad();
+                                        echo $gr->getNaziv(); ?></td>
+                                    <td><input type='submit' name='dugme1' value='Obrisi'></td>
+                                </tr>
+                            </form>
+                            <?php
+                        }
+                    }
+
+                    ?>
+                    </tbody>
+                    <tfoot>
+
+                    </tfoot>
+
+                </table>
+
+                <?php
+
+            }
+            ?>
+        </div>
     </div>
 </div>
 

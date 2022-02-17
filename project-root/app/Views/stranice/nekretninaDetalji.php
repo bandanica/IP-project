@@ -8,11 +8,154 @@
     <!--          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>/css/detaljiNekretnine.css">
     <script src="<?php echo base_url(); ?>/js/nekretninaDetalji.js"></script>
+    <script src="<?php echo base_url(); ?>/js/login.js"></script>
     <title></title>
 </head>
 <body>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="modalzaloginformu" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="exampleModalLabel">Prijava</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="loginForma" method='post' action=<?php echo site_url() . "login/login" ?>>
+                <div class="modal-body">
+                    <div class="form-group text-center">
+                        <input type="text" name="kor_ime" placeholder="Korisnicko ime" required="required">
+
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="password" name="lozinka" placeholder="Lozinka" required="required">
+
+                    </div>
+
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="submit" id="LogSubmit" class="btn btn-primary text-center">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="modalzaloginformu" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regNaslov">Registracija</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="regForma" method='post' action=<?php echo site_url() . "login/registerSubmit" ?>>
+                <div class="modal-body">
+                    <div class="form-group text-center">
+                        <input type="text" name="ime" placeholder="Ime" required="required" onchange="f()">
+
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="text" name="prez" placeholder="Prezime" required="required" onchange="f()">
+
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="text" name="korime" placeholder="Korisnicko ime" required="required"
+                               onchange="f()">
+
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="password" name="loz" placeholder="Lozinka" required="required"
+                               onchange="proveraLozinke()">
+
+                    </div>
+                    <div class="form-group text-center">
+                        Grad:
+                        <select name="gradici" onchange="f()">
+                            <?php
+                            if (isset($gradovi)) {
+                                foreach ($gradovi as $g) {
+                                    ?>
+                                    <option><?php echo $g->getNaziv() ?> </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+
+                    </div>
+                    <div class="form-group text-center">
+                        Datum rodjenja:
+                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?> ><br/>
+
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="text" name="tel" placeholder="Telefon" required="required"
+                               onchange="f()">
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="text" name="mejl" placeholder="Email" required="required"
+                               onchange="f()">
+                    </div>
+                    <div class="form-group text-center">
+                        Tip korisnika:
+                        <?php
+                        if (isset($tipkorisnika)) {
+                            foreach ($tipkorisnika as $t) {
+
+                                ?>
+
+                                <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                                       value="<?php echo $t->getTipKorisnika() ?>"
+                                       onchange="f()"> <?php echo $t->getTipKorisnika() ?>
+
+
+                                <?php
+                            }
+                        }
+                        ?>
+
+                    </div>
+                    <div class="form-group text-center">
+                        <div id="agencija" hidden>
+                            Agencija:
+                            <select name="agencije1" id="ListaAgencija" onchange="f()">
+
+                                <?php
+                                if (isset($agencije)) {
+                                    foreach ($agencije as $a) {
+                                        ?>
+                                        <option><?php echo $a->getNaziv() ?> </option>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                            <input type="text" name="brlicence" placeholder="Broj licence">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer text-center">
+                    <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
+
+                    <button type="submit" class="btn btn-primary" disabled id="regDugme">
+                        Registruj se
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 <div class="container-fluid">

@@ -499,6 +499,6 @@ class Oglasivac extends BaseController
         $korisnik->setEMail($mejl);
         $korisnik->setTip($tip);
         $this->doctrine->em->flush();
-        echo "SVE OK";
+        return redirect()->to(site_url("oglasivac"));
     }
 }
