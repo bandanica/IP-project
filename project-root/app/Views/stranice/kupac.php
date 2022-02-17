@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/css/kupacStil.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/css/osnova.css">
     <script src="<?php echo base_url(); ?>/js/kupac.js"></script>
 </head>
 <body>
@@ -93,8 +93,9 @@
 
     </div>
     <div class="row">
-        <div class="listaNek" id="prikazN">
-
+        <div class="listaNek oglas" id="prikazN">
+<!--            <span>Ovde idu oglasi</span>-->
+<!--            <br>-->
         </div>
     </div>
 
