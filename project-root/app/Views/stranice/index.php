@@ -2,8 +2,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/css/osnova.css">
-    <script src="<?php echo base_url(); ?>/js/login.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url('/css/osnova.css'); ?>">
+    <script src="<?php echo base_url('/js/login.js'); ?>"></script>
 </head>
 <body>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -61,7 +61,7 @@
 
                     </div>
                     <div class="form-group text-center">
-                        <input type="text" name="kor_ime" placeholder="Korisnicko ime" required="required"
+                        <input type="text" name="korime" placeholder="Korisnicko ime" required="required"
                                onchange="f()">
 
                     </div>
@@ -132,7 +132,7 @@
                                 }
                                 ?>
                             </select>
-                            <input type="text" name="brlicence" placeholder="Broj licence" required="required">
+                            <input type="text" name="brlicence" placeholder="Broj licence">
                         </div>
                     </div>
 
@@ -235,9 +235,9 @@
     <!---->
     <!---->
     <!--                <input type='submit' name='submit' value='Prijava'><br/>-->
-    <!--                --><?php //if (isset($porukaL)) echo "$porukaL";
-    //                echo "<br/>"; ?>
-    <!--                <span style="color: red"> --><?php //if (isset($poruka)) echo $poruka ?><!--</span>-->
+                    <?php if (isset($porukaL)) echo "$porukaL";
+                    echo "<br/>"; ?>
+                    <span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
     <!--            </form>-->
     <!--        </div>-->
     <!--        <div class="col-4">-->
@@ -377,8 +377,8 @@
     <!--                <input type='submit' name='submit' disabled value='Registracija' id="regDugme">-->
     <!--                <br/>-->
     <!---->
-    <!--                <span id="regGreske" style="color: red">-->
-    <?php //if (isset($poruka1)) echo $poruka1 ?><!--</span>-->
+                    <span id="regGreske" style="color: red">
+    <?php if (isset($poruka1)) echo $poruka1 ?></span>
     <!--            </form>-->
     <!---->
     <!--        </div>-->

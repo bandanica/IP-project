@@ -140,13 +140,8 @@
             <p class="cenaNekretnine"><?php echo $nek->getCena(); ?> &euro;</p>
         </div>
         <div class="col-6" id="desnoTekst">
-            <form method='post' action=<?php echo site_url() . "korisnik/dodajUOmiljene" ?>>
-                <input type='hidden' value="<?php echo $nek->getIdn() ?>"
-                       name='idNek'>
-                <!--                    <br/>-->
-                <!--                    <br/>-->
-                <input type="submit" id="dugmeOmiljene" value="Dodaj u omiljene">
-            </form>
+            <input type="submit" id="dugmeOmiljene" value="Dodaj u omiljene" onclick="dodavaljeOmiljene(<?php echo $nek->getIdn() ?>)">
+
         </div>
     </div>
     <div class="row" id="cetvrtiRed">

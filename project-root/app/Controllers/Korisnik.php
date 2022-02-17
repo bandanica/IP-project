@@ -174,8 +174,9 @@ class Korisnik extends BaseController
             array_push($ids,$n1->getIdn());
     }
         $this->session->set('sveN',$ids);
-        $this->prikaz('rezultatiPretrage', ['rezultati' => $zaprvu,'sve'=>$ids,'page'=>$page,'nump'=>$numpages]);
+        //$this->prikaz('rezultatiPretrage', ['rezultati' => $zaprvu,'sve'=>$ids,'page'=>$page,'nump'=>$numpages]);
         //echo view("sabloni/footer");
+        return redirect()->to(site_url("korisnik/promenaStranice?page=1"));
     }
 
     public function promenaStranice(){
