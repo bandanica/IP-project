@@ -38,8 +38,10 @@
                         Sobe: <?php echo $n1->getBrSoba() ?>|
                         Sprat: <?php echo $n1->getSprat() ?><br/>
                         <?php echo $n1->getOpis() ?></small></p>
-                <p> <?php echo $n1->getIdn(); ?></p>
-
+<!--                <p> --><?php //echo $n1->getIdn(); ?><!--</p>-->
+                <p class="card-text text-muted"><small>Linije: <?php if ($n1->getLinijeprevoza()!=""){
+                            echo $n1->getLinijeprevoza();
+                        }?></small></p>
                 <input type='submit' name='dugmeO' value='Pogledaj'>
             </div>
         </div>

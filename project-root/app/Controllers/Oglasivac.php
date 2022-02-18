@@ -123,12 +123,6 @@ class Oglasivac extends BaseController
 
     public function zavrsiDodavanjeNekretnine()
     {
-        //$putanja = "slike/profilna.png";
-        //$ime = $_FILES["izaberiSliku"]["name"];
-        //echo $ime;
-
-
-
         $ime = $this->request->getVar('nazivN');
         $grad = $this->doctrine->em->getRepository(Grad::class)->find($this->request->getVar('gr'));
         $opstina = $this->doctrine->em->getRepository(Opstina::class)->find($this->request->getVar('opst'));
@@ -145,6 +139,18 @@ class Oglasivac extends BaseController
         $opis = $this->request->getVar('opisNek');
         $mtroskovi = $this->request->getVar('mesTroskovi');
         $c = (int)$this->request->getVar('cenaNekretnine');
+        $prevoz = $this->request->getVar('prevozi');
+        $pr = "";
+        $j=0;
+        foreach ($prevoz as $linija){
+            if ($j==0){
+                $pr.="$linija";
+                $j=1;
+            }
+            else{
+                $pr.=","."$linija";
+            }
+        }
         //dodavanje entiteta karakteristike koje nekretnina ima
         $p = "ne";
         $t = "ne";
@@ -229,6 +235,7 @@ class Oglasivac extends BaseController
         $nekretninaN->setOpstina($opstina);
         $nekretninaN->setMikrolokacija($lokacija);
         $nekretninaN->setUlica($ulica);
+        $nekretninaN->setLinijeprevoza($pr);
         $oglasivac = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get("korisnik"));
         //echo $oglasivac->getIdK();
         $nekretninaN->setOglasivac($oglasivac);
@@ -392,6 +399,18 @@ class Oglasivac extends BaseController
         $uks = (int)$this->request->getVar('ukspratnost');
         $opis = $this->request->getVar('opisNek');
         $mtroskovi = $this->request->getVar('mesTroskovi');
+        $gradskeLinije = $this->request->getVar('prevozG');
+        $gLinije="";
+        $brojac=0;
+        foreach ($gradskeLinije as $linija){
+            if ($brojac==0){
+                $gLinije.="$linija";
+                $brojac=1;
+            }
+            else{
+                $gLinije.=","."$linija";
+            }
+        }
         $c = (int)$this->request->getVar('cenaNekretnine');
         $p = "ne";
         $t = "ne";
@@ -466,6 +485,7 @@ class Oglasivac extends BaseController
         $nekretninaN->setUkupnaSpratnost($uks);
         $nekretninaN->setOpis($opis);
         $nekretninaN->setMesecniTroskovi($mtroskovi);
+        $nekretninaN->setLinijeprevoza($gLinije);
         //$nekretninaN->setOpstina($opstina);
         //$nekretninaN->setMikrolokacija($lokacija);
         //$nekretninaN->setUlica($ulica);

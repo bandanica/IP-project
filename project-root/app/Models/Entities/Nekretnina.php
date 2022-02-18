@@ -194,11 +194,18 @@ class Nekretnina
 
 
     /**
+ * @var string|null
+ *
+ * @ORM\Column(name="putanjaSlike", type="string", length=100, nullable=true)
+ */
+    private $slike;
+
+    /**
      * @var string|null
      *
-     * @ORM\Column(name="putanjaSlike", type="string", length=100, nullable=true)
+     * @ORM\Column(name="linije_prevoza", type="string", length=100, nullable=true)
      */
-    private $slike;
+    private $linijePrevoza;
 
 
     /**
@@ -564,6 +571,22 @@ class Nekretnina
     public function setGradid($gradid)
     {
         $this->gradid = $gradid;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLinijeprevoza()
+    {
+        return $this->linijePrevoza;
+    }
+
+    /**
+     * @param string|null $linijePrevoza
+     */
+    public function setLinijeprevoza(?string $linijePrevoza)
+    {
+        $this->linijePrevoza = $linijePrevoza;
     }
 
     /**

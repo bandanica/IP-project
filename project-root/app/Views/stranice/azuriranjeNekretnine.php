@@ -191,6 +191,36 @@
             } ?>
 
             <br/>
+            Linije prevoza:<select multiple name="prevozG[]">
+                <option></option>
+            <?php if ($nek->getLinijeprevoza()!=""){
+                $sveL = $nek->getLinijeprevoza();
+                $linije = explode(",",$sveL);
+                $brojac=0;
+                $sveLinije=[7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95];
+                $x = count($linije);
+                foreach ($sveLinije as $linija){
+                    if ($brojac<=(count($linije)-1) && $linija==((int)$linije[$brojac])){
+                        $brojac+=1;
+                        ?>
+                        <option selected><?php echo $linija?></option>
+                            <?php
+                    }
+                    else{
+                        ?>
+                        <option><?php echo $linija;?></option>
+                            <?php
+                    }
+
+                    ?>
+
+                <?php
+                }
+
+            }
+            ?>
+
+            </select>
             <input type="submit" name="dodaj" value="Zavrsi">
         </form>
         <?php

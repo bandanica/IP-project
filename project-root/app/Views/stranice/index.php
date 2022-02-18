@@ -179,6 +179,9 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $n1->getNaziv(); ?></h5>
                                         <p class="card-text"> <?php echo $n1->getCena(); ?> EUR</p>
+                                        <p class="card-text"><small>Linije: <?php if ($n1->getLinijeprevoza()!=""){
+                                            echo $n1->getLinijeprevoza();
+                                        }?></small></p>
                                         <form method="get" action="<?php echo site_url() . "login/Pogledaj" ?>">
                                             <input type="hidden" value="<?php echo $n1->getIdn(); ?>" name="idNek">
                                             <button type="submit" value="Detaljnije..." class="link-button">
