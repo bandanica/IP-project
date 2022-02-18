@@ -12,13 +12,13 @@ class OglasivacFilter implements FilterInterface
     {
         $session = session();
         if ($session->has("vrstaKor")){
-            $idTip = $session->get('vrstaKor')->getIdt();
+            $idTip = $session->get('vrstaKor');
             switch ($idTip){
                 case 4: return redirect()->to(site_url("administrator"));
                 case 1: return redirect()->to(site_url("korisnik"));
             }
         } else {
-            return redirect()->to(site_url("login"));
+            return redirect()->to(site_url(""));
         }
     }
 

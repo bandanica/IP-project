@@ -94,7 +94,7 @@ class Login extends BaseController
         $zaSesiju = $korisnik->getIdK();
 
         $this->session->set('korisnik', $zaSesiju);
-        $this->session->set('vrstaKor', $korisnik->getTip());
+        $this->session->set('vrstaKor', $korisnik->getTip()->getIdt());
 
         if ($korisnik->getTip()->getTipKorisnika() == "kupac") {
             return redirect()->to(site_url('korisnik'));
@@ -189,6 +189,7 @@ class Login extends BaseController
     public function logout()
     {
         $this->session->remove('korisnik');
+        $this->session->remove('vrstaKor');
         return redirect()->to(site_url());
     }
 

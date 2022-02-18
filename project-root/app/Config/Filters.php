@@ -22,15 +22,15 @@ class Filters extends BaseConfig
      * @var array
      */
     public $aliases = [
-        'csrf'          => CSRF::class,
-        'toolbar'       => DebugToolbar::class,
-        'honeypot'      => Honeypot::class,
-        'invalidchars'  => InvalidChars::class,
+        'csrf' => CSRF::class,
+        'toolbar' => DebugToolbar::class,
+        'honeypot' => Honeypot::class,
+        'invalidchars' => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'gost'=> \App\Filters\GostFilter::class,
-        'korisnik'=>\App\Filters\KorisnikFilter::class,
-        'oglasivac'=>\App\Filters\OglasivacFilter::class,
-        'administrator'=>\App\Filters\AdminFilter::class
+        'gost' => \App\Filters\GostFilter::class,
+        'korisnik' => \App\Filters\KorisnikFilter::class,
+        'oglasivac' => \App\Filters\OglasivacFilter::class,
+        'administrator' => \App\Filters\AdminFilter::class
     ];
 
     /**
@@ -74,8 +74,8 @@ class Filters extends BaseConfig
      */
     public $filters = [
 //        'gost' => ['before' => ['/','Login/','/logout','/registrovan/*']],
-//        'korisnik' => ['before' => ['Korisnik/*', 'korisnik']],
-//        'oglasivac' => ['before' => ['Oglasivac/*', 'oglasivac']],
-//        'administrator' => ['before' => ['Administrator/*', 'Administrator']]
+        'korisnik' => ['before' => ['Korisnik/*', 'korisnik']],
+        'oglasivac' => ['before' => ['Oglasivac/*', 'oglasivac']],
+        'administrator' => ['before' => ['Administrator/*', 'Administrator']]
     ];
 }

@@ -28,9 +28,9 @@ class KorisnikFilter implements FilterInterface
 
         if ($session->has("vrstaKor")) {
             $tip = $session->get('vrstaKor');
-            $idTipKor = $tip->getIdt();
+            //$idTipKor = $tip->getIdt();
 
-            switch ($idTipKor) {
+            switch ($tip) {
                 case 4:
                     return redirect()->to(site_url("administrator"));
                 case 3:
@@ -39,7 +39,7 @@ class KorisnikFilter implements FilterInterface
                     return redirect()->to(site_url("oglasivac"));
             }
         } else {
-            return redirect()->to(site_url("korisnik"));
+            return redirect()->to(site_url(""));
         }
     }
 
