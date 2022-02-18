@@ -283,7 +283,17 @@
             </div>
             <div class="row" id="treciRed">
                 <div class="col-6" id="desnoTekst">
-                    <p class="cenaNekretnine"><?php echo $nek->getCena(); ?> &euro;</p>
+                    <?php
+                    if (isset($zeleno) && ($zeleno==1)) {
+                        ?>
+                        <p class="cenaNekretnine1"><?php echo $nek->getCena(); ?> &euro;</p>
+                        <?php
+                    } else {
+                        ?>
+                        <p class="cenaNekretnine2"><?php echo $nek->getCena(); ?> &euro;</p>
+                        <?php
+                    } ?>
+
                 </div>
                 <div class="col-6" id="desnoTekst">
                     <input type="submit" id="dugmeOmiljene" value="Dodaj u omiljene"
@@ -442,7 +452,11 @@
                         </div>
                         <div class="card-body">
                             <p><?php echo $nek->getOpis(); ?></p>
-                            <p>Prosecna cena na lokaciji:</p>
+                            <p>Prosecna cena na lokaciji:<?php if (isset($prosecnaCena)) {
+                                    $proCena2 = number_format((float)$prosecnaCena, 2, '.', '');
+                                    echo " " . "$proCena2";
+                                    echo " EUR/m2";
+                                } ?></p>
                         </div>
                     </div>
                 </div>
@@ -450,7 +464,8 @@
 
 
                     <?php
-                    if ($nek->getOglasivac()->getTip()->getTipKorisnika() == 'agent') {
+                    if ($nek->getAgencija()!=null){
+                    //if ($nek->getOglasivac()->getTip()->getTipKorisnika() == 'agent') {
                         ?>
                         <div class="col-2">
                             <h4>Agencija:</h4>
@@ -459,7 +474,7 @@
                             <?php $agencija = $nek->getAgencija()->getNaziv();
                             $grad = $nek->getAgencija()->getIdgrada()->getNaziv();
                             $pib = $nek->getAgencija()->getPib();
-                            $adresaA = $nek->getAgencija()->getAdresa();?>
+                            $adresaA = $nek->getAgencija()->getAdresa(); ?>
 
                             <p><?php echo $agencija; ?></p>
                         </div>

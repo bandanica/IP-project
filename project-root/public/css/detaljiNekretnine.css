@@ -272,3 +272,12 @@ body {
 .tekst{
     padding-top: 20px;
 }
+
+.cenaNekretnine1{
+    color: lawngreen;
+    font-weight: bold;
+}
+
+.cenaNekretnine2{
+    color: darkred;
+}

@@ -11,7 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <div class="container-fluid sredina">
-    <form method="post" class="formaPretraga" action=<?php echo site_url() . "korisnik/izvrsiNapredno" ?>>
+    <form method="get" class="formaPretraga" action=<?php echo site_url() . "korisnik/izvrsiNapredno" ?>>
         <div class="row">
             <div class="col-1">
                 Tip:<select name="izabranTip" required>
