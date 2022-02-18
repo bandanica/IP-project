@@ -198,8 +198,23 @@ class Korisnik extends BaseController
 
     private function prikazJedne($idn)
     {
-        $nek = $this->doctrine->em->getRepository(Nekretnina::class)->find($idn);
-        return view("stranice/komponentaN", ['n1' => $nek]);
+        $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($idn);
+        $lok = $n->getMikrolokacija()->getIdmikro();
+        $tip = $n->getTip()->getIdtipnekretnine();
+        $slicne = $this->doctrine->em->getRepository(Nekretnina::class)->nadjiSlicneNekretnine($tip,$lok);
+        $suma=0;
+        $prosek = $n->getCena()/$n->getKvadratura();
+        $tmpProsek = $prosek;
+        if ($slicne!=null){
+            $uk = count($slicne);
+            foreach ($slicne as $sl){
+                $tmpCena = $sl->getCena()/$sl->getKvadratura();
+                //echo $sl->getIdn();
+                $suma+= $tmpCena;
+            }
+            $prosek = $suma/$uk;
+        }
+        return view("stranice/komponentaN", ['n1' => $n,'prosek'=>$prosek]);
     }
 
     private function prikazPagin($nump, $page)
@@ -416,7 +431,28 @@ class Korisnik extends BaseController
 
         }
 
-        $this->prikaz('rezultatiPretrage', ['rezultati' => $nek]);
+        $proseci=[];
+        $brojac=0;
+        foreach ($nek as $n){
+            $lok = $n->getMikrolokacija()->getIdmikro();
+            $tip = $n->getTip()->getIdtipnekretnine();
+            $slicne = $this->doctrine->em->getRepository(Nekretnina::class)->nadjiSlicneNekretnine($tip,$lok);
+            $suma=0;
+            $prosek = $n->getCena()/$n->getKvadratura();
+            $tmpProsek = $prosek;
+            if ($slicne!=null){
+                $uk = count($slicne);
+                foreach ($slicne as $sl){
+                    $tmpCena = $sl->getCena()/$sl->getKvadratura();
+                    //echo $sl->getIdn();
+                    $suma+= $tmpCena;
+                }
+                $prosek = $suma/$uk;
+            }
+            $proseci[$brojac] = $prosek;
+            $brojac+=1;
+        }
+        $this->prikaz('rezultatiPretrage', ['rezultati' => $nek, 'proseci'=>$proseci]);
 
     }
 

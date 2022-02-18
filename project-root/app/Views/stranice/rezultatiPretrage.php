@@ -14,7 +14,7 @@
     </div>
 
     <?php
-    if (isset($rezultati) && !empty($rezultati)) {
+    if (isset($rezultati) && !empty($rezultati) && isset($proseci)) {
         ?>
 <!--        <table>-->
 <!--            <tr>-->
@@ -26,7 +26,7 @@
 <!--                <th></th>-->
 <!--            </tr>-->
             <?php
-
+            $brojac = 0;
             foreach ($rezultati as $n1) {
                 //OVO TREBA DA SE DORADI!!! treba fja koja ce da redirektuje na oglas
                 ?>
@@ -55,22 +55,29 @@
                             else{
                                 ?>
                                 <img src="<?php echo base_url() . "/noimage/noim.jpg"; ?>" class="img-fluid rounded-start" alt="slika nekretnine">
-                            <?php
+                                <?php
                             }?>
-                            </div>
+                        </div>
                         <div class="col-8">
                             <div class="card-body">
-                                <h5 class="card-title"><?php echo $n1->getNaziv()."," ?> <?php echo $n1->getCena() ?>EUR</h5>
+                                <h5 class="card-title"><?php echo $n1->getNaziv().", " ?> <?php echo $n1->getCena() ?> &euro;</h5>
                                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $n1->getGradid()->getNaziv() . " - opstina " . $n1->getOpstina()->getNaziv() . " - " . $n1->getMikrolokacija()->getNaziv(); ?></h6>
                                 <input type='hidden' value="<?php echo $n1->getIdn() ?>"
                                        name='idNek'>
-<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+                                <!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
 
                                 <p class="card-text"><small class="text-muted">Kvadratura: <?php echo $n1->getKvadratura() ?>m2|
                                         Sobe: <?php echo $n1->getBrSoba() ?>|
                                         Sprat: <?php echo $n1->getSprat() ?><br/>
                                         <?php echo $n1->getOpis() ?></small></p>
-
+                                <!--                <p> --><?php //echo $n1->getIdn(); ?><!--</p>-->
+                                <p class="card-text text-muted"><small>Linije: <?php if ($n1->getLinijeprevoza()!=""){
+                                            echo $n1->getLinijeprevoza();
+                                        }?></small></p>
+                                <p class="card-text text-muted"><small>Prosek: <?php if (isset($proseci[$brojac]) && $proseci[$brojac]!=null){
+                                            $ispis = number_format((float)$proseci[$brojac], 2, '.', '');
+                                            echo $ispis;
+                                        }?> &euro; /m2</small></p>
                                 <input type='submit' name='dugmeO' value='Pogledaj'>
                             </div>
                         </div>
@@ -81,6 +88,7 @@
 
 
                 <?php
+                $brojac+=1;
             }
 
 

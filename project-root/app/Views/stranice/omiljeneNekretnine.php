@@ -33,7 +33,7 @@
                 foreach ($rezultati as $n1) {
                     //OVO TREBA DA SE DORADI!!! treba fja koja ce da redirektuje na oglas
                     ?>
-                    <form method='post' action=<?php echo site_url() . "korisnik/omiljenaObrada" ?>>
+                    <form method='get' action=<?php echo site_url() . "korisnik/omiljenaObrada" ?>>
                         <div class="row">
                             <!--                    <div class="oglas justify-content-center">-->
                             <div class="card mb-3 text-dark bg-light" style="max-width: 700px;">

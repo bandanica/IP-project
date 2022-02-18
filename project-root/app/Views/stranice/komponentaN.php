@@ -28,7 +28,7 @@
         </div>
         <div class="col-8">
             <div class="card-body">
-                <h5 class="card-title"><?php echo $n1->getNaziv()."," ?> <?php echo $n1->getCena() ?>EUR</h5>
+                <h5 class="card-title"><?php echo $n1->getNaziv().", " ?> <?php echo $n1->getCena() ?> &euro;</h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo $n1->getGradid()->getNaziv() . " - opstina " . $n1->getOpstina()->getNaziv() . " - " . $n1->getMikrolokacija()->getNaziv(); ?></h6>
                 <input type='hidden' value="<?php echo $n1->getIdn() ?>"
                        name='idNek'>
@@ -42,6 +42,10 @@
                 <p class="card-text text-muted"><small>Linije: <?php if ($n1->getLinijeprevoza()!=""){
                             echo $n1->getLinijeprevoza();
                         }?></small></p>
+                <p class="card-text text-muted"><small>Prosek: <?php if (isset($prosek) && $prosek!=null){
+                    $ispis = number_format((float)$prosek, 2, '.', '');
+                            echo $ispis;
+                        }?> &euro; /m2</small></p>
                 <input type='submit' name='dugmeO' value='Pogledaj'>
             </div>
         </div>
