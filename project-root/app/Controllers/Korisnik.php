@@ -400,6 +400,9 @@ class Korisnik extends BaseController
     public function dodajUOmiljene()
     {
         //$idkor = 2;
+        if ($this->session->has('korisnik')){
+
+
         $idkor = $this->session->get('korisnik');
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($idkor);
         $nekr = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
@@ -433,6 +436,10 @@ class Korisnik extends BaseController
 //            $this->doctrine->em->flush($kor);
 //        }
         $this->prikaz('nekretninaDetalji', ['nek' => $nekr]);
+        }
+        else{
+            return redirect()->to(site_url('login'));
+        }
 
     }
 

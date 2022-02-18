@@ -8,6 +8,7 @@ function prikazTelefona(){
 }
 
 function dodavaljeOmiljene(idNek){
+
     const xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/korisnik/dodajUOmiljene", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -307,7 +307,7 @@ class Administrator extends BaseController
         $lokacija->setNaziv($naziv);
         $this->doctrine->em->persist($lokacija);
         $this->doctrine->em->flush();
-        return redirect()->to(site_url("administrator"));
+        return redirect()->to(site_url("administrator/novaLokacijaAdmin"));
 
 
     }
@@ -364,7 +364,7 @@ class Administrator extends BaseController
         $lokacija->setNaziv($naziv);
         $this->doctrine->em->persist($lokacija);
         $this->doctrine->em->flush();
-        return redirect()->to(site_url("administrator"));
+        return redirect()->to(site_url("administrator/novaUlicaAdmin"));
     }
 
 
