@@ -398,7 +398,10 @@ class Korisnik extends BaseController
         $smaks = $this->request->getVar('maxS');
         $minSpr = $this->request->getVar('minSprat');
         $maxSpr = $this->request->getVar('maxSprat');
-        $stanje = 'LUX';
+        $minG = $this->request->getVar('minG');
+        $maxG = $this->request->getVar('maxG');
+        $stanje = $this->request->getVar('stanje');
+        //$stanje = "'lux'";
 
         if ($cmaks == '') {
             //promeniti
@@ -462,7 +465,7 @@ class Korisnik extends BaseController
             } else {
                 $obj = $obj->getIdmikro();
                 $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)
-                    ->naprednaLokacije($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip));
+                    ->naprednaLokacije($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip, $minG, $maxG, $stanje));
                 continue;
             }
             if ($obj == null) {
@@ -471,12 +474,12 @@ class Korisnik extends BaseController
             } else {
                 $obj = $obj->getIdopstine();
                 $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)
-                    ->naprednaOpstine($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip));
+                    ->naprednaOpstine($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip, $minG, $maxG, $stanje));
                 continue;
             }
             $obj = $obj->getIdg();
             $nek = array_merge($nek, $this->doctrine->em->getRepository(Nekretnina::class)
-                ->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip));
+                ->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr, $obj, $Tip, $minG, $maxG, $stanje));
             //return $this->doctrine->em->getRepository(Nekretnina::class)->naprednaGradovi($cmin, $cmaks, $kmin, $kmaks, $smin, $smaks, $minSpr, $maxSpr,  $obj, $Tip);
 
         }

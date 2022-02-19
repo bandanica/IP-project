@@ -90,9 +90,11 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
-    public function naprednaGradovi($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $gradic, $tip)
+    public function naprednaGradovi($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $gradic, $tip, $ming, $maxg, $stanje)
     {
         $status = "'Aktivno'";
+        $ming = date_create_from_format("Y-m-d H:i", $ming . '00:00');
+        $maxg = date_create_from_format("Y-m-d H:i", $maxg . '00:00');
         $upit = $this->getEntityManager()->createQueryBuilder();
 
 
@@ -103,22 +105,27 @@ class NekretninaRepository extends EntityRepository
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
+                $upit->expr()->eq('n.stanje',$stanje),
                 $upit->expr()->lte('n.cena', "$maxc"),
                 $upit->expr()->gte('n.cena', "$minc"),
                 $upit->expr()->gte('n.kvadratura', "$mink"),
                 $upit->expr()->lte('n.kvadratura', "$maxk"),
                 $upit->expr()->gte('n.brSoba', "$mins"),
                 $upit->expr()->lte('n.brSoba', "$maxs"),
+                $upit->expr()->between('n.godinaIzgradnje', '?1', '?2'),
                 $upit->expr()->gte('n.ukupnaSpratnost', "$minSprat"),
                 $upit->expr()->lte('n.ukupnaSpratnost', "$maxSprat"),
-                $upit->expr()->eq('n.gradid', "$gradic")));
+                $upit->expr()->eq('n.gradid', "$gradic")))
+            ->setParameters(['1' => $ming, '2' => $maxg]);
         //return  $upit->getQuery()->getDQL();
         return $upit->getQuery()->getResult();
     }
 
-    public function naprednaOpstine($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $opstina, $tip)
+    public function naprednaOpstine($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $opstina, $tip, $ming, $maxg, $stanje)
     {
         $status = "'Aktivno'";
+        $ming = date_create_from_format("Y-m-d", $ming);
+        $maxg = date_create_from_format("Y-m-d", $maxg);
         $upit = $this->getEntityManager()->createQueryBuilder();
 
 
@@ -129,23 +136,29 @@ class NekretninaRepository extends EntityRepository
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
+                $upit->expr()->eq('n.stanje',$stanje),
                 $upit->expr()->lte('n.cena', "$maxc"),
                 $upit->expr()->gte('n.cena', "$minc"),
                 $upit->expr()->gte('n.kvadratura', "$mink"),
                 $upit->expr()->lte('n.kvadratura', "$maxk"),
                 $upit->expr()->gte('n.brSoba', "$mins"),
                 $upit->expr()->lte('n.brSoba', "$maxs"),
+                $upit->expr()->between('n.godinaIzgradnje', '?1', '?2'),
                 $upit->expr()->gte('n.ukupnaSpratnost', "$minSprat"),
                 $upit->expr()->lte('n.ukupnaSpratnost', "$maxSprat"),
-                $upit->expr()->eq('n.opstina', "$opstina")));
+                $upit->expr()->eq('n.opstina', "$opstina")))
+            ->setParameters(['1' => $ming, '2' => $maxg]);
         //return  $upit->getQuery()->getDQL();
         return $upit->getQuery()->getResult();
     }
 
-    public function naprednaLokacije($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $lokacija, $tip)
+    public function naprednaLokacije($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $lokacija, $tip, $ming, $maxg, $stanje)
     {
         $status = "'Aktivno'";
+        $ming = date_create_from_format("Y-m-d", $ming);
+        $maxg = date_create_from_format("Y-m-d", $maxg);
         $upit = $this->getEntityManager()->createQueryBuilder();
+
 
 
         $upit->select('n')
@@ -155,15 +168,18 @@ class NekretninaRepository extends EntityRepository
             ->where($upit->expr()->andX(
                 $upit->expr()->eq('n.tip', "$tip"),
                 $upit->expr()->eq('n.status', $status),
+                $upit->expr()->eq('n.stanje',$stanje),
                 $upit->expr()->lte('n.cena', "$maxc"),
                 $upit->expr()->gte('n.cena', "$minc"),
                 $upit->expr()->gte('n.kvadratura', "$mink"),
                 $upit->expr()->lte('n.kvadratura', "$maxk"),
                 $upit->expr()->gte('n.brSoba', "$mins"),
                 $upit->expr()->lte('n.brSoba', "$maxs"),
+                $upit->expr()->between('n.godinaIzgradnje', '?1', '?2'),
                 $upit->expr()->gte('n.ukupnaSpratnost', "$minSprat"),
                 $upit->expr()->lte('n.ukupnaSpratnost', "$maxSprat"),
-                $upit->expr()->eq('n.mikrolokacija', "$lokacija")));
+                $upit->expr()->eq('n.mikrolokacija', "$lokacija")))
+            ->setParameters(['1' => $ming, '2' => $maxg]);
         //return  $upit->getQuery()->getDQL();
         return $upit->getQuery()->getResult();
     }

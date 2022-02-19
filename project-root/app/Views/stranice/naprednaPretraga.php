@@ -58,14 +58,14 @@
         </div>
         <div class="row">
             <div class="col-2">
-                Godina izgradnje od:<input type="date" name="minG">
+                Godina izgradnje od:<input type="date" name="minG" value="1900-01-01"><br/>
 
-                do:<input type="date" name="maxG">
+                do:<input type="date" name="maxG" value="2030-01-01">
             </div>
             <div class="col-4">
-                Stanje nekretnine:<input type="radio" name="stanje" value="izvorno">Izvorno
-                <input type="radio" name="stanje" value="renovirano">Renovirano
-                <input type="radio" name="stanje" value="lux">LUX<br/>
+                Stanje nekretnine:<input type="radio" name="stanje" value="'izvorno'">Izvorno
+                <input type="radio" name="stanje" value="'renovirano'">Renovirano
+                <input type="radio" name="stanje" value="'lux'">LUX<br/>
             </div>
             <div class="col-1">
                 Sprat od:<input type="text" name="minSprat">
