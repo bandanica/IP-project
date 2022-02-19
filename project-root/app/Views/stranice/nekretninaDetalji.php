@@ -296,8 +296,20 @@
 
                 </div>
                 <div class="col-6" id="desnoTekst">
-                    <input type="submit" id="dugmeOmiljene" value="Dodaj u omiljene"
-                           onclick="dodavaljeOmiljene(<?php echo $nek->getIdn() ?>)">
+                    <?php
+                    if (isset($disOmiljeno) && $disOmiljeno==1){
+                        ?>
+                        <input type="submit" disabled id="dugmeOmiljene" value="Dodaj u omiljene"
+                               onclick="dodavaljeOmiljene(<?php echo $nek->getIdn() ?>)">
+                    <?php
+                    }else{
+                        ?>
+                        <input type="submit" id="dugmeOmiljene" value="Dodaj u omiljene"
+                               onclick="dodavaljeOmiljene(<?php echo $nek->getIdn() ?>)">
+                    <?php
+                    }
+                            ?>
+
 
                 </div>
             </div>

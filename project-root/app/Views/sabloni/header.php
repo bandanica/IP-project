@@ -12,7 +12,7 @@
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="<?php echo site_url() . "login"?>" id="pocL" class="nav-link px-2">Pocetna</a></li>
-            <li><a href="#" id="pocL2" class="nav-link px-2">FAQs</a></li>
+<!--            <li><a href="#" id="pocL2" class="nav-link px-2">FAQs</a></li>-->
             <li><a href="#" id="pocL3" class="nav-link px-2">O nama</a></li>
         </ul>
 

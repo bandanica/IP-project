@@ -195,7 +195,8 @@ class Login extends BaseController
 
     public function Pogledaj()
     {
+        $disO = 1;
         $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
-        $this->prikaz('nekretninaDetalji', ['nek' => $n]);
+        $this->prikaz('nekretninaDetalji', ['nek' => $n,'disOmiljeno',$disO]);
     }
 }

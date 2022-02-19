@@ -521,4 +521,9 @@ class Oglasivac extends BaseController
         $this->doctrine->em->flush();
         return redirect()->to(site_url("oglasivac"));
     }
+
+    public function statistika(){
+        $sveLokacije = $this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
+        $this->prikaz('vizualizacija',['lokacije'=>$sveLokacije]);
+    }
 }
