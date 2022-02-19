@@ -29,6 +29,14 @@ class Grad
     private $naziv;
 
     /**
+     * @var string|null
+     *
+     * @ORM\Column(name="gradski_prevoz", type="string", length=100, nullable=true)
+     */
+    private $gradskiPrevoz;
+
+
+    /**
      * @return int
      */
     public function getIdg()
@@ -60,5 +68,20 @@ class Grad
         $this->naziv = $naziv;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getGradskiPrevoz()
+    {
+        return $this->gradskiPrevoz;
+    }
+
+    /**
+     * @param string|null $gradskiPrevoz
+     */
+    public function setGradskiPrevoz($gradskiPrevoz)
+    {
+        $this->gradskiPrevoz = $gradskiPrevoz;
+    }
 
 }

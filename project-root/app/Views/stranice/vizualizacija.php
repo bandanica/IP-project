@@ -3,7 +3,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url(); ?>/css/osnova.css">
-    <script src="<?php echo base_url(); ?>/js/vizualizacija.js"></script>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
 
@@ -13,14 +14,21 @@
     <div class="row">
         <div class="col-4">
             <?php
-            if (isset($lokacije)) {
+            if (isset($ogl) && ($ogl == 'agent')) {
                 ?>
-                <select name="mikLok">
+                    <input type="hidden" id="ogl" value="<?php echo $ogl?>">
+                <h2>Broj prodatih nekretnina po mesecima za vasu agenciju:</h2>
+                <?php
+            } elseif (isset($ogl) && isset($lokacije)) {
+                ?>
+                <input type="hidden" id="ogl" value="<?php echo $ogl?>">
+                <h2>Broj prodatih nekretnina po mesecima za mikrolokaciju:</h2>
+                <select id="mikLok" onchange="iscrtavanjeGrafikona()">
                     <?php
                     foreach ($lokacije as $l) {
                         ?>
-                        <option><?php echo $l->getNaziv();?></option>
-                    <?php
+                        <option><?php echo $l->getNaziv(); ?></option>
+                        <?php
                     }
                     ?>
                 </select>
@@ -29,9 +37,23 @@
             ?>
         </div>
     </div>
+    <?php
+    if (isset($ogl)) {
+        ?>
+        <div class="row">
+            <div class="col">
+                <div id="d3-container">
+
+                </div>
+
+            </div>
+        </div>
+        <?php
+    }
+    ?>
 </div>
 
-
+<script src="<?php echo base_url(); ?>/js/vizualizacija.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

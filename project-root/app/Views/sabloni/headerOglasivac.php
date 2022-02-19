@@ -15,8 +15,8 @@
             <li><a href="<?php echo site_url() . "oglasivac/novaNekretnina"?>" id="pocL" class="nav-link px-2">Nova nekretnina</a></li>
             <li><a href="<?php echo site_url() . "oglasivac/podaciIzmena"?>" id="pocL" class="nav-link px-2">Osnovni podaci</a></li>
             <li><a href="<?php echo site_url() . "oglasivac/promenaLozinke"?>" id="pocL" class="nav-link px-2">Promena lozinke</a></li>
-            <li><a href="<?php echo site_url() . "oglasivac/statistika"?>" id="pocL2" class="nav-link px-2">Statistika</a></li>
-            <li><a href="#" id="pocL3" class="nav-link px-2">O nama</a></li>
+            <li><a href="<?php echo site_url() . "oglasivac/statistika"?>" id="pocL2" class="nav-link px-2">Stat</a></li>
+            <li><a href="<?php echo site_url() . "oglasivac/Onama"?>" id="pocL3" class="nav-link px-2">O nama</a></li>
         </ul>
 
         <div class="col-md-3 text-end">

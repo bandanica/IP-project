@@ -43,6 +43,13 @@ class Nekretnina
     private $godinaIzgradnje;
 
     /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="datum_prodaje", type="datetime", nullable=true)
+     */
+    private $datumProdaje;
+
+    /**
      * @var int|null
      *
      * @ORM\Column(name="sprat", type="integer", nullable=true)
@@ -299,6 +306,23 @@ class Nekretnina
     public function setGodinaIzgradnje($godinaIzgradnje)
     {
         $this->godinaIzgradnje = $godinaIzgradnje;
+    }
+
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getDatumProdaje()
+    {
+        return $this->datumProdaje;
+    }
+
+    /**
+     * @param \DateTime|null $datumProdaje
+     */
+    public function setDatumProdaje($datumProdaje)
+    {
+        $this->datumProdajee = $datumProdaje;
     }
 
     /**
@@ -584,7 +608,7 @@ class Nekretnina
     /**
      * @param string|null $linijePrevoza
      */
-    public function setLinijeprevoza(?string $linijePrevoza)
+    public function setLinijeprevoza($linijePrevoza)
     {
         $this->linijePrevoza = $linijePrevoza;
     }

@@ -142,25 +142,27 @@
                 </div>
                 <div class="col">
                     Linije prevoza:
-                    <select multiple name="prevozi[]">
+                    <?php
+                    ?>
+                    <select multiple name="prevozi[]" id="Glinije" style="width: 10%">
                         <option selected></option>
-                        <option>7</option>
-                        <option>9</option>
-                        <option >14</option>
-                        <option>17</option>
-                        <option>18</option>
-                        <option >23</option>
-                        <option>26</option>
-                        <option>27</option>
-                        <option>29</option>
-                        <option>33</option>
-                        <option >45</option>
-                        <option>50</option>
-                        <option>65</option>
-                        <option>74</option>
-                        <option >77</option>
-                        <option>83</option>
-                        <option>95</option>
+<!--                        <option>7</option>-->
+<!--                        <option>9</option>-->
+<!--                        <option >14</option>-->
+<!--                        <option>17</option>-->
+<!--                        <option>18</option>-->
+<!--                        <option >23</option>-->
+<!--                        <option>26</option>-->
+<!--                        <option>27</option>-->
+<!--                        <option>29</option>-->
+<!--                        <option>33</option>-->
+<!--                        <option >45</option>-->
+<!--                        <option>50</option>-->
+<!--                        <option>65</option>-->
+<!--                        <option>74</option>-->
+<!--                        <option >77</option>-->
+<!--                        <option>83</option>-->
+<!--                        <option>95</option>-->
                     </select>
                 </div>
                 <div class="col">

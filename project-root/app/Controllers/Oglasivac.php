@@ -78,7 +78,7 @@ class Oglasivac extends BaseController
     {
         $tipN = $this->doctrine->em->getRepository(Tipnekretnine::class)->findAll();
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi, 'tipoviN'=>$tipN]);
+        $this->prikaz('dodavanjeNekretnine', ['gradovi' => $gradovi, 'tipoviN' => $tipN]);
     }
 
     public function opstineUGradu()
@@ -141,14 +141,13 @@ class Oglasivac extends BaseController
         $c = (int)$this->request->getVar('cenaNekretnine');
         $prevoz = $this->request->getVar('prevozi');
         $pr = "";
-        $j=0;
-        foreach ($prevoz as $linija){
-            if ($j==0){
-                $pr.="$linija";
-                $j=1;
-            }
-            else{
-                $pr.=","."$linija";
+        $j = 0;
+        foreach ($prevoz as $linija) {
+            if ($j == 0) {
+                $pr .= "$linija";
+                $j = 1;
+            } else {
+                $pr .= "," . "$linija";
             }
         }
         //dodavanje entiteta karakteristike koje nekretnina ima
@@ -244,7 +243,6 @@ class Oglasivac extends BaseController
         $nekretninaN->setAgencija($oglasivac->getIdagencije());
 
 
-
         //$idS = (int) $nekretninaN->getIdn();
         //$idS=5;
 
@@ -256,28 +254,28 @@ class Oglasivac extends BaseController
         $this->doctrine->em->persist($nekretninaN);
         $this->doctrine->em->flush();
 
-        $data=[];
-        $idS = (int) $nekretninaN->getIdn();
+        $data = [];
+        $idS = (int)$nekretninaN->getIdn();
         $putanja = 'slike/profilna.png';
 
         $fajlovi = $_FILES["izaberiSliku"]['name'];
 
         //OVO URADITI U JS!!!
-        if (count($fajlovi)<3){
+        if (count($fajlovi) < 3) {
             echo "MORAJU DA SE UNESU BAR 3 SLIKE";
         }
-        if (count($fajlovi)>6){
+        if (count($fajlovi) > 6) {
             echo "NAJVISE DOZVOLJENO 6 slika";
         }
 
-        if (count($fajlovi)>=3 && count($fajlovi)<=6){
+        if (count($fajlovi) >= 3 && count($fajlovi) <= 6) {
             $names = $_FILES['izaberiSliku']['name'];
             $sizes = $_FILES['izaberiSliku']['size'];
             $tmp_names = $_FILES['izaberiSliku']['tmp_name'];
             $m = count($names);
-            for ($i=0;$i<$m;$i++){
-                if ($sizes[$i]!=0){
-                    $putanja = $this->uzmiPutanju($data,$idS,$names[$i],$sizes[$i],$tmp_names[$i]);
+            for ($i = 0; $i < $m; $i++) {
+                if ($sizes[$i] != 0) {
+                    $putanja = $this->uzmiPutanju($data, $idS, $names[$i], $sizes[$i], $tmp_names[$i]);
                     //echo $putanja;
                     //echo "<br/>";
                 }
@@ -295,18 +293,18 @@ class Oglasivac extends BaseController
         //echo "<br/>";
         //echo $putanja;
 
-        $putanja= "slike/nekretnina"."$idS"."/";
+        $putanja = "slike/nekretnina" . "$idS" . "/";
         $nekretninaN->setSlike($putanja);
         $this->doctrine->em->flush();
         return redirect()->to(site_url("oglasivac"));
 
     }
 
-    protected function uzmiPutanju(&$greska, $id,$name,$size,$tmp_name): string
+    protected function uzmiPutanju(&$greska, $id, $name, $size, $tmp_name): string
     {
 
-        $target_dir = "slike/nekretnina"."$id"."/";
-        if (!is_dir($target_dir)){
+        $target_dir = "slike/nekretnina" . "$id" . "/";
+        if (!is_dir($target_dir)) {
             mkdir($target_dir);
         }
         $target_file = $target_dir . basename($name);
@@ -336,45 +334,46 @@ class Oglasivac extends BaseController
         }
     }
 
-    public function Obradi(){
-        if ($this->request->getVar('dugmeNek')=='prodato'){
+    public function Obradi()
+    {
+        if ($this->request->getVar('dugmeNek') == 'prodato') {
             $n = $this->request->getVar('idNek');
             $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($n);
             $n->setStatus('Prodato');
+            $date = date('Y-m-d H:i:s');
+            $n->setDatumProdaje($date);
             $this->doctrine->em->flush();
             return redirect()->to(site_url("oglasivac"));
-        }
-        else{
+        } else {
             $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
             $g = $this->doctrine->em->getRepository(Grad::class)->findAll();
-            $this->prikaz('azuriranjeNekretnine',['nek'=>$n,'gradovi'=>$g]);
+            $this->prikaz('azuriranjeNekretnine', ['nek' => $n, 'gradovi' => $g]);
         }
     }
 
-    public function podaciIzmena(){
-        $id=$this->session->get('korisnik');
+    public function podaciIzmena()
+    {
+        $id = $this->session->get('korisnik');
         $korisnik = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($id);
         $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
         $indexAdmin = 0;
         $indexKupac = 0;
-        $kk=0;
-        $ka=0;
+        $kk = 0;
+        $ka = 0;
         foreach ($tipkorisnika as $t) {
-            if (($t->getTipKorisnika() != "kupac") && ($kk==0)) {
-                $indexKupac +=1;
-            }
-            else if ($t->getTipKorisnika() == "kupac"){
+            if (($t->getTipKorisnika() != "kupac") && ($kk == 0)) {
+                $indexKupac += 1;
+            } else if ($t->getTipKorisnika() == "kupac") {
 
-                $kk=1;
+                $kk = 1;
             }
 
-            if (($t->getTipKorisnika() != "administrator") && ($ka==0)) {
+            if (($t->getTipKorisnika() != "administrator") && ($ka == 0)) {
                 $indexAdmin += 1;
+            } else if ($t->getTipKorisnika() == "administrator") {
+                $ka = 1;
             }
-            else if ($t->getTipKorisnika() == "administrator"){
-                $ka=1;
-            }
-            if ($ka!=0 && $kk!=0){
+            if ($ka != 0 && $kk != 0) {
                 break;
             }
 
@@ -383,10 +382,11 @@ class Oglasivac extends BaseController
         unset($tipkorisnika[$indexKupac]);
         $ag = $this->doctrine->em->getRepository(Agencija::class)->findAll();
 
-        $this->prikaz('podaciOglasivaca', ['podaci'=>$korisnik,'agencije'=>$ag,'tipkorisnika'=>$tipkorisnika]);
+        $this->prikaz('podaciOglasivaca', ['podaci' => $korisnik, 'agencije' => $ag, 'tipkorisnika' => $tipkorisnika]);
     }
 
-    public function zavrsiAzuriranje(){
+    public function zavrsiAzuriranje()
+    {
         $nekretninaN = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idN'));
         $kar = $nekretninaN->getKarakteristike();
         $ime = $this->request->getVar('nazivN');
@@ -400,15 +400,14 @@ class Oglasivac extends BaseController
         $opis = $this->request->getVar('opisNek');
         $mtroskovi = $this->request->getVar('mesTroskovi');
         $gradskeLinije = $this->request->getVar('prevozG');
-        $gLinije="";
-        $brojac=0;
-        foreach ($gradskeLinije as $linija){
-            if ($brojac==0){
-                $gLinije.="$linija";
-                $brojac=1;
-            }
-            else{
-                $gLinije.=","."$linija";
+        $gLinije = "";
+        $brojac = 0;
+        foreach ($gradskeLinije as $linija) {
+            if ($brojac == 0) {
+                $gLinije .= "$linija";
+                $brojac = 1;
+            } else {
+                $gLinije .= "," . "$linija";
             }
         }
         $c = (int)$this->request->getVar('cenaNekretnine');
@@ -494,23 +493,23 @@ class Oglasivac extends BaseController
 
     }
 
-    public function promenaSubmit(){
+    public function promenaSubmit()
+    {
         //$idK = $this->request->getVar('idKor');
         $idK = $this->session->get('korisnik');
         $korisnik = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($idK);
         $tel = $this->request->getVar('tel');
         $mejl = $this->request->getVar('mejl');
         $tip = $this->request->getVar('tip');
-        $tip = $this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika'=>$tip]);
-        if ($tip->getTipkorisnika()=='agent'){
+        $tip = $this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => $tip]);
+        if ($tip->getTipkorisnika() == 'agent') {
 
             $a = $this->request->getVar('agencije1');
-            $a = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv'=>$a]);
+            $a = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $a]);
             $br = $this->request->getVar('brlicence1');
             $korisnik->setIdagencije($a);
             $korisnik->setBrLicence($br);
-        }
-        else{
+        } else {
             $korisnik->setIdagencije(null);
             $korisnik->setBrLicence(null);
 
@@ -522,8 +521,95 @@ class Oglasivac extends BaseController
         return redirect()->to(site_url("oglasivac"));
     }
 
-    public function statistika(){
+    public function statistika()
+    {
+        $kor = $this->session->get('korisnik');
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($kor);
+        $vrstaOglasivaca = $kor->getTip()->getTipKorisnika();
         $sveLokacije = $this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
-        $this->prikaz('vizualizacija',['lokacije'=>$sveLokacije]);
+        $this->prikaz('vizualizacija', ['lokacije' => $sveLokacije, 'ogl' => $vrstaOglasivaca]);
+    }
+
+
+    public function podaci()
+    {
+        $kor = $this->session->get('korisnik');
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($kor);
+        $vrstaOglasivaca = $kor->getTip()->getTipKorisnika();
+        //echo $mlok->getNaziv();
+        $status = "'Prodato'";
+        if ($vrstaOglasivaca=='agent'){
+            $agencija = $kor->getIdagencije();
+            $nek = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['status'=>"Prodato",'agencija'=>$agencija]);
+        }
+        else{
+            $mlok = $this->request->getVar('lokacija');
+            $mlok = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv'=>$mlok]);
+            $nek = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['status'=>"Prodato",'mikrolokacija' => $mlok]);
+        }
+
+        $podaci = [
+            "Jan" => 0,
+            "Feb" => 0,
+            "Mar" => 0,
+            "Apr" => 0,
+            "May" => 0,
+            "Jun" => 0,
+            "Jul" => 0,
+            "Aug" => 0,
+            "Sep" => 0,
+            "Oct" => 0,
+            "Nov" => 0,
+            "Dec" => 0
+        ];
+        //echo count($nek);
+        foreach ($nek as $n){
+
+            $mesec = date_format($n->getDatumProdaje(), 'M');
+            //echo $n->getNaziv();
+            //echo "<br/>";
+            //echo $mesec;
+            //echo "<br/>";
+            $podaci[$mesec] +=1;
+        }
+//        foreach ($podaci as $p){
+//            echo $p."<br/>";
+//        }
+
+        $zaSlanje = [];
+        $meseci = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        $i=0;
+        foreach ($podaci as $p) {
+            array_push($zaSlanje, [
+                "mesec" => $meseci[$i],
+                "prodato" => $p
+            ]);
+            $i+=1;
+        }
+        return json_encode($zaSlanje);
+
+    }
+
+    public function Onama(){
+        $this->prikaz('oNama',[]);
+    }
+
+    public function linijeprevoza(){
+        $g = $this->request->getVar('idgrad');
+        $g = $this->doctrine->em->getRepository(Grad::class)->find($g);
+        $lin = $g->getGradskiPrevoz();
+        $zaSlanje=[];
+        if ($lin!=null){
+            $linije = explode(",",$lin);
+            foreach ($linije as $l){
+
+                array_push($zaSlanje,[
+                    "broj"=>(int)$l,
+                    "idL"=>(int)$l
+                ]);
+            }
+        }
+
+        return json_encode($zaSlanje);
     }
 }

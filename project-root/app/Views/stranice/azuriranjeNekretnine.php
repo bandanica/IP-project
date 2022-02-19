@@ -197,9 +197,12 @@
                 $sveL = $nek->getLinijeprevoza();
                 $linije = explode(",",$sveL);
                 $brojac=0;
-                $sveLinije=[7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95];
+                //$sveLinije=[7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95];
+                $sveLinije = $nek->getGradid()->getGradskiPrevoz();
+                $sveLinije = explode(",",$sveLinije);
                 $x = count($linije);
                 foreach ($sveLinije as $linija){
+                    $linija = (int) $linija;
                     if ($brojac<=(count($linije)-1) && $linija==((int)$linije[$brojac])){
                         $brojac+=1;
                         ?>

@@ -3,6 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url(); ?>/css/kupacStil.css">
+    <script src="<?php echo base_url(); ?>/js/kupac.js"></script>
 </head>
 <body>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -107,8 +108,8 @@
     <ul class="pagination justify-content-center">
         <li class="page-item">
             <?php
-            $prev = "$";
-            $next = "$";
+            $prev="#";
+            $next ="#";
             if (isset($nump) && isset($page)){
                 if ($page>1){
                     $prev = $page-1;
@@ -123,25 +124,24 @@
                     $next = $page;
                 }
             }?>
-            <a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$prev; ?>" aria-label="Previous">
+            <a class="page-link" href="<?php echo site_url() . "korisnik/slStranaNapredno?page=".$prev?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
-<!--                <span class="sr-only">Previous</span>-->
+                <!--                <span class="sr-only">Previous</span>-->
             </a>
-<!--            <a class="page-link" href="#">Previous</a>-->
+            <!--            <a class="page-link" href="#">Previous</a>-->
         </li>
         <?php
         if (isset($nump) && isset($page)){
             for ($i=1;$i<=$nump;$i++){
                 if ($i==$page){
-
                     ?>
-                    <li class="page-item active"><a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$i; ?>"><?php echo $i;?></a></li>
+                    <li class="page-item active"><a class="page-link" href="<?php echo site_url() . "korisnik/slStranaNapredno?page=".$i?>"><?php echo $i;?></a></li>
                     <?php
 
                 }
                 else{
                     ?>
-                    <li class="page-item"><a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$i; ?>"><?php echo $i;?></a></li>
+                    <li class="page-item"><a class="page-link" href="<?php echo site_url() . "korisnik/slStranaNapredno?page=".$i?>"><?php echo $i;?></a></li>
                     <?php
                 }
 
@@ -150,14 +150,14 @@
 
 
         ?>
-<!--        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+        <!--        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+        <!--        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+        <!--        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
         <li class="page-item">
-            <a class="page-link" href="<?php echo site_url() . "korisnik/promenaStranice/?page=".$next; ?>" aria-label="Next">
+            <a class="page-link" href="<?php echo site_url() . "korisnik/slStranaNapredno?page=".$next?>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
-<!--            <a class="page-link" href="#">Next</a>-->
+            <!--            <a class="page-link" href="#">Next</a>-->
         </li>
     </ul>
 </nav>

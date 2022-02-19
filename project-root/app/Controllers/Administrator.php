@@ -383,4 +383,8 @@ class Administrator extends BaseController
         $this->doctrine->em->flush();
         return redirect()->to(site_url("administrator/novaUlicaAdmin"));
     }
+
+    public function Onama(){
+        $this->prikaz('oNama',[]);
+    }
 }

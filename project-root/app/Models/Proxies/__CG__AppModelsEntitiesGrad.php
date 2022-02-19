@@ -66,10 +66,10 @@ class Grad extends \App\Models\Entities\Grad implements \Doctrine\ORM\Proxy\Prox
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'idg', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'naziv'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'idg', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'naziv', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'gradskiPrevoz'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'idg', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'naziv'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'idg', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'naziv', '' . "\0" . 'App\\Models\\Entities\\Grad' . "\0" . 'gradskiPrevoz'];
     }
 
     /**
@@ -222,6 +222,28 @@ class Grad extends \App\Models\Entities\Grad implements \Doctrine\ORM\Proxy\Prox
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setNaziv', [$naziv]);
 
         return parent::setNaziv($naziv);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getGradskiPrevoz()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getGradskiPrevoz', []);
+
+        return parent::getGradskiPrevoz();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setGradskiPrevoz($gradskiPrevoz)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setGradskiPrevoz', [$gradskiPrevoz]);
+
+        return parent::setGradskiPrevoz($gradskiPrevoz);
     }
 
 }

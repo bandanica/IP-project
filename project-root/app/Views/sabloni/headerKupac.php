@@ -16,7 +16,7 @@
             <li><a href="<?php echo site_url() . "korisnik/pogledajOmiljenje"?>" id="pocL" class="nav-link px-2">Omiljene</a></li>
             <li><a href="<?php echo site_url() . "korisnik/promenaLozinke"?>" id="pocL" class="nav-link px-2">Promena lozinke</a></li>
 <!--            <li><a href="#" id="pocL2" class="nav-link px-2">FAQs</a></li>-->
-            <li><a href="#" id="pocL3" class="nav-link px-2">O nama</a></li>
+            <li><a href="<?php echo site_url() . "korisnik/Onama"?>" id="pocL3" class="nav-link px-2">O nama</a></li>
         </ul>
 
         <div class="col-md-3 text-end">

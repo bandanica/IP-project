@@ -222,6 +222,56 @@ class Korisnik extends BaseController
         return view("stranice/komponentaPaginacija", ['nump' => $nump, 'page' => $page]);
     }
 
+    public function slStranaNapredno(){
+        if (isset($_GET['page'])){
+            $tmpPage = $_GET['page'];
+            $sve = $this->session->get('sveN');
+            $n = count($sve);
+            $nump = ceil($n/10);
+            $nek = [];
+            foreach ($sve as $id){
+                //echo $id;
+                //echo "<br/>";
+                array_push($nek,$this->doctrine->em->getRepository(Nekretnina::class)->find($id));
+            }
+            $zaprikaz=[];
+            $i=-1;
+            foreach ($nek as $n1){
+                $i+=1;
+                if (($i<(($tmpPage-1)*10)) || ($i>=(10*$tmpPage))){
+                    continue;
+                }
+                array_push($zaprikaz,$n1);
+
+            }
+
+            $proseci=[];
+            $brojac=0;
+            foreach ($zaprikaz as $n){
+                $lok = $n->getMikrolokacija()->getIdmikro();
+                $tip = $n->getTip()->getIdtipnekretnine();
+                $slicne = $this->doctrine->em->getRepository(Nekretnina::class)->nadjiSlicneNekretnine($tip,$lok);
+                $suma=0;
+                $prosek = $n->getCena()/$n->getKvadratura();
+                $tmpProsek = $prosek;
+                if ($slicne!=null){
+                    $uk = count($slicne);
+                    foreach ($slicne as $sl){
+                        $tmpCena = $sl->getCena()/$sl->getKvadratura();
+                        //echo $sl->getIdn();
+                        $suma+= $tmpCena;
+                    }
+                    $prosek = $suma/$uk;
+                }
+                $proseci[$brojac] = $prosek;
+                $brojac+=1;
+            }
+        }
+        //echo count($zaprikaz);
+
+        $this->prikaz('rezultatiPretrage',['rezultati'=>$zaprikaz,'proseci'=>$proseci,'page'=>$tmpPage,'nump'=>$nump]);
+
+    }
     public function promenaStranice()
     {
         $tmpPage = $this->request->getVar('page');
@@ -431,9 +481,31 @@ class Korisnik extends BaseController
 
         }
 
+
+
+        $page = 1;
+        $n = count($nek);
+        $numpages = ceil($n / 10);
+        $zaprvu = [];
+        $i = 0;
+        foreach ($nek as $n1) {
+            array_push($zaprvu, $n1);
+            $i += 1;
+            if ($i == 10) {
+                break;
+            }
+
+        }
+        $ids = [];
+        foreach ($nek as $n1) {
+            array_push($ids, $n1->getIdn());
+        }
+        $this->session->set('sveN', $ids);
+
+
         $proseci=[];
         $brojac=0;
-        foreach ($nek as $n){
+        foreach ($zaprvu as $n){
             $lok = $n->getMikrolokacija()->getIdmikro();
             $tip = $n->getTip()->getIdtipnekretnine();
             $slicne = $this->doctrine->em->getRepository(Nekretnina::class)->nadjiSlicneNekretnine($tip,$lok);
@@ -452,7 +524,9 @@ class Korisnik extends BaseController
             $proseci[$brojac] = $prosek;
             $brojac+=1;
         }
-        $this->prikaz('rezultatiPretrage', ['rezultati' => $nek, 'proseci'=>$proseci]);
+
+
+        $this->prikaz('rezultatiPretrage', ['rezultati' => $zaprvu, 'proseci'=>$proseci,'page'=>$page,'nump'=>$numpages]);
 
     }
 
@@ -532,5 +606,9 @@ class Korisnik extends BaseController
         $files1 = scandir($dir);
         //$files1 = Storage::disk('public')->allFiles('img/animals');
         print_r($files1);
+    }
+
+    public function Onama(){
+        $this->prikaz('oNama',[]);
     }
 }

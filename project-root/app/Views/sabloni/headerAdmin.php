@@ -17,7 +17,7 @@
             <li><a href="<?php echo site_url() . "administrator/novaLokacijaAdmin"?>" id="pocL" class="nav-link px-2">Nova lokacija</a></li>
             <li><a href="<?php echo site_url() . "administrator/novaUlicaAdmin"?>" id="pocL" class="nav-link px-2">Nova ulica</a></li>
 
-            <li><a href="#" id="pocL3" class="nav-link px-2">O nama</a></li>
+            <li><a href="<?php echo site_url() . "administrator/Onama"?>" id="pocL3" class="nav-link px-2">O nama</a></li>
         </ul>
 
         <div class="col-md-3 text-end">

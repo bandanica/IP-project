@@ -199,4 +199,8 @@ class Login extends BaseController
         $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
         $this->prikaz('nekretninaDetalji', ['nek' => $n,'disOmiljeno',$disO]);
     }
+
+    public function Onama(){
+        $this->prikaz('oNama',[]);
+    }
 }
