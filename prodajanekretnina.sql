@@ -57,6 +57,7 @@ DROP TABLE IF EXISTS `grad`;
 CREATE TABLE `grad` (
   `idG` int unsigned NOT NULL AUTO_INCREMENT,
   `naziv` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `gradski_prevoz` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idG`),
   UNIQUE KEY `idG_UNIQUE` (`idG`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
@@ -68,7 +69,7 @@ CREATE TABLE `grad` (
 
 LOCK TABLES `grad` WRITE;
 /*!40000 ALTER TABLE `grad` DISABLE KEYS */;
-INSERT INTO `grad` VALUES (1,'Beograd');
+INSERT INTO `grad` VALUES (1,'Beograd','7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95');
 /*!40000 ALTER TABLE `grad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,6 +213,7 @@ CREATE TABLE `nekretnina` (
   `cena` int NOT NULL,
   `putanjaSlike` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `linije_prevoza` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `datum_prodaje` datetime DEFAULT NULL,
   PRIMARY KEY (`idN`),
   UNIQUE KEY `idN_UNIQUE` (`idN`),
   KEY `agencijaID` (`agencija`),
@@ -239,7 +241,7 @@ CREATE TABLE `nekretnina` (
 
 LOCK TABLES `nekretnina` WRITE;
 /*!40000 ALTER TABLE `nekretnina` DISABLE KEYS */;
-INSERT INTO `nekretnina` VALUES (1,1,3,1,45,1,1,1,3,2,'2015-01-01 00:00:00',2,5,'da','izvorno','na struju',12000,'Super lokacija, svetao stan, opremljen kuhinjom.','Aktivno',1,'Stan Hadzi Milentijeva 50',60000,NULL,NULL),(3,1,3,NULL,55,1,1,2,1,2,'2010-05-05 00:00:00',4,4,'da','dobro','na struju',7000,'za manju porodicu','Aktivno',1,'Stan Crveni krst povoljno',70000,NULL,NULL),(7,1,3,1,33,1,1,2,2,1,'2022-02-08 10:19:26',3,7,'da','lux','Na struju',4500,'super nekretnian','Aktivno',13,'Super stan',47500,NULL,NULL),(8,1,3,1,33,1,1,2,2,4,'2022-02-08 02:27:53',3,7,'ne','lux','podno',4500,'super','Aktivno',14,'frre',47500,NULL,NULL),(9,1,3,1,33,1,1,2,1,3,'2025-11-26 17:13:34',3,7,'da','lux','centralno',4500,'super','Aktivno',15,'dojiwqjdiqo',50000,'slike/nekretnina16',NULL),(10,1,3,1,213,1,1,2,1,2,'2022-02-19 10:58:19',3,7,'ne','izvorno','podno',4684,'wqdwqdqwdqwd','Prodato',16,'db',45645,'slike/nekretnina16',NULL),(11,1,3,1,123,1,1,2,1,4,'2022-02-02 10:59:37',3,3,'da','renovirano','nastruju',13,'dq','Prodato',17,'dqw',124,'slike/nekretnina16',NULL),(13,2,3,1,125,1,1,2,2,4,'1999-10-01 16:35:51',2,2,'da','renovirano','centralno',12000,'Lepa kucica u srci Vracara','Aktivno',19,'Kuca lepa',150000,'slike/nekretnina13',NULL),(16,1,3,1,60,1,1,2,2,2,'1982-01-01 03:56:23',3,4,'ne','lux','centralno',10000,'Lep','Aktivno',22,'Crveni',104000,'slike/nekretnina16','23,29'),(17,1,24,1,25,1,3,7,5,1,'2022-04-05 08:54:22',1,3,'da','lux','centralno',5000,'Kvalitetno i moderno','Aktivno',23,'Zemun Altina, novogradnja',40880,'slike/nekretnina17/','45,18'),(18,1,24,1,44,1,3,7,5,1,'2022-04-01 08:58:56',2,2,'da','lux','nastruju',0,'Mirno, blizu Prvomajske','Aktivno',24,'Novogradnja, bez provizije',78300,'slike/nekretnina18/','17,45'),(19,1,24,1,104,1,10,10,9,3,'1999-04-04 09:03:11',2,3,'ne','renovirano','centralno',12000,'Uknjizen,renoviran','Aktivno',25,'Zvezdara teatar,104m2',215000,'slike/nekretnina19/','77,7,14'),(20,2,27,2,208,1,3,6,7,5,'1999-03-03 17:16:36',1,2,'ne','lux','centralno',0,'Lux kuca, na 4 etaze, suteren, prizemlje,1. i 2. sprat. 4 spavace sobe, 3 kupatila i wc,3 terase... Za svaku preporuku','Aktivno',28,'Lux mediteranka, 4 etaze',395000,'slike/nekretnina20/','17,83'),(21,1,27,2,56,1,1,1,3,2,'1990-11-11 17:24:19',2,4,'ne','renovirano','centralno',8000,'Uknjizen, 2 sobe, veoma svetao, kvalitetno renoviran, uredna zgrada. Dnevna soba, trpezarija i kuhinja, spavaca, kupatilo, terasa.','Aktivno',29,'Neimar-Branicevska 56m2',162000,'slike/nekretnina21/','17,33'),(22,1,27,2,57,1,10,10,9,3,'2016-10-10 17:31:36',1,5,'da','lux','centralno',12000,'Stan se prodaje potpuno opremljen kao na slikama,2 spavace sobe, kupatilo, toalet, dnevni boravak sa trpezarijom i kuhinjom. Komforan, funkcionalan.','Aktivno',30,'Lion-Lux',165000,'slike/nekretnina22/','7,14,29'),(23,1,27,2,68,1,10,8,12,3,'2018-01-01 17:36:07',1,4,'da','lux','podno',11000,'Stan prakticno nov, sve ukupno se u njemu boravilo 2 meseca. Namestaj neupotrebljivan i moguce ga uzeti u dogovoru. Nema parking zone, slobodan parking.','Aktivno',31,'Bulevar, nov, lux',159000,'slike/nekretnina23/','7,14');
+INSERT INTO `nekretnina` VALUES (1,1,3,1,45,1,1,1,3,2,'2015-01-01 00:00:00',2,5,'da','izvorno','na struju',12000,'Super lokacija, svetao stan, opremljen kuhinjom.','Aktivno',1,'Stan Hadzi Milentijeva 50',60000,NULL,NULL,NULL),(3,1,3,NULL,55,1,1,2,1,2,'2010-05-05 00:00:00',4,4,'da','dobro','na struju',7000,'za manju porodicu','Aktivno',1,'Stan Crveni krst povoljno',70000,NULL,NULL,NULL),(7,1,3,1,33,1,1,2,2,1,'2022-02-08 10:19:26',3,7,'da','lux','Na struju',4500,'super nekretnian','Aktivno',13,'Super stan',47500,NULL,NULL,NULL),(8,1,3,1,33,1,1,2,2,4,'2022-02-08 02:27:53',3,7,'ne','lux','podno',4500,'super','Aktivno',14,'frre',47500,NULL,NULL,NULL),(9,1,3,1,33,1,1,2,1,3,'2025-11-26 17:13:34',3,7,'da','lux','centralno',4500,'super','Aktivno',15,'dojiwqjdiqo',50000,'slike/nekretnina16',NULL,NULL),(10,1,3,1,213,1,1,2,1,2,'2022-02-19 10:58:19',3,7,'ne','izvorno','podno',4684,'wqdwqdqwdqwd','Prodato',16,'db',45645,'slike/nekretnina16',NULL,'2021-12-12 00:00:00'),(11,1,3,1,123,1,1,2,1,4,'2022-02-02 10:59:37',3,3,'da','renovirano','nastruju',13,'dq','Prodato',17,'dqw',124,'slike/nekretnina16',NULL,'2021-10-10 00:00:00'),(13,2,3,1,125,1,1,2,2,4,'1999-10-01 16:35:51',2,2,'da','renovirano','centralno',12000,'Lepa kucica u srci Vracara','Aktivno',19,'Kuca lepa',150000,'slike/nekretnina13',NULL,NULL),(16,1,3,1,60,1,1,2,2,2,'1982-01-01 03:56:23',3,4,'ne','lux','centralno',10000,'Lep','Aktivno',22,'Crveni',104000,'slike/nekretnina16','23,29',NULL),(17,1,24,1,25,1,3,7,5,1,'2022-04-05 08:54:22',1,3,'da','lux','centralno',5000,'Kvalitetno i moderno','Aktivno',23,'Zemun Altina, novogradnja',40880,'slike/nekretnina17/','45,18',NULL),(18,1,24,1,44,1,3,7,5,1,'2022-04-01 08:58:56',2,2,'da','lux','nastruju',0,'Mirno, blizu Prvomajske','Aktivno',24,'Novogradnja, bez provizije',78300,'slike/nekretnina18/','17,45',NULL),(19,1,24,1,104,1,10,10,9,3,'1999-04-04 09:03:11',2,3,'ne','renovirano','centralno',12000,'Uknjizen,renoviran','Aktivno',25,'Zvezdara teatar,104m2',215000,'slike/nekretnina19/','77,7,14',NULL),(20,2,27,2,208,1,3,6,7,5,'1999-03-03 17:16:36',1,2,'ne','lux','centralno',0,'Lux kuca, na 4 etaze, suteren, prizemlje,1. i 2. sprat. 4 spavace sobe, 3 kupatila i wc,3 terase... Za svaku preporuku','Aktivno',28,'Lux mediteranka, 4 etaze',395000,'slike/nekretnina20/','17,83',NULL),(21,1,27,2,56,1,1,1,3,2,'1990-11-11 17:24:19',2,4,'ne','renovirano','centralno',8000,'Uknjizen, 2 sobe, veoma svetao, kvalitetno renoviran, uredna zgrada. Dnevna soba, trpezarija i kuhinja, spavaca, kupatilo, terasa.','Aktivno',29,'Neimar-Branicevska 56m2',162000,'slike/nekretnina21/','17,33',NULL),(22,1,27,2,57,1,10,10,9,3,'2016-10-10 17:31:36',1,5,'da','lux','centralno',12000,'Stan se prodaje potpuno opremljen kao na slikama,2 spavace sobe, kupatilo, toalet, dnevni boravak sa trpezarijom i kuhinjom. Komforan, funkcionalan.','Aktivno',30,'Lion-Lux',165000,'slike/nekretnina22/','7,14,29',NULL),(23,1,27,2,68,1,10,8,12,3,'2018-01-01 17:36:07',1,4,'da','lux','podno',11000,'Stan prakticno nov, sve ukupno se u njemu boravilo 2 meseca. Namestaj neupotrebljivan i moguce ga uzeti u dogovoru. Nema parking zone, slobodan parking.','Aktivno',31,'Bulevar, nov, lux',159000,'slike/nekretnina23/','7,14',NULL);
 /*!40000 ALTER TABLE `nekretnina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,4 +390,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-19  1:26:41
+-- Dump completed on 2022-02-19 14:46:24
