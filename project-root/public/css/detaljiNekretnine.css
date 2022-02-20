@@ -153,11 +153,16 @@ body {
 }
 
 #tip1{
-    border: 2px solid black;
+/*    border: 2px solid;
     background-color: whitesmoke;
 
     border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
+    border-top-right-radius: 9px;*/
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size:18;
+    
+   
 }
 
 #desnoTekst{
@@ -276,8 +281,18 @@ body {
 .cenaNekretnine1{
     color: lawngreen;
     font-weight: bold;
+    font-size:20px;
 }
 
 .cenaNekretnine2{
     color: darkred;
+    font-weight: bold;
+    font-size:20px;
+}
+
+#dugmeOmiljene{
+    background-color: #68C3D4;
+    color:white;
+    border-color:#68C3D7;
+    border: 5px;
 }

@@ -16,6 +16,7 @@ function promenaGrad(){
             let newOption = new Option(opstina.naziv,opstina.idO);
             o.add(newOption,undefined);
         })
+        
 
     }
     xhttp.open("POST", "/oglasivac/opstineugradu", true);
@@ -43,6 +44,7 @@ function promenaOpstina(){
             let newOption = new Option(mlokacija.naziv,mlokacija.idL);
             ml.add(newOption,undefined);
         })
+        
     }
     xhttp.open("POST", "/oglasivac/lokacijeuopstini", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

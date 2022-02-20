@@ -38,7 +38,7 @@
                                            name='idNek'>
                                 </td>
                                 <td><?php echo $n1->getNaziv() ?></td>
-                                <td><?php echo $n1->getCena()." EUR"; ?></td>
+                                <td><?php echo $n1->getCena(); ?> &euro;</td>
                                 <?php if ($n1->getStatus() == 'Aktivno') {
                                     ?>
                                     <td class="text-center"><input type='submit' name='dugmeNek' value='izmeni'></td>

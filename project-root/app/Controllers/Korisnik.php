@@ -590,7 +590,8 @@ class Korisnik extends BaseController
     {
         if ($this->request->getVar('dugmeOm') == 'Pogledaj') {
             $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
-            $this->prikaz('nekretninaDetalji', ['nek' => $n]);
+            $this->Pogledaj();
+            //$this->prikaz('nekretninaDetalji', ['nek' => $n]);
         } else {
             $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($this->session->get('korisnik'));
             $kor->removeOmiljena($this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek')));

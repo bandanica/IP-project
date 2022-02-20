@@ -162,12 +162,12 @@
             <?php
             if (isset($nek)) {
             ?>
-            <div class="row" id="prviRed">
-                <div class="col float-right" id="nazivNek">
+            <div class="row mb-1" id="prviRed">
+                <div class="col pt-2 text-center" id="nazivNek">
                     <h2><?php echo $nek->getNaziv(); ?></h2>
                 </div>
-                <div class="col float-center oglas" id="lok">
-                    <p class="float-center"><?php echo $nek->getGradid()->getNaziv() . " - opstina " . $nek->getOpstina()->getNaziv() . " - " . $nek->getMikrolokacija()->getNaziv() . " - " .
+                <div class="col text-end oglas pt-4" id="lok">
+                    <p class="text-end"><?php echo $nek->getGradid()->getNaziv() . " - opstina " . $nek->getOpstina()->getNaziv() . " - " . $nek->getMikrolokacija()->getNaziv() . " - " .
                             $nek->getUlica()->getNaziv(); ?></p>
                 </div>
                 <hr>
@@ -252,18 +252,22 @@
                     </div>
                 </div>
                 <div class="col-6 d-inline">
-                    <div class="row">
-                        <div class="col text-center" id="tip1">
+                    <div class="row mb-0">                       
+                        <div class="col text-center border bg-light rounded p-2" id="tip1">
                             Tip:<?php echo $nek->getTip()->getNazivTipa(); ?>
                         </div>
-                        <div class="col text-center" id="tip1">
+                        
+                        <div class="col text-center border bg-light rounded-top p-2" id="tip1">
                             Kvadratura: <?php echo $nek->getKvadratura(); ?>m2
                         </div>
-                        <div class="col text-center" id="tip1">
+                       
+                        <div class="col text-center border bg-light rounded-top p-2" id="tip1">
                             Soba: <?php echo $nek->getBrSoba(); ?>
                         </div>
+                        
                     </div>
-                    <div class="row">
+                    <hr class="mt-0">
+                    <div class="row pt-2">
                         <div class="col-6">
                             <p>Oglasivac: <?php echo $nek->getOglasivac()->getKorIme(); ?></p>
                             <p>Godina izgradnje: <?php echo date_format($nek->getGodinaIzgradnje(), 'Y'); ?></p>

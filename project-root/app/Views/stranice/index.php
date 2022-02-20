@@ -174,7 +174,7 @@
                         $i += 1;
                         if ($i == $s) {
                             ?>
-                            <div class="col-4 offset-0 ml-4 mr-4 justify-content-center">
+                            <div class="col-4 ml-4 mr-4 justify-content-center" id="Kartica">
                                 <div class="card text-dark bg-light">
                                     <img src="<?php echo base_url() . "/" . $dir_path . "/" . $file; ?>"
                                          alt="Slika nekr" class="card-img-top">
