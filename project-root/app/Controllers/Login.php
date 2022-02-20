@@ -78,7 +78,7 @@ class Login extends BaseController
             $this->session->set("poruka", 'Korisnik ne postoji');
             return redirect()->to(site_url());
         }
-        if (($korisnik->getLozinka()) != ($this->request->getVar('lozinka'))) {
+        if (($korisnik->getLozinka()) != (md5($this->request->getVar('lozinka')))) {
             $this->session->set("poruka", 'Pogresna lozinka');
             return redirect()->to(site_url());
         }
@@ -141,7 +141,8 @@ class Login extends BaseController
         $korisnik->setIme($ime);
         $korisnik->setPrezime($prez);
         $korisnik->setKorIme($korime);
-        $korisnik->setLozinka($lozinka);
+        $sifra = md5($lozinka);
+        $korisnik->setLozinka($sifra);
         $korisnik->setIdgrada($grad);
         $korisnik->setTelefon($telefon);
         $korisnik->setDatumRodjenja($rodjenje);
@@ -197,8 +198,27 @@ class Login extends BaseController
     public function Pogledaj()
     {
         $disO = 1;
+        $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
+        $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
+        $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
+        $indexAdmin = -1;
+        foreach ($tipkorisnika as $t) {
+            $indexAdmin += 1;
+            if ($t->getTipKorisnika() == "administrator") {
+                break;
+            }
+        }
+        unset($tipkorisnika[$indexAdmin]);
+        $poruka = $this->session->get("poruka");
+        $poruka1 = $this->session->get("poruka1");
+        $porukaL = $this->session->get("porukaLozinka");
+        $this->session->set("poruka", '');
+        $this->session->set("poruka1", '');
+        $this->session->set("porukaLozinka", '');
+        $s = "Aktivno";
         $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
-        $this->prikaz('nekretninaDetalji', ['nek' => $n,'disOmiljeno',$disO]);
+        $this->prikaz('nekretninaDetalji', ['nek' => $n,'disOmiljeno',$disO, 'gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
+            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL]);
     }
 
     public function Onama(){

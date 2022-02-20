@@ -40,9 +40,9 @@
     <?php
     if (isset($ogl)) {
         ?>
-        <div class="row">
-            <div class="col">
-                <div id="d3-container">
+        <div class="row text-center justify-content-center">
+            <div class="col text-center justify-content-center">
+                <div id="d3-container" class="justify-content-center">
 
                 </div>
 

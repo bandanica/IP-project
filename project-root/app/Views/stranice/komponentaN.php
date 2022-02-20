@@ -1,5 +1,5 @@
 <form method='get' action=<?php echo site_url() . "korisnik/pogledaj" ?>>
-    <div class="card mb-3 offset-3 text-dark bg-light" style="max-width: 700px;"">
+    <div class="card mb-3 offset-3 text-dark bg-light shadow" style="max-width: 700px;"">
     <div class="row g-0">
         <div class="col-4">
             <?php if ($n1->getSlike() != null) {
