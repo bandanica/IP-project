@@ -12,33 +12,37 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <div class="container-fluid">
-    <div class="row">
-
-        <form method="post" action=<?php echo site_url() . "administrator/dodajUl" ?>>
-            Grad:<select name="gr" onchange="promenaGrad()">
-                <option></option>
-                <?php
-                if (isset($gradovi)) {
-                    foreach ($gradovi as $g) {
-                        ?>
-                        <option value= <?php echo $g->getIdg() ?>><?php echo $g->getNaziv(); ?></option>
-                        <?php
+    <div class="row pt-4">
+        <div class="col-2">
+            <h5>Dodavanje ulice:</h5>
+        </div>
+        <div class="col">
+            <form method="post" action=<?php echo site_url() . "administrator/dodajUl" ?>>
+                Grad:<select name="gr" onchange="promenaGrad()">
+                    <option></option>
+                    <?php
+                    if (isset($gradovi)) {
+                        foreach ($gradovi as $g) {
+                            ?>
+                            <option value= <?php echo $g->getIdg() ?>><?php echo $g->getNaziv(); ?></option>
+                            <?php
+                        }
                     }
-                }
-                ?>
+                    ?>
 
-            </select>
+                </select>
 
-            Opstina:<select id="opst" name="opst" onchange="promenaOpstina()">
-                <option></option>
-            </select>
+                Opstina:<select id="opst" name="opst" onchange="promenaOpstina()">
+                    <option></option>
+                </select>
 
-            Mikrolokacija:<select id="lok" name="lok" onchange="promenaLokacije()">
-                <option></option>
-            </select>
-            Naziv ulice:<input type="text" name="naziv">
-            <input type="submit" id="dugmeDodaj">
-        </form>
+                Mikrolokacija:<select id="lok" name="lok" onchange="promenaLokacije()">
+                    <option></option>
+                </select>
+                Naziv ulice:<input type="text" name="naziv">
+                <input type="submit" id="dugmeDodaj">
+            </form>
+        </div>
 
     </div>
     <div class="row">
@@ -56,7 +60,7 @@
                         <th>Mikrolokacija</th>
                         <th>Opstina</th>
                         <th>Grad</th>
-                        <th>Brisanje</th>
+                        <th class="text-center">Brisanje</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -79,7 +83,7 @@
                                         echo $o->getNaziv(); ?></td>
                                     <td><?php $gr = $o->getGrad();
                                         echo $gr->getNaziv(); ?></td>
-                                    <td><input type='submit' name='dugme1' value='Obrisi'></td>
+                                    <td class="text-center"><input type='submit' name='dugme1' value='Obrisi' ></td>
                                 </tr>
                             </form>
                             <?php

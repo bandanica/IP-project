@@ -190,6 +190,7 @@ class Login extends BaseController
     {
         $this->session->remove('korisnik');
         $this->session->remove('vrstaKor');
+        $this->session->remove('sveN');
         return redirect()->to(site_url());
     }
 

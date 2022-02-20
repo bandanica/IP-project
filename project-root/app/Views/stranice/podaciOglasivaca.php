@@ -10,81 +10,160 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <div class="container-fluid sredina">
-    <form method='post' action=<?php echo site_url() . "oglasivac/promenaSubmit" ?>>
-        <h2>Vasi podaci:</h2>
-        <?php if (isset($podaci)) {
-            ?>
-            <input type="hidden" name="idKor" value="<?php echo $podaci->getIdK(); ?>">
-            Ime: <?php echo $podaci->getIme(); ?><br/>
-            Prezime: <?php echo $podaci->getPrezime(); ?><br/>
-            Korisnicko ime: <?php echo $podaci->getKorIme(); ?><br/>
+    <div class="row pt-4">
+        <div class="col text-center">
+            <h2>Podaci o korisniku</h2>
+        </div>
 
-            Grad: <?php echo $podaci->getIdgrada()->getNaziv(); ?>
-            <br/>
-            Datum rodjenja: <?php echo $podaci->getDatumRodjenja()->format('Y-m-d'); ?><br/>
+    </div>
+    <div class="row pt-4">
+        <div class="col">
+            <form method='post' action=<?php echo site_url() . "oglasivac/promenaSubmit" ?>>
 
-            Kontakt telefon: <input type="text" name="tel" value=<?php echo $podaci->getTelefon(); ?>><br/>
-            I-mejl: <input type="text" name="mejl" value=<?php echo $podaci->getEMail(); ?>><br/>
+                <?php if (isset($podaci)) {
+                    ?>
+                    <input type="hidden" name="idKor" value="<?php echo $podaci->getIdK(); ?>">
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            Ime:
+                        </div>
+                        <div class="col-6 text-start">
+                            <?php echo $podaci->getIme(); ?>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            Prezime:
+                        </div>
+                        <div class="col-6 text-start">
+                            <?php echo $podaci->getPrezime(); ?>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            Korisnicko ime:
+                        </div>
+                        <div class="col-6 text-start">
+                            <?php echo $podaci->getKorIme(); ?>
+                        </div>
+                    </div>
 
-            Tip korisnika:
-            <?php
-            if (isset($tipkorisnika)) {
-                foreach ($tipkorisnika as $t) {
-                    if ($t == $podaci->getTip()) {
-                        ?>
-                        <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
-                               value="<?php echo $t->getTipKorisnika() ?>" checked
-                               onclick="promenaTipa()"> <?php echo $t->getTipKorisnika() ?>
-                        <?php
-                    } else {
-                        ?>
-                        <input type="radio" name="tip" onclick="promenaTipa()" id="<?php echo $t->getTipKorisnika() ?>"
-                               value="<?php echo $t->getTipKorisnika() ?>"> <?php echo $t->getTipKorisnika() ?>
-                        <?php
-                    }
-                }
-            }
-            ?>
-            <br/>
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            Grad:
+                        </div>
+                        <div class="col-6 text-start">
+                            <?php echo $podaci->getIdgrada()->getNaziv(); ?>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            Datum rodjenja:
+                        </div>
+                        <div class="col-6 text-start">
+                            <?php echo $podaci->getDatumRodjenja()->format('Y-m-d'); ?>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            Kontakt telefon:
+                        </div>
+                        <div class="col-6 text-start">
+                            <input type="text" name="tel" value=<?php echo $podaci->getTelefon(); ?>>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-2 offset-4 text-center">
+                            I-mejl:
+                        </div>
+                        <div class="col-6 text-start">
+                            <input type="text" name="mejl" value=<?php echo $podaci->getEMail(); ?>>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2 offset-4 text-center">
+                            Tip korisnika:
+                        </div>
+                        <div class="col text-start">
+                            <?php
+                            if (isset($tipkorisnika)) {
+                                foreach ($tipkorisnika as $t) {
+                                    if ($t == $podaci->getTip()) {
+                                        ?>
+                                        <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                                               value="<?php echo $t->getTipKorisnika() ?>" checked
+                                               onclick="promenaTipa()"> <?php echo $t->getTipKorisnika() ?>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <input type="radio" name="tip" onclick="promenaTipa()"
+                                               id="<?php echo $t->getTipKorisnika() ?>"
+                                               value="<?php echo $t->getTipKorisnika() ?>"> <?php echo $t->getTipKorisnika() ?>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
 
-            <div id="agencija">
-                Agencija:
-                <select name="agencije1" id="ListaAgencija" disabled>
-                    <option></option>
+
+                    <div id="agencija" class="text-center">
+                        <div class="row pb-2">
+                            <div class="col-2 offset-4 text-center">
+                                Agencija:
+                            </div>
+                            <div class="col-6 text-start">
+                                <select name="agencije1" id="ListaAgencija" disabled>
+                                    <option></option>
+
+                                    <?php
+                                    if (isset($agencije)) {
+                                        foreach ($agencije as $a) {
+                                            if (($podaci->getTip()->getTipKorisnika() == 'agent') && ($podaci->getIdagencije() == $a)) {
+                                                ?>
+                                                <option selected> <?php echo $a->getNaziv() ?></option>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <option><?php echo $a->getNaziv() ?> </option>
+                                                <?php
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-2 offset-4 text-center">
+                                Broj licence agenta:
+                            </div>
+                            <div class="col-6 text-start">
+                                <input type="text" id="brlicence" name="brlicence1" disabled value="<?php
+                                if ($podaci->getTip()->getTipKorisnika() == 'agent') {
+                                    echo $podaci->getBrLicence();
+                                } else {
+                                    echo "";
+                                } ?>" onloadstart="promenaTipa()">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row pb-2">
+                        <div class="col text-center">
+                            <input type='submit' name='submit' value='Sacuvaj izmene' id="dugmeIzmena">
+                        </div>
+                    </div>
+
 
                     <?php
-                    if (isset($agencije)) {
-                        foreach ($agencije as $a) {
-                            if (($podaci->getTip()->getTipKorisnika() == 'agent') && ($podaci->getIdagencije() == $a)) {
-                                ?>
-                                <option selected> <?php echo $a->getNaziv() ?></option>
-                                <?php
-                            } else {
-                                ?>
-                                <option><?php echo $a->getNaziv() ?> </option>
-                                <?php
-                            }
-                        }
-                    }
-                    ?>
-                </select>
-                <br/>
-
-                Broj licence agenta:<input type="text" id="brlicence" name="brlicence1" disabled value="<?php
-                if ($podaci->getTip()->getTipKorisnika() == 'agent') {
-                    echo $podaci->getBrLicence();
-                } else {
-                    echo "";
-                } ?>" onloadstart="promenaTipa()"><br/>
-            </div>
-            <input type='submit' name='submit' value='Sacuvaj izmene' id="dugmeIzmena">
-            <br/>
-
-
-            <?php
-        }
-        ?>
-    </form>
+                }
+                ?>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

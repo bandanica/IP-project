@@ -15,23 +15,23 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="exampleModalLabel">Prijava</h5>
+                <h5 class="modal-title text-center w-100 font-weight-bold" id="naslovModalaLogin">Prijava</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form id="loginForma" method='post' action=<?php echo site_url() . "login/login" ?>>
                 <div class="modal-body">
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-2">
                         <input type="text" name="kor_ime" placeholder="Korisnicko ime" required="required">
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-2">
                         <input type="password" name="lozinka" placeholder="Lozinka" required="required">
 
                     </div>
 
                 </div>
-                <div class="modal-footer text-center">
+                <div class="modal-footer justify-content-center">
                     <button type="submit" id="LogSubmit" class="btn btn-primary text-center">
                         Login
                     </button>
@@ -45,32 +45,32 @@
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="modalzaloginformu" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="regNaslov">Registracija</h5>
+            <div class="modal-header text-center">
+                <h5 class="modal-title text-center w-100 font-weight-bold" id="regNaslov">Registracija</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form id="regForma" method='post' action=<?php echo site_url() . "login/registerSubmit" ?>>
                 <div class="modal-body">
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <input type="text" name="ime" placeholder="Ime" required="required" onchange="f()">
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <input type="text" name="prez" placeholder="Prezime" required="required" onchange="f()">
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <input type="text" name="korime" placeholder="Korisnicko ime" required="required"
                                onchange="f()">
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <input type="password" name="loz" placeholder="Lozinka" required="required"
                                onchange="proveraLozinke()">
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         Grad:
                         <select name="gradici" onchange="f()">
                             <?php
@@ -84,21 +84,21 @@
                             ?>
                         </select>
 
-                    </div>
-                    <div class="form-group text-center">
+<!--                    </div>-->
+<!--                    <div class="form-group text-center pb-1">-->
                         Datum rodjenja:
                         <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?> ><br/>
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <input type="text" name="tel" placeholder="Telefon" required="required"
                                onchange="f()">
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <input type="text" name="mejl" placeholder="Email" required="required"
                                onchange="f()">
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         Tip korisnika:
                         <?php
                         if (isset($tipkorisnika)) {
@@ -117,7 +117,7 @@
                         ?>
 
                     </div>
-                    <div class="form-group text-center">
+                    <div class="form-group text-center pb-1">
                         <div id="agencija" hidden>
                             Agencija:
                             <select name="agencije1" id="ListaAgencija" onchange="f()">
@@ -138,7 +138,7 @@
 
 
                 </div>
-                <div class="modal-footer text-center">
+                <div class="modal-footer justify-content-center">
                     <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
 
                     <button type="submit" class="btn btn-primary" disabled id="regDugme">
@@ -152,6 +152,8 @@
 
 
 <div class="container-fluid sredina">
+    <span id="regGreske" style="color: red">
+    <?php if (isset($poruka1)) echo $poruka1 ?></span>
 
     <div class="row">
         <div class="col d-flex flex-wrap oglas justify-content-center">
@@ -380,8 +382,7 @@
     <!--                <input type='submit' name='submit' disabled value='Registracija' id="regDugme">-->
     <!--                <br/>-->
     <!---->
-                    <span id="regGreske" style="color: red">
-    <?php if (isset($poruka1)) echo $poruka1 ?></span>
+
     <!--            </form>-->
     <!---->
     <!--        </div>-->

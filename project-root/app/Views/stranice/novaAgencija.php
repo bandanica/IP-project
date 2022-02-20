@@ -10,27 +10,75 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 <div class="container-fluid">
-    <div class="row">
-        <form method='post' action=<?php echo site_url() . "administrator/kreirajAgenciju" ?>>
-            Naziv:<input type="text" name="imeAg"><br/>
-            PIB:<input type="text" name="pib"><br/>
-            Kontakt telefon:<input type="text" name="telAg"><br/>
-            Adresa:<input type="text" name="adrAg"><br/>
-            Grad:<select name="gradici" onchange="f()">
-                <?php
-                if (isset($gradovi)) {
-                    foreach ($gradovi as $g) {
-                        ?>
-                        <option><?php echo $g->getNaziv() ?> </option>
-                        <?php
-                    }
-                }
-                ?>
+    <div class="row pt-4">
+        <div class="col justify-content-center text-center">
+            <h2>Dodavanje nove agencije:</h2>
+        </div>
 
-            </select>
-            <br/>
-            <input type="submit" id="dugmeID" value="Zavrsi">
-        </form>
+    </div>
+    <div class="row pt-4">
+        <div class="col">
+            <form method='post' action=<?php echo site_url() . "administrator/kreirajAgenciju" ?>>
+                <div class="row pb-2">
+                    <div class="col-1 offset-5 text-center">
+                        Naziv:
+                    </div>
+                    <div class="col-6 text-start">
+                        <input type="text" name="imeAg">
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-1 offset-5 text-center">
+                        PIB:
+                    </div>
+                    <div class="col-6 text-start">
+                        <input type="text" name="pib">
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-1 offset-5 text-center">
+                        Kontakt telefon:
+                    </div>
+                    <div class="col-6 text-start">
+                        <input type="text" name="telAg">
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col-1 offset-5 text-center">
+                        Adresa:
+                    </div>
+                    <div class="col-6 text-start">
+                        <input type="text" name="adrAg">
+                    </div>
+                </div>
+                <div class="row pb-4">
+                    <div class="col-1 offset-5 text-center">
+                        Grad:
+                    </div>
+                    <div class="col-6 text-start">
+                        <select name="gradici" onchange="f()">
+                            <?php
+                            if (isset($gradovi)) {
+                                foreach ($gradovi as $g) {
+                                    ?>
+                                    <option><?php echo $g->getNaziv() ?> </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="row pb-2">
+                    <div class="col text-center">
+                        <input type="submit" id="dugmeID" value="Zavrsi">
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

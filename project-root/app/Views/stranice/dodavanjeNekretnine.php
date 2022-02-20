@@ -12,25 +12,33 @@
 
 <div class="container-fluid sredina">
     <div class="row">
+        <div class="col text-center">
+            <h2>Nova nekretnina</h2>
+        </div>
+    </div>
+    <div class="row">
         <div class="col oglas d-flex flex-wrap">
             <form method="post" action="<?php echo site_url() . "oglasivac/zavrsiDodavanjeNekretnine" ?>"
                   enctype="multipart/form-data">
-                <div class="col d-block">
-                    Tip:<select name="izabranTip" required>
-                        <?php
-                        if (isset($tipoviN)) {
-                            foreach ($tipoviN as $n) {
-                                ?>
-                                <option><?php echo $n->getNazivTipa(); ?></option>
-                                <?php
+                <div class="row justify-content-center text-center">
+                    <div class="col">
+                        Tip:<select name="izabranTip" required>
+                            <?php
+                            if (isset($tipoviN)) {
+                                foreach ($tipoviN as $n) {
+                                    ?>
+                                    <option><?php echo $n->getNazivTipa(); ?></option>
+                                    <?php
+                                }
                             }
-                        }
-                        ?>
-                    </select>
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col d-block">
+                        Naziv nekretnine:<input type="text" name="nazivN"><br/>
+                    </div>
                 </div>
-                <div class="col d-block">
-                    Naziv nekretnine:<input type="text" name="nazivN"><br/>
-                </div>
+
                 <div class="col">
                     Grad:<select name="gr" onchange="promenaGrad()">
                         <option></option>
