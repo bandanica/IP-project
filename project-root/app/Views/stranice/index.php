@@ -84,10 +84,10 @@
                             ?>
                         </select>
 
-<!--                    </div>-->
-<!--                    <div class="form-group text-center pb-1">-->
+                        <!--                    </div>-->
+                        <!--                    <div class="form-group text-center pb-1">-->
                         Datum rodjenja:
-                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?> ><br/>
+                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?>><br/>
 
                     </div>
                     <div class="form-group text-center pb-1">
@@ -152,8 +152,21 @@
 
 
 <div class="container-fluid sredina">
-    <span id="regGreske" style="color: red">
-    <?php if (isset($poruka1)) echo $poruka1 ?></span>
+    <div class="row">
+        <div class="col">
+            <span id="regGreske" style="color: red">
+            <?php if (isset($poruka1)) echo $poruka1 ?></span>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <?php if (isset($porukaL)) echo "$porukaL";
+            echo "<br/>"; ?>
+            <span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col d-flex flex-wrap oglas justify-content-center">
@@ -181,9 +194,9 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><?php echo $n1->getNaziv(); ?></h5>
                                         <p class="card-text"> <?php echo $n1->getCena(); ?> EUR</p>
-                                        <p class="card-text"><small>Linije: <?php if ($n1->getLinijeprevoza()!=""){
-                                            echo $n1->getLinijeprevoza();
-                                        }?></small></p>
+                                        <p class="card-text"><small>Linije: <?php if ($n1->getLinijeprevoza() != "") {
+                                                    echo $n1->getLinijeprevoza();
+                                                } ?></small></p>
                                         <form method="get" action="<?php echo site_url() . "login/Pogledaj" ?>">
                                             <input type="hidden" value="<?php echo $n1->getIdn(); ?>" name="idNek">
                                             <button type="submit" value="Detaljnije..." class="link-button">
@@ -240,9 +253,7 @@
     <!---->
     <!---->
     <!--                <input type='submit' name='submit' value='Prijava'><br/>-->
-                    <?php if (isset($porukaL)) echo "$porukaL";
-                    echo "<br/>"; ?>
-                    <span style="color: red"> <?php if (isset($poruka)) echo $poruka ?></span>
+
     <!--            </form>-->
     <!--        </div>-->
     <!--        <div class="col-4">-->
