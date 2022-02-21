@@ -18,7 +18,7 @@
         <div class="col">
 
             <form method="post" action=<?php echo site_url() . "administrator/dodajMikro" ?>>
-                Grad:<select name="gr" onchange="promenaGrad()">
+                Grad:<select name="gr" onclick="promenaGrad()">
                     <option></option>
                     <?php
                     if (isset($gradovi)) {

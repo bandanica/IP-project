@@ -76,26 +76,7 @@
                                onchange="proveraLozinke()">
 
                     </div>
-                    <div class="form-group text-center pb-1">
-                        Grad:
-                        <select name="gradici" onchange="f()">
-                            <?php
-                            if (isset($gradovi)) {
-                                foreach ($gradovi as $g) {
-                                    ?>
-                                    <option><?php echo $g->getNaziv() ?> </option>
-                                    <?php
-                                }
-                            }
-                            ?>
-                        </select>
 
-                        <!--                    </div>-->
-                        <!--                    <div class="form-group text-center pb-1">-->
-                        Datum rodjenja:
-                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?> ><br/>
-
-                    </div>
                     <div class="form-group text-center pb-1">
                         <input type="text" name="tel" placeholder="Telefon" required="required"
                                onchange="f()">
@@ -121,6 +102,26 @@
                             }
                         }
                         ?>
+
+                    </div>
+                    <div class="form-group text-center pb-1">
+                        Grad:
+                        <select name="gradici" onchange="f()">
+                            <?php
+                            if (isset($gradovi)) {
+                                foreach ($gradovi as $g) {
+                                    ?>
+                                    <option><?php echo $g->getNaziv() ?> </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+
+                        <!--                    </div>-->
+                        <!--                    <div class="form-group text-center pb-1">-->
+                        Datum rodjenja:
+                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?>><br/>
 
                     </div>
                     <div class="form-group text-center pb-1">
@@ -155,7 +156,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div class="container-fluid sredina">
@@ -254,19 +254,19 @@
                     </div>
                 </div>
                 <div class="col-6 d-inline">
-                    <div class="row mb-0">                       
+                    <div class="row mb-0">
                         <div class="col text-center border bg-light rounded p-2" id="tip1">
                             Tip:<?php echo $nek->getTip()->getNazivTipa(); ?>
                         </div>
-                        
+
                         <div class="col text-center border bg-light rounded-top p-2" id="tip1">
                             Kvadratura: <?php echo $nek->getKvadratura(); ?>m2
                         </div>
-                       
+
                         <div class="col text-center border bg-light rounded-top p-2" id="tip1">
                             Soba: <?php echo $nek->getBrSoba(); ?>
                         </div>
-                        
+
                     </div>
                     <hr class="mt-0">
                     <div class="row pt-2">
@@ -290,7 +290,7 @@
             <div class="row" id="treciRed">
                 <div class="col-6" id="desnoTekst">
                     <?php
-                    if (isset($zeleno) && ($zeleno==1)) {
+                    if (isset($zeleno) && ($zeleno == 1)) {
                         ?>
                         <p class="cenaNekretnine1"><?php echo $nek->getCena(); ?> &euro;</p>
                         <?php
@@ -302,19 +302,24 @@
 
                 </div>
                 <div class="col-6" id="desnoTekst">
+                    <span id="povratnaPoruka" class="text-danger"></span>
                     <?php
-                    if (isset($disOmiljeno) && $disOmiljeno==1){
+
+                    if (isset($disOmiljeno) && $disOmiljeno == 1) {
                         ?>
-                        <input type="submit" disabled id="dugmeOmiljene" value="Dodaj u omiljene"
-                               onclick="dodavaljeOmiljene(<?php echo $nek->getIdn() ?>)">
-                    <?php
-                    }else{
+<!--                        <input type="submit" disabled id="dugmeOmiljene" value="Dodaj u omiljene">-->
+                        <?php
+                    } elseif (isset($disOmiljeno) && $disOmiljeno == 2) {
+                        ?>
+                        <input type="submit" disabled id="dugmeOmiljene" value="Dodato u omiljene">
+                        <?php
+                    } else {
                         ?>
                         <input type="submit" id="dugmeOmiljene" value="Dodaj u omiljene"
                                onclick="dodavaljeOmiljene(<?php echo $nek->getIdn() ?>)">
-                    <?php
+                        <?php
                     }
-                            ?>
+                    ?>
 
 
                 </div>
@@ -482,8 +487,8 @@
 
 
                     <?php
-                    if ($nek->getAgencija()!=null){
-                    //if ($nek->getOglasivac()->getTip()->getTipKorisnika() == 'agent') {
+                    if ($nek->getAgencija() != null) {
+                        //if ($nek->getOglasivac()->getTip()->getTipKorisnika() == 'agent') {
                         ?>
                         <div class="col-2">
                             <h4>Agencija:</h4>

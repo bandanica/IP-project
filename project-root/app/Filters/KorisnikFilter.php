@@ -17,11 +17,9 @@ class KorisnikFilter implements FilterInterface
         $method = explode("/", $path);
         if (!isset($_SESSION['vrstaKor']) && sizeof($method) > 2) {
             $method = $method[2];
-            if (!($method == "naprednaPretraga" || $method == "pretragaNekretnine"
-                || $method == "promenaStranice" || $method == "Pogledaj"
-                || $method == "izvrsiNapredno" || $method == "dodajUOmiljene"
-                || $method == "pogledajOmiljenje" || $method == "omiljenaObrada")) {
-                return redirect()->to(site_url("Login"));
+            $method =explode("?",$method)[0];
+            if (!($method == "pogledaj")) {
+                 return redirect()->to(site_url());
             }
             return;
         }

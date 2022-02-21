@@ -9,6 +9,7 @@ use App\Models\Entities\Grad;
 use App\Models\Entities\Mikrolokacija;
 use App\Models\Entities\Nekretnina;
 use App\Models\Entities\Opstina;
+use App\Models\Entities\Tipkorisnika;
 use App\Models\Entities\Tipnekretnine;
 
 class Korisnik extends BaseController
@@ -52,7 +53,12 @@ class Korisnik extends BaseController
     protected function prikaz($page, $data)
     {
         $data['controller'] = 'Korisnik';
-        echo view("sabloni/headerKupac");
+        if ($this->session->has('korisnik')) {
+            echo view("sabloni/headerKupac");
+        } else {
+            echo view("sabloni/header");
+        }
+
         echo view("stranice/$page", $data);
         echo view("sabloni/footer");
         //return view("stranice/$page", $data);
@@ -60,15 +66,14 @@ class Korisnik extends BaseController
 
     public function promenaLozinke()
     {
-        //echo view("sabloni/headerKupac");
-        $this->prikaz('promenaSifre', []);
-        //echo view("sabloni/footer");
+        $t = $this->session->get('vrstaKor');
+        $this->prikaz('promenaSifre', ['tip'=>$t]);
     }
 
     public function zameniLozinku()
     {
         $this->session->set("poruka2", '');
-        $stara = $this->request->getVar('staraL');
+        $stara = md5($this->request->getVar('staraL'));
         $kor = $this->session->get('korisnik');
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK' => $kor]);
         $loz = $kor->getLozinka();
@@ -79,7 +84,7 @@ class Korisnik extends BaseController
         //$dobraStara = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['kor'=>])
         if ($loz === $stara) {
             $nova = $this->request->getVar('novaL');
-            $kor->setLozinka($nova);
+            $kor->setLozinka(md5($nova));
             $this->doctrine->em->flush();
             $this->session->remove('korisnik');
             $this->session->set('porukaLozinka', 'Uspesno promenjena lozinka');
@@ -124,8 +129,7 @@ class Korisnik extends BaseController
         $b = 0;
         if ($l == null) {
             $b = 1;
-        }
-        elseif (count($l) == 1) {
+        } elseif (count($l) == 1) {
             foreach ($l as $l1) {
                 if ($l1 == "") {
                     $b = 1;
@@ -164,8 +168,7 @@ class Korisnik extends BaseController
 
                 //array_push($lokacijePretraga,$obj);
             }
-        }
-        else{
+        } else {
             $nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineBezLokacije($c, $k, $s, $Tip);
         }
 
@@ -382,6 +385,9 @@ class Korisnik extends BaseController
     public function Pogledaj()
     {
         $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+        $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
+        $tipovi = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
+
         //racunanje prosecne cene kvadrata na toj lokaciji nekretnine tog tipa
         $lok = $n->getMikrolokacija()->getIdmikro();
         $tip = $n->getTip()->getIdtipnekretnine();
@@ -402,8 +408,24 @@ class Korisnik extends BaseController
         if ($tmpProsek <= $prosek) {
             $zeleno = 1;
         }
+        $disOmiljeno = 1;
+        if ($this->session->has('korisnik')) {
+            $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)
+                ->find($this->session->get('korisnik'));
+            $om = $kor->getOmiljene();
+            $disOmiljeno = 0;
+            foreach ($om as $obj) {
+                if ($obj->getIdn() == ($n->getIdn())) {
+                    $disOmiljeno = 2;
+                    break;
+                };
+            }
 
-        $this->prikaz('nekretninaDetalji', ['nek' => $n, 'prosecnaCena' => $prosek, 'zeleno' => $zeleno]);
+        }
+
+
+        $this->prikaz('nekretninaDetalji',
+            ['nek' => $n, 'prosecnaCena' => $prosek, 'zeleno' => $zeleno, 'disOmiljeno' => $disOmiljeno,'gradovi'=>$gradovi,'tipkorisnika'=>$tipovi]);
     }
 
     public function izvrsiNapredno()
@@ -477,8 +499,7 @@ class Korisnik extends BaseController
         $b = 0;
         if ($l == null) {
             $b = 1;
-        }
-        elseif (count($l) == 1) {
+        } elseif (count($l) == 1) {
             foreach ($l as $l1) {
                 if ($l1 == "") {
                     $b = 1;
@@ -571,46 +592,30 @@ class Korisnik extends BaseController
 
     public function dodajUOmiljene()
     {
-        //$idkor = 2;
-        if ($this->session->has('korisnik')) {
+        $idkor = $this->session->get('korisnik');
+        $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($idkor);
+        $nekr = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
 
-
-            $idkor = $this->session->get('korisnik');
-            $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->find($idkor);
-            $nekr = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
-            //$o[] = $kor->getOmiljene();
-            //echo gettype($o);
-            //echo gettype($nekr);
-            //array_push($o,$nekr);
-            //echo gettype($o);
-            $o = $kor->getOmiljene();
-            //echo $o->count();
-            $fleg = 0;
-            foreach ($o as $obj) {
-                if ($obj->getIdn() == ($nekr->getIdn())) {
-                    $fleg = -1;
-                    break;
-                };
-            }
-            if (($fleg != -1) && ($o->count() < 5)) {
-                $kor->addOmiljene($nekr);
-                //echo "SVE OK";
-                $this->doctrine->em->flush($kor);
-            } else {
-                //echo "NE MOZE DA SE DODA";
-            }
-//        if ($o->count()==4){
-//            echo "Ne mozete da dodate vise nekretnina u omiljene";
-//        }
-//        else{
-//            $kor->addOmiljene($nekr);
-//            echo "SVE OK";
-//            $this->doctrine->em->flush($kor);
-//        }
-            $this->prikaz('nekretninaDetalji', ['nek' => $nekr]);
-        } else {
-            return redirect()->to(site_url('login'));
+        $o = $kor->getOmiljene();
+        //echo $o->count();
+        $fleg = 0;
+        foreach ($o as $obj) {
+            if ($obj->getIdn() == ($nekr->getIdn())) {
+                $fleg = -1;
+                break;
+            };
         }
+        if (($fleg != -1) && ($o->count() < 5)) {
+            $kor->addOmiljene($nekr);
+            //echo "SVE OK";
+            $this->doctrine->em->flush($kor);
+            return "OK";
+        }
+        return "NE";
+
+
+        //$this->prikaz('nekretninaDetalji', ['nek' => $nekr]);
+
 
     }
 

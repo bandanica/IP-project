@@ -14,7 +14,7 @@
         <div class="col oglas">
 
 
-            <div class="row pt-4">
+            <div class="row mt-4">
                 <div class="text-center bg-light shadow w-50 justify-content-center border">
                     <div class="col">
 
@@ -132,7 +132,10 @@
                                                 </div>
                                                 <div class="col text-start">
                                                     <select class="form-select" name="agencije1" id="ListaAgencija"
-                                                            disabled>
+                                                        <?php
+                                                        if ($podaci->getTip()->getTipKorisnika() != 'agent') {
+                                                            echo "disabled";
+                                                        } ?>>
                                                         <option></option>
 
                                                         <?php
@@ -163,7 +166,10 @@
                                                 <div class="col text-start">
                                                     <input type="text" class="form-control" id="brlicence"
                                                            name="brlicence1"
-                                                           disabled value="<?php
+                                                        <?php
+                                                        if ($podaci->getTip()->getTipKorisnika() != 'agent') {
+                                                            echo "disabled";
+                                                        } ?> value="<?php
                                                     if ($podaci->getTip()->getTipKorisnika() == 'agent') {
                                                         echo $podaci->getBrLicence();
                                                     } else {
@@ -190,6 +196,8 @@
                                     }
                                     ?>
                                 </form>
+                                <span id="regGreske"
+                                      style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
                             </div>
                         </div>
                     </div>

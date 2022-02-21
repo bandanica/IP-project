@@ -18,7 +18,7 @@
         </div>
         <div class="col">
             <form method="post" action=<?php echo site_url() . "administrator/dodajUl" ?>>
-                Grad:<select name="gr" onchange="promenaGrad()">
+                Grad:<select name="gr" onclick="promenaGrad()">
                     <option></option>
                     <?php
                     if (isset($gradovi)) {
@@ -32,15 +32,15 @@
 
                 </select>
 
-                Opstina:<select id="opst" name="opst" onchange="promenaOpstina()">
+                Opstina:<select id="opst" name="opst" onclick="promenaOpstina()">
                     <option></option>
                 </select>
 
-                Mikrolokacija:<select id="lok" name="lok" onchange="promenaLokacije()">
+                Mikrolokacija:<select id="lok" name="lok" onclick="promenaLokacije()">
                     <option></option>
                 </select>
                 Naziv ulice:<input type="text" name="naziv">
-                <input type="submit" id="dugmeDodaj">
+                <input type="submit" id="dugmeDodaj" value="Dodaj">
             </form>
         </div>
 

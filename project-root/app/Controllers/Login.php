@@ -197,28 +197,30 @@ class Login extends BaseController
 
     public function Pogledaj()
     {
-        $disO = 1;
-        $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
-        $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
-        $indexAdmin = -1;
-        foreach ($tipkorisnika as $t) {
-            $indexAdmin += 1;
-            if ($t->getTipKorisnika() == "administrator") {
-                break;
-            }
-        }
-        unset($tipkorisnika[$indexAdmin]);
-        $poruka = $this->session->get("poruka");
-        $poruka1 = $this->session->get("poruka1");
-        $porukaL = $this->session->get("porukaLozinka");
-        $this->session->set("poruka", '');
-        $this->session->set("poruka1", '');
-        $this->session->set("porukaLozinka", '');
-        $s = "Aktivno";
-        $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
-        $this->prikaz('nekretninaDetalji', ['nek' => $n,'disOmiljeno',$disO, 'gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
-            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL]);
+        $n = $this->request->getVar('idNek');
+        return redirect()->to(site_url('korisnik/pogledaj?idNek='.$n));
+//        $disO = 1;
+//        $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
+//        $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
+//        $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
+//        $indexAdmin = -1;
+//        foreach ($tipkorisnika as $t) {
+//            $indexAdmin += 1;
+//            if ($t->getTipKorisnika() == "administrator") {
+//                break;
+//            }
+//        }
+//        unset($tipkorisnika[$indexAdmin]);
+//        $poruka = $this->session->get("poruka");
+//        $poruka1 = $this->session->get("poruka1");
+//        $porukaL = $this->session->get("porukaLozinka");
+//        $this->session->set("poruka", '');
+//        $this->session->set("poruka1", '');
+//        $this->session->set("porukaLozinka", '');
+//        $s = "Aktivno";
+//        $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($this->request->getVar('idNek'));
+//        $this->prikaz('nekretninaDetalji', ['nek' => $n,'disOmiljeno',$disO, 'gradovi' => $gradovi, 'poruka' => $poruka, 'poruka1' => $poruka1,
+//            'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'porukaL' => $porukaL]);
     }
 
     public function Onama(){

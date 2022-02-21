@@ -35,7 +35,7 @@
 
                     foreach ($korisnici as $k) {
                         ?>
-                        <form method='post' action=<?php echo site_url() . "administrator/azuriranje" ?>>
+                        <form method='get' action=<?php echo site_url() . "administrator/azuriranje" ?>>
                             <tr>
                                 <td><?php echo $k->getIdK() ?>
                                     <input type='hidden' value="<?php echo $k->getIdK() ?>"

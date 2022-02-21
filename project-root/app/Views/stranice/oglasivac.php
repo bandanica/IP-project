@@ -10,6 +10,8 @@
 
 
 <div class="container-fluid">
+    <span id="regGreske"
+          style="color: red"><?php if (isset($poruka2)) echo $poruka2 ?></span>
     <div class="row oglas">
         <div class="col d-flex">
             <?php

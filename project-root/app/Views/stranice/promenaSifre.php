@@ -20,7 +20,14 @@
                         </div>
                         <div class="row pt-4">
                             <div class="col">
-                                <form method='post' action=<?php echo site_url() . "korisnik/zameniLozinku" ?>>
+                                <form method='post' action=<?php
+                                if ($tip==1) {
+                                    echo site_url() . "korisnik/zameniLozinku";
+                                }elseif ($tip==4){
+                                    echo site_url() . "administrator/zameniLozinku";
+                                }else{
+                                    echo site_url() . "oglasivac/zameniLozinku";
+                                } ?>>
                                     <div class="row pb-3 justify-content-center">
                                         <div class="col-4 offset-2 text-center">
                                             Stara lozinka:

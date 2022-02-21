@@ -6,6 +6,7 @@ use App\Models\EntitetiZaProsledjivanje\Nekretnine;
 use App\Models\Entities\Agencija;
 use App\Models\Entities\Grad;
 use App\Models\Entities\Karakteristike;
+use App\Models\Entities\Korisnik;
 use App\Models\Entities\Mikrolokacija;
 use App\Models\Entities\Nekretnina;
 use App\Models\Entities\Opstina;
@@ -45,13 +46,14 @@ class Oglasivac extends BaseController
 
     public function promenaLozinke()
     {
-        $this->prikaz('promenaSifre', []);
+        $t = $this->session->get('vrstaKor');
+        $this->prikaz('promenaSifre', ['tip'=>$t]);
     }
 
     public function zameniLozinku()
     {
         $this->session->set("poruka2", '');
-        $stara = $this->request->getVar('staraL');
+        $stara = md5($this->request->getVar('staraL'));
         $kor = $this->session->get('korisnik');
         $kor = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['idK' => $kor]);
         $loz = $kor->getLozinka();
@@ -62,7 +64,7 @@ class Oglasivac extends BaseController
         //$dobraStara = $this->doctrine->em->getRepository(\App\Models\Entities\Korisnik::class)->findOneBy(['kor'=>])
         if ($loz === $stara) {
             $nova = $this->request->getVar('novaL');
-            $kor->setLozinka($nova);
+            $kor->setLozinka(md5($nova));
             $this->doctrine->em->flush();
             $this->session->remove('korisnik');
             $this->session->set('porukaLozinka', 'Uspesno promenjena lozinka');
@@ -385,9 +387,12 @@ class Oglasivac extends BaseController
         }
         unset($tipkorisnika[$indexAdmin]);
         unset($tipkorisnika[$indexKupac]);
+
         $ag = $this->doctrine->em->getRepository(Agencija::class)->findAll();
 
-        $this->prikaz('podaciOglasivaca', ['podaci' => $korisnik, 'agencije' => $ag, 'tipkorisnika' => $tipkorisnika]);
+        $poruka1 = $this->session->get("poruka1");
+        $this->session->set("poruka1", '');
+        $this->prikaz('podaciOglasivaca', ['poruka1'=>$poruka1,'podaci' => $korisnik, 'agencije' => $ag, 'tipkorisnika' => $tipkorisnika]);
     }
 
     public function zavrsiAzuriranje()
@@ -512,23 +517,33 @@ class Oglasivac extends BaseController
         $mejl = $this->request->getVar('mejl');
         $tip = $this->request->getVar('tip');
         $tip = $this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => $tip]);
-        if ($tip->getTipkorisnika() == 'agent') {
 
-            $a = $this->request->getVar('agencije1');
-            $a = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $a]);
-            $br = $this->request->getVar('brlicence1');
-            $korisnik->setIdagencije($a);
-            $korisnik->setBrLicence($br);
-        } else {
-            $korisnik->setIdagencije(null);
-            $korisnik->setBrLicence(null);
-
+        $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
+            ->findOneBy(['eMail' => $mejl]);
+        if (($korisnik1 != null) && ($korisnik1!=$korisnik)) {
+            $this->session->set("poruka1", 'Zauzeta email adresa');
+            $this->podaciIzmena();
         }
-        $korisnik->setTelefon($tel);
-        $korisnik->setEMail($mejl);
-        $korisnik->setTip($tip);
-        $this->doctrine->em->flush();
-        return redirect()->to(site_url("oglasivac"));
+        else{
+            if ($tip->getTipkorisnika() == 'agent') {
+
+                $a = $this->request->getVar('agencije1');
+                $a = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $a]);
+                $br = $this->request->getVar('brlicence1');
+                $korisnik->setIdagencije($a);
+                $korisnik->setBrLicence($br);
+            } else {
+                $korisnik->setIdagencije(null);
+                $korisnik->setBrLicence(null);
+
+            }
+            $korisnik->setTelefon($tel);
+            $korisnik->setEMail($mejl);
+            $korisnik->setTip($tip);
+            $this->doctrine->em->flush();
+            return redirect()->to(site_url("oglasivac"));
+        }
+
     }
 
     public function statistika()

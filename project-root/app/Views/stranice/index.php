@@ -70,26 +70,7 @@
                                onchange="proveraLozinke()">
 
                     </div>
-                    <div class="form-group text-center pb-1">
-                        Grad:
-                        <select name="gradici" onchange="f()">
-                            <?php
-                            if (isset($gradovi)) {
-                                foreach ($gradovi as $g) {
-                                    ?>
-                                    <option><?php echo $g->getNaziv() ?> </option>
-                                    <?php
-                                }
-                            }
-                            ?>
-                        </select>
 
-                        <!--                    </div>-->
-                        <!--                    <div class="form-group text-center pb-1">-->
-                        Datum rodjenja:
-                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?>><br/>
-
-                    </div>
                     <div class="form-group text-center pb-1">
                         <input type="text" name="tel" placeholder="Telefon" required="required"
                                onchange="f()">
@@ -115,6 +96,26 @@
                             }
                         }
                         ?>
+
+                    </div>
+                    <div class="form-group text-center pb-1">
+                        Grad:
+                        <select name="gradici" onchange="f()">
+                            <?php
+                            if (isset($gradovi)) {
+                                foreach ($gradovi as $g) {
+                                    ?>
+                                    <option><?php echo $g->getNaziv() ?> </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+
+                        <!--                    </div>-->
+                        <!--                    <div class="form-group text-center pb-1">-->
+                        Datum rodjenja:
+                        <input type="date" name="rodjenje" onchange="f()" max=<?php echo date("Y-m-d") ?>><br/>
 
                     </div>
                     <div class="form-group text-center pb-1">
