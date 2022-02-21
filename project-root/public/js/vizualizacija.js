@@ -27,8 +27,8 @@ function iscrtavanjeGrafikona(){
         //     {name:"Dec",score:100}
         // ];
 
-        const width=1000;
-        const height=800;
+        const width=800;
+        const height=500;
         const margin={top:50, bottom:50, left:50,right:50};
 
 
