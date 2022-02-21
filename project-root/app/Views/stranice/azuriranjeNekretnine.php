@@ -287,6 +287,18 @@
                                                     <label for="internet">Internet</label>
                                                     <?php
                                                 }
+                                                if ($k->getInterfon() == 'da') {
+                                                    ?>
+                                                    <input type="checkbox" id="interfon" name="interfon" checked>
+                                                    <label for="interfon">Interfon</label>
+
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <input type="checkbox" id="interfon" name="interfon">
+                                                    <label for="interfon">Interfon</label>
+                                                    <?php
+                                                }
                                                 if ($k->getTelefon() == 'da') {
                                                     ?>
                                                     <input type="checkbox" id="telefon" name="telefon" checked>
@@ -335,15 +347,17 @@
                                             <div class="col-4 offset-2 text-center">
                                                 Linije prevoza:
                                             </div>
-                                            <div class="col-2 text-start">
-                                                <select multiple name="prevozG[]">
+                                            <div class="col-6 text-start">
+                                                <select multiple name="prevozG[]" style="width: 20%">
                                                     <option></option>
-                                                    <?php if ($nek->getLinijeprevoza() != "") {
+                                                    <?php if (($nek->getLinijeprevoza() != null) && ($nek->getLinijeprevoza() != "")) {
                                                         $sveL = $nek->getLinijeprevoza();
+
                                                         $linije = explode(",", $sveL);
                                                         $brojac = 0;
                                                         //$sveLinije=[7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95];
                                                         $sveLinije = $nek->getGradid()->getGradskiPrevoz();
+
                                                         $sveLinije = explode(",", $sveLinije);
                                                         $x = count($linije);
                                                         foreach ($sveLinije as $linija) {
@@ -364,6 +378,14 @@
                                                             <?php
                                                         }
 
+                                                    } else{
+                                                        $sveLinije = $nek->getGradid()->getGradskiPrevoz();
+                                                        $sveLinije = explode(",", $sveLinije);
+                                                        foreach ($sveLinije as $linija){
+                                                            ?>
+                                                            <option><?php echo $linija; ?></option>
+                                                            <?php
+                                                        }
                                                     }
                                                     ?>
 

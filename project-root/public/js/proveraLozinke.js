@@ -1,13 +1,12 @@
 function proveraL() {
     podaciOk = true;
     greske = "";
-    //document.getElementById("novaLGreske").innerHTML = greske;
     lozinka = document.getElementsByName('novaL')[0].value;
 
     regBroj = /([0-9])+/;
     regMaloSlovo = /([a-z])+/;
     regVelSlovo = /([A-Z])+/;
-    regKarkter = /([!@#$%^&\\*])+/;
+    regKarkter = /([!@#$%^&*\\.+])+/;
     regDuzinaPocetak = /^([A-Z]|[a-z]){1}.{7,}$/;
 
     if (!regBroj.test(lozinka) || !regMaloSlovo.test(lozinka) || !regKarkter.test(lozinka) || !regVelSlovo.test(lozinka) || !regDuzinaPocetak.test(lozinka)) {

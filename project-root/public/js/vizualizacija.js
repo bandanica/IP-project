@@ -1,35 +1,19 @@
-
-function iscrtavanjeGrafikona(){
+function iscrtavanjeGrafikona() {
     lok = document.getElementById('mikLok').value;
-    //console.log(lok);
     div = document.getElementById('d3-container');
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
         div.innerHTML = "";
-        data=[];
+        data = [];
         brojevi = JSON.parse(xhttp.responseText.split("\n")[0]);
 
         brojevi.forEach(jedan => {
-            data.push({name:jedan.mesec, score:jedan.prodato});
+            data.push({name: jedan.mesec, broj: jedan.prodato});
         })
-        // const data=[
-        //     {name:"Jan", score:80},
-        //     {name:"Feb",score:100},
-        //     {name:"Mart",score:60},
-        //     {name:"April",score:80},
-        //     {name:"Maj",score:100},
-        //     {name:"Jun",score:50},
-        //     {name: "Jul",score:70},
-        //     {name:"Avg",score:80},
-        //     {name:"Sept",score:100},
-        //     {name:"Okt",score:120},
-        //     {name:"Nov",score:110},
-        //     {name:"Dec",score:100}
-        // ];
 
-        const width=800;
-        const height=500;
-        const margin={top:50, bottom:50, left:50,right:50};
+        const width = 800;
+        const height = 500;
+        const margin = {top: 50, bottom: 50, left: 50, right: 50};
 
 
         const svg = d3.select('#d3-container')
@@ -45,20 +29,22 @@ function iscrtavanjeGrafikona(){
             .padding(0.3)
 
         const y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return d.score; })])
+            .domain([0, d3.max(data, function (d) {
+                return d.broj;
+            })])
             .range([height - margin.bottom, margin.top])
 
         svg
             .append("g")
-            .attr("fill", 'royalblue')
+            .attr("fill", "#68c3d4")
             .selectAll("rect")
             .data(data)
             .join("rect")
             .attr("x", (d, i) => x(i))
-            .attr("y", d => y(d.score))
-            .attr('title', (d) => d.score)
+            .attr("y", d => y(d.broj))
+            .attr('title', (d) => d.broj)
             .attr("class", "rect")
-            .attr("height", d => y(0) - y(d.score))
+            .attr("height", d => y(0) - y(d.broj))
             .attr("width", x.bandwidth());
 
         function yAxis(g) {
@@ -80,34 +66,29 @@ function iscrtavanjeGrafikona(){
 
     }
 
-    xhttp.open("GET", "/oglasivac/podaci?lokacija="+lok, true);
+    xhttp.open("GET", "/oglasivac/podaci?lokacija=" + lok, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //poslati = "izabranTip=" + tip + "&cenaDO=" + cena + "&Lokacija=" + getSelectValues(lokacije).join("\t") + "&kvadrOD=" + kvadrat + "&brs=" + sobe;
-    //console.log("lokacija=" + lok);
-    //xhttp.send("lokacija=" + lok);
     xhttp.send();
-
-
 
 
 }
 
-window.onload=function(){
+window.onload = function () {
     ogl = document.getElementById('ogl').value;
-    if (ogl==='agent'){
+    if (ogl === 'agent') {
         console.log(ogl);
         div = document.getElementById('d3-container');
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function () {
             div.innerHTML = "";
-            data=[];
+            data = [];
             brojevi = JSON.parse(xhttp.responseText.split("\n")[0]);
             brojevi.forEach(jedan => {
-                data.push({name:jedan.mesec, score:jedan.prodato});
+                data.push({name: jedan.mesec, broj: jedan.prodato});
             });
-            const width=800;
-            const height=500;
-            const margin={top:50, bottom:50, left:50,right:50};
+            const width = 800;
+            const height = 500;
+            const margin = {top: 50, bottom: 50, left: 50, right: 50};
 
 
             const svg = d3.select('#d3-container')
@@ -123,20 +104,22 @@ window.onload=function(){
                 .padding(0.3)
 
             const y = d3.scaleLinear()
-                .domain([0, d3.max(data, function(d) { return d.score; })])
+                .domain([0, d3.max(data, function (d) {
+                    return d.broj;
+                })])
                 .range([height - margin.bottom, margin.top])
 
             svg
                 .append("g")
-                .attr("fill", 'royalblue')
+                .attr("fill", '#68c3d4')
                 .selectAll("rect")
                 .data(data)
                 .join("rect")
                 .attr("x", (d, i) => x(i))
-                .attr("y", d => y(d.score))
-                .attr('title', (d) => d.score)
+                .attr("y", d => y(d.broj))
+                .attr('title', (d) => d.broj)
                 .attr("class", "rect")
-                .attr("height", d => y(0) - y(d.score))
+                .attr("height", d => y(0) - y(d.broj))
                 .attr("width", x.bandwidth());
 
             function yAxis(g) {
@@ -161,14 +144,8 @@ window.onload=function(){
         xhttp.open("GET", "/oglasivac/podaci", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send();
-    }
-    else{
+    } else {
         iscrtavanjeGrafikona();
     }
-
-}
-
-function pocetniSadrzaj(ogl){
-
 
 }

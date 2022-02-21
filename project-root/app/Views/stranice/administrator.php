@@ -121,20 +121,7 @@
         </div>
     </div>
 
-    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/noviKorisnikAdmin" ?><!--
-        <input type="submit" name="noviKorisnik1" value="Dodaj kupca ili oglasivaca">-->
-    <!--    </form>-->
-    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/novaAgencijaAdmin" ?><!--
-        <input type="submit" name="novaAgencija1" value="Dodaj agenciju">-->
-    <!--    </form>-->
-    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/novaLokacijaAdmin" ?><!--
-        <input type="submit" name="novaMikro1" value="Dodaj mikrolokaciju">-->
-    <!--    </form>-->
-    <!--    <form method="post" action=--><?php //echo site_url() . "administrator/novaUlicaAdmin" ?><!--
-        <input type="submit" name="novaUlica1" value="Dodaj ulicu">-->
-    <!--    </form>-->
-    <!--    <form method='post' action=--><?php //echo site_url() . "login/logout" ?><!--
-        <input type="submit" name="logout" value="Odjavi se">-->
+
 
     </form>
 </div>

@@ -21,10 +21,6 @@ function promenaGrad(){
     }
     xhttp.open("POST", "/oglasivac/opstineugradu", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // unutar bodija se nalaze parametri za prosledjivanje;
-    // tip stringa je
-    // name1=value1?name2=value2?name3?value3
-    // u php kodu pomocu getVar("nameX") dobijas valueX, kad kad saljes pomocu forme
     xhttp.send("idgrad=" + g);
     console.log(g);
 
@@ -48,10 +44,6 @@ function promenaOpstina(){
     }
     xhttp.open("POST", "/oglasivac/lokacijeuopstini", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // unutar bodija se nalaze parametri za prosledjivanje;
-    // tip stringa je
-    // name1=value1?name2=value2?name3?value3
-    // u php kodu pomocu getVar("nameX") dobijas valueX, kad kad saljes pomocu forme
     xhttp.send("idO=" + ops);
     console.log(ops);
 }
@@ -70,10 +62,6 @@ function promenaLokacije(){
     }
     xhttp.open("POST", "/oglasivac/uliceNaLokaciji", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // unutar bodija se nalaze parametri za prosledjivanje;
-    // tip stringa je
-    // name1=value1?name2=value2?name3?value3
-    // u php kodu pomocu getVar("nameX") dobijas valueX, kad kad saljes pomocu forme
     xhttp.send("idL=" + l);
     console.log(l);
 }
@@ -107,18 +95,14 @@ function prevoz(){
     }
     xhttp.open("POST", "/oglasivac/linijeprevoza", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // unutar bodija se nalaze parametri za prosledjivanje;
-    // tip stringa je
-    // name1=value1?name2=value2?name3?value3
-    // u php kodu pomocu getVar("nameX") dobijas valueX, kad kad saljes pomocu forme
     xhttp.send("idgrad=" + g);
     //console.log(g);
 }
 
-function createOption(option, label) {
-    var option = document.createElement("option");
-    option.setAttribute("value", option);
-    option.innerHTML = label;
-
-    return option;
-}
+// function createOption(option, label) {
+//     var option = document.createElement("option");
+//     option.setAttribute("value", option);
+//     option.innerHTML = label;
+//
+//     return option;
+// }

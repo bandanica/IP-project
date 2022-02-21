@@ -274,6 +274,8 @@
                                         <label for="klima">Klima</label>
                                         <input type="checkbox" id="internet" name="internet">
                                         <label for="internet">Internet</label>
+                                        <input type="checkbox" id="internet" name="interfon">
+                                        <label for="interfon">Interfon</label>
                                         <input type="checkbox" id="telefon" name="telefon">
                                         <label for="telefon">Telefon</label>
                                     </div>

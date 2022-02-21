@@ -162,6 +162,7 @@ class Oglasivac extends BaseController
         $k = 'ne';
         $in = 'ne';
         $tel = 'ne';
+        $interfon='ne';
         $grejanje = $this->request->getVar('grej');
         if ($this->request->getVar('parking') != '') {
             $p = "da";
@@ -193,6 +194,9 @@ class Oglasivac extends BaseController
         if ($this->request->getVar('internet') != '') {
             $in = "da";
         }
+        if ($this->request->getVar('interfon') != '') {
+            $interfon = "da";
+        }
         if ($this->request->getVar('telefon') != '') {
             $tel = "da";
         }
@@ -210,6 +214,7 @@ class Oglasivac extends BaseController
         $kar->setPodrum($pod);
         $kar->setSaBastom($bast);
         $kar->setTerasa($t);
+        $kar->setInterfon($interfon);
         //GREJANJE DIREKTNO U NEKRETNINI
         $this->doctrine->em->persist($kar);
         //$this->doctrine->em->flush();
@@ -422,6 +427,7 @@ class Oglasivac extends BaseController
         $k = 'ne';
         $in = 'ne';
         $tel = 'ne';
+        $interfon = 'ne';
         $grejanje = $this->request->getVar('grej');
         if ($this->request->getVar('parking') != '') {
             $p = "da";
@@ -453,6 +459,9 @@ class Oglasivac extends BaseController
         if ($this->request->getVar('internet') != '') {
             $in = "da";
         }
+        if ($this->request->getVar('interfon') != '') {
+            $interfon = "da";
+        }
         if ($this->request->getVar('telefon') != '') {
             $tel = "da";
         }
@@ -468,6 +477,7 @@ class Oglasivac extends BaseController
         $kar->setPodrum($pod);
         $kar->setSaBastom($bast);
         $kar->setTerasa($t);
+        $kar->setInterfon($interfon);
 
         $nekretninaN->setParking($p);
 

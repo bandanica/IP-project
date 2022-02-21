@@ -2,7 +2,7 @@ function f(greske = "", podaciOk = true) {
     //console.log("log");
     //podaciOk = true;
     //greske = "";
-    // ovde napisati proveru da li su podaci okej
+
     ime = document.getElementsByName('ime')[0].value;
     prezime = document.getElementsByName('prez')[0].value;
     korime = document.getElementsByName('korime')[0].value;
@@ -27,9 +27,7 @@ function f(greske = "", podaciOk = true) {
         document.getElementById("agencija").hidden = false;
         tip = 'agent';
     }
-    //else{
-    //    document.getElementById("agencija").hidden=true;
-    //}
+
 
 
     console.log(ime, prezime, korime, grad, lozinka, datum, telefon, mejl);
@@ -70,7 +68,7 @@ function proveraLozinke() {
     lozinka = document.getElementsByName('loz')[0].value;
     //regLozinka = new RegExp("^(((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])).{8,})");
 
-    //DODATI SPECIJALNE KARAKTERE
+
     regLozinka = /^(([A-Z]|[a-z])+((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])).{8,})$/;
     regBroj = /([0-9])+/;
     regMaloSlovo = /([a-z])+/;
@@ -83,19 +81,19 @@ function proveraLozinke() {
         podaciOk = false;
     }
     if (!regBroj.test(lozinka)) {
-        greske = greske.concat("broj<br/>");
+        greske = greske.concat("Lozinka mora imati bar jednu cifru<br/>");
     }
     if (!regDuzinaPocetak.test(lozinka)) {
-        greske = greske.concat("duz poc<br/>");
+        greske = greske.concat("Lozinka mora imati bar 8 karaktera<br/> i pocinjati slovom<br/>");
     }
     if (!regMaloSlovo.test(lozinka)) {
-        greske = greske.concat("malo slovo<br/>");
+        greske = greske.concat("Lozinka mora imati bar jedno malo slovo<br/>");
     }
     if (!regVelSlovo.test(lozinka)) {
-        greske = greske.concat("vel slovo<br/>");
+        greske = greske.concat("Lozinka mora imati bar jedno veliko slovo<br/>");
     }
     if (!regKarkter.test(lozinka)) {
-        greske = greske.concat("spec<br/>");
+        greske = greske.concat("Lozinka mora imati bar jedan spec. karakter<br/>");
     }
     // if (podaciOk) {
     //     document.getElementById("regDugme").disabled = false;

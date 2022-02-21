@@ -19,15 +19,13 @@ class Administrator extends BaseController
         $regzahtevi = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status' => 0]);
 
         $korisnici = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['status' => [1, 2]]);
-        //$tl = [];
-//        foreach ($korisnici as $kor) {
-//            array_push($tl, $kor);
-//            echo $kor->getKorIme();
-//            echo "<br/>";
-//        }
 
-        //echo $this->session->get('korisnik');
-        $this->prikaz('administrator', ['zahtevi' => $regzahtevi, 'korisnici' => $korisnici]);
+        $poruka = $this->session->get("poruka");
+        $poruka1 = $this->session->get("poruka1");
+        $this->session->set("poruka", '');
+        $this->session->set("poruka1", '');
+
+        $this->prikaz('administrator', ['zahtevi' => $regzahtevi, 'korisnici' => $korisnici, 'poruka' => $poruka, 'poruka1' => $poruka1]);
 
     }
 
@@ -61,21 +59,22 @@ class Administrator extends BaseController
     public function azuriranje()
     {
         if ($this->request->getVar('dugme1') == 'Azuriraj') {
-            //DODATI AZURIRANJE KORISNIKA
+
             $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
             $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
             $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
             $id = $this->request->getVar('idKor');
             $zaAzuriranje = $this->doctrine->em->getRepository(Korisnik::class)->find($id);
             //return redirect()->to(site_url('adminitrator/azuriranjeKorisnika'));
-            $this->prikaz('azuriranjeKorisnika', ['gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'ka' => $zaAzuriranje]);
+            $poruka = $this->session->get("poruka");
+            $poruka1 = $this->session->get("poruka1");
+            $this->session->set("poruka", '');
+            $this->session->set("poruka1", '');
+            $this->prikaz('azuriranjeKorisnika', ['poruka' => $poruka, 'poruka1' => $poruka1, 'gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'ka' => $zaAzuriranje]);
 
         } else if ($this->request->getVar('dugme1') == 'Obrisi') {
             $korisnik = $this->request->getVar('idKor');
-            //echo $korisnik;
             $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->find($korisnik);
-            //echo $korisnik->getIme();
-            //$korisnik = $this->doctrine->em->getRepository(Korisnik::class)->findOneBy(['idK' => $korisnik]);
 
             $this->doctrine->em->remove($korisnik);
             $this->doctrine->em->flush();
@@ -97,34 +96,36 @@ class Administrator extends BaseController
         $mejl = $this->request->getVar('mejl');
         $grad = $this->doctrine->em->getRepository(Grad::class)->findOneBy(['naziv' => $grad]);
         $rodjenje = date_create_from_format("Y-m-d", $rodjenje);
-        //$tipKor = $this->request->getVar('tip');
 
-        //$tipKor = $this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika'=>$tipKor]);
+        $proveraMejla = $this->doctrine->em->getRepository(Korisnik::class)->findBy(['eMail' => $mejl]);
+        if (count($proveraMejla) > 1) {
+            $this->session->set("poruka1", 'Zauzeta email adresa');
+            $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
+            $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
+            $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
+            $id = $this->request->getVar('idKor');
+            $zaAzuriranje = $this->doctrine->em->getRepository(Korisnik::class)->find($id);
+            //return redirect()->to(site_url('adminitrator/azuriranjeKorisnika'));
+            $poruka = $this->session->get("poruka");
+            $poruka1 = $this->session->get("poruka1");
+            $this->session->set("poruka", '');
+            $this->session->set("poruka1", '');
+            $this->prikaz('azuriranjeKorisnika', ['poruka' => $poruka, 'poruka1' => $poruka1, 'gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije, 'ka' => $zaAzuriranje]);
 
 
-        //PROVERA DA LI POSTOJI KORISNIK SA KORISNICKIM IMENOM ILI MEJLOM U BAZI
-//        $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
-//            ->findOneBy(['korIme' => $this->request->getVar('korime')]);
-//        if ($korisnik1 != null) {
-//            $this->session->set("poruka1", 'Zauzeto korisnicko ime');
-//            return redirect()->to(site_url());
-//        }
-//        $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
-//            ->findOneBy(['eMail' => $this->request->getVar('mejl')]);
-//        if ($korisnik1 != null) {
-//            $this->session->set("poruka1", 'Zauzeta email adresa');
-//            return redirect()->to(site_url());
-//        }
-        $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->findOneBy(['korIme' => $this->request->getVar('korime')]);
-        $korisnik->setIme($ime);
-        $korisnik->setPrezime($prez);
-        $korisnik->setKorIme($korime);
-        $korisnik->setLozinka($lozinka);
-        $korisnik->setIdgrada($grad);
-        $korisnik->setTelefon($telefon);
-        $korisnik->setDatumRodjenja($rodjenje);
-        $korisnik->setEMail($mejl);
-        //$korisnik->setStatus(0);
+        } else {
+
+
+            $korisnik = $this->doctrine->em->getRepository(Korisnik::class)->findOneBy(['korIme' => $this->request->getVar('korime')]);
+            $korisnik->setIme($ime);
+            $korisnik->setPrezime($prez);
+            $korisnik->setKorIme($korime);
+            $korisnik->setLozinka($lozinka);
+            $korisnik->setIdgrada($grad);
+            $korisnik->setTelefon($telefon);
+            $korisnik->setDatumRodjenja($rodjenje);
+            $korisnik->setEMail($mejl);
+            //$korisnik->setStatus(0);
 //        $korisnik->setTip($tipKor);
 //        if ($tipKor->getTipKorisnika() == 'kupac') {
 //            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'kupac']));
@@ -140,7 +141,7 @@ class Administrator extends BaseController
 //            $korisnik->setIdagencije($agencija);
 //
 //        }
-        $a = $this->request->getVar('agencije1');
+            $a = $this->request->getVar('agencije1');
 //        if (isset($a) && ($a!='') && (!empty($a))){
 //            $agencija = $this->request->getVar('agencije1');
 //            $agencija = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $agencija]);
@@ -149,21 +150,22 @@ class Administrator extends BaseController
 //            $korisnik->setBrLicence($licenca);
 //            $korisnik->setIdagencije($agencija);
 //        }
-        echo $ime;
-        echo $prez;
-        echo $korime;
-        echo $grad->getNaziv();
-        echo "<br/>";
-        echo $rodjenje->format("Y-m-d");
-        echo "<br/>";
-        echo $mejl;
-        echo $lozinka;
+            echo $ime;
+            echo $prez;
+            echo $korime;
+            echo $grad->getNaziv();
+            echo "<br/>";
+            echo $rodjenje->format("Y-m-d");
+            echo "<br/>";
+            echo $mejl;
+            echo $lozinka;
 
 
-        //$this->doctrine->em->persist($korisnik);
-        //$this->doctrine->em->flush();
+            //$this->doctrine->em->persist($korisnik);
+            //$this->doctrine->em->flush();
 
-        //return redirect()->to(site_url("administrator"));
+            //return redirect()->to(site_url("administrator"));
+        }
     }
 
 
@@ -173,7 +175,11 @@ class Administrator extends BaseController
         $gradovi = $this->doctrine->em->getRepository(Grad::class)->findAll();
         $agencije = $this->doctrine->em->getRepository(Agencija::class)->findAll();
         $tipkorisnika = $this->doctrine->em->getRepository(Tipkorisnika::class)->findAll();
-        $this->prikaz('noviKorisnik', ['gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije]);
+        $poruka = $this->session->get("poruka");
+        $poruka1 = $this->session->get("poruka1");
+        $this->session->set("poruka", '');
+        $this->session->set("poruka1", '');
+        $this->prikaz('noviKorisnik', ['poruka' => $poruka, 'poruka1' => $poruka1, 'gradovi' => $gradovi, 'tipkorisnika' => $tipkorisnika, 'agencije' => $agencije]);
     }
 
     public function kreirajKorisnika()
@@ -199,57 +205,61 @@ class Administrator extends BaseController
             ->findOneBy(['korIme' => $this->request->getVar('korime')]);
         if ($korisnik1 != null) {
             $this->session->set("poruka1", 'Zauzeto korisnicko ime');
-            return redirect()->to(site_url());
-        }
-        $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
-            ->findOneBy(['eMail' => $this->request->getVar('mejl')]);
-        if ($korisnik1 != null) {
-            $this->session->set("poruka1", 'Zauzeta email adresa');
-            return redirect()->to(site_url());
-        }
-        $korisnik = new Korisnik();
-        $korisnik->setIme($ime);
-        $korisnik->setPrezime($prez);
-        $korisnik->setKorIme($korime);
-        $korisnik->setLozinka($lozinka);
-        $korisnik->setIdgrada($grad);
-        $korisnik->setTelefon($telefon);
-        $korisnik->setDatumRodjenja($rodjenje);
-        $korisnik->setEMail($mejl);
-        $korisnik->setStatus(0);
-        $korisnik->setTip($tipKor);
-        if ($tipKor->getTipKorisnika() == 'kupac') {
-            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'kupac']));
-        } else if ($tipKor->getTipKorisnika() == 'samostalni prodavac') {
-            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'samostalni prodavac']));
+            $this->noviKorisnikAdmin();
         } else {
-            $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'agent']));
-            $agencija = $this->request->getVar('agencije1');
-            $agencija = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $agencija]);
+            $korisnik1 = $this->doctrine->em->getRepository(Korisnik::class)
+                ->findOneBy(['eMail' => $this->request->getVar('mejl')]);
+            if ($korisnik1 != null) {
+                $this->session->set("poruka1", 'Zauzeta email adresa');
+                $this->noviKorisnikAdmin();
+            } else {
+                $korisnik = new Korisnik();
+                $korisnik->setIme($ime);
+                $korisnik->setPrezime($prez);
+                $korisnik->setKorIme($korime);
+                $korisnik->setLozinka($lozinka);
+                $korisnik->setIdgrada($grad);
+                $korisnik->setTelefon($telefon);
+                $korisnik->setDatumRodjenja($rodjenje);
+                $korisnik->setEMail($mejl);
+                $korisnik->setStatus(0);
+                $korisnik->setTip($tipKor);
+                if ($tipKor->getTipKorisnika() == 'kupac') {
+                    $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'kupac']));
+                } else if ($tipKor->getTipKorisnika() == 'samostalni prodavac') {
+                    $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'samostalni prodavac']));
+                } else {
+                    $korisnik->setTip($this->doctrine->em->getRepository(Tipkorisnika::class)->findOneBy(['tipKorisnika' => 'agent']));
+                    $agencija = $this->request->getVar('agencije1');
+                    $agencija = $this->doctrine->em->getRepository(Agencija::class)->findOneBy(['naziv' => $agencija]);
 
-            $licenca = $this->request->getVar('brlicence');
-            $korisnik->setBrLicence($licenca);
-            $korisnik->setIdagencije($agencija);
+                    $licenca = $this->request->getVar('brlicence');
+                    $korisnik->setBrLicence($licenca);
+                    $korisnik->setIdagencije($agencija);
 
+                }
+
+
+                echo $ime;
+                echo $prez;
+                echo $korime;
+                echo $grad->getNaziv();
+                echo "<br/>";
+                echo $rodjenje->format("Y-m-d");
+                echo "<br/>";
+                echo $mejl;
+                echo $lozinka;
+
+
+                $this->doctrine->em->persist($korisnik);
+                $this->doctrine->em->flush();
+
+                return redirect()->to(site_url("administrator"));
+            }
         }
 
-
-        echo $ime;
-        echo $prez;
-        echo $korime;
-        echo $grad->getNaziv();
-        echo "<br/>";
-        echo $rodjenje->format("Y-m-d");
-        echo "<br/>";
-        echo $mejl;
-        echo $lozinka;
-
-
-        $this->doctrine->em->persist($korisnik);
-        $this->doctrine->em->flush();
-
-        return redirect()->to(site_url("administrator"));
     }
+
 
     public function novaAgencijaAdmin()
     {
@@ -282,17 +292,17 @@ class Administrator extends BaseController
     public function novaLokacijaAdmin()
     {
         $sveLok = $this->doctrine->em->getRepository(Mikrolokacija::class)->findAll();
-        $prazne=[];
-        foreach ($sveLok as $l){
-            $n = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['mikrolokacija'=>$l]);
-            if ($n==null){
-                array_push($prazne,$l);
+        $prazne = [];
+        foreach ($sveLok as $l) {
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['mikrolokacija' => $l]);
+            if ($n == null) {
+                array_push($prazne, $l);
 
             }
         }
 
         $grad = $this->doctrine->em->getRepository(Grad::class)->findAll();
-        $this->prikaz('dodajMikrolokaciju', ['gradovi' => $grad,'prazneLok'=>$prazne]);
+        $this->prikaz('dodajMikrolokaciju', ['gradovi' => $grad, 'prazneLok' => $prazne]);
     }
 
     public function dodajMikro()
@@ -338,23 +348,25 @@ class Administrator extends BaseController
         return json_encode($sveLokacije);
     }
 
-    public function novaUlicaAdmin(){
-        $ulice =$this->doctrine->em->getRepository(Ulica::class)->findAll();
+    public function novaUlicaAdmin()
+    {
+        $ulice = $this->doctrine->em->getRepository(Ulica::class)->findAll();
         $grad = $this->doctrine->em->getRepository(Grad::class)->findAll();
 
-        $prazne=[];
-        foreach ($ulice as $u){
-            $n = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['ulica'=>$u]);
-            if ($n==null){
-                array_push($prazne,$u);
+        $prazne = [];
+        foreach ($ulice as $u) {
+            $n = $this->doctrine->em->getRepository(Nekretnina::class)->findBy(['ulica' => $u]);
+            if ($n == null) {
+                array_push($prazne, $u);
 
             }
         }
-        $this->prikaz('dodajUlicu', ['gradovi' => $grad,'prazneUlice'=>$prazne]);
+        $this->prikaz('dodajUlicu', ['gradovi' => $grad, 'prazneUlice' => $prazne]);
 
     }
 
-    public function dodajUl(){
+    public function dodajUl()
+    {
         $m = $this->doctrine->em->getRepository(Mikrolokacija::class)->find($this->request->getVar('lok'));
         $naziv = $this->request->getVar('naziv');
         //$m = $this->doctrine->em->getRepository(Mikrolokacija::class)->findOneBy(['naziv' => $naziv]);
@@ -368,7 +380,8 @@ class Administrator extends BaseController
     }
 
 
-    public function brisanjeMikrolokacije(){
+    public function brisanjeMikrolokacije()
+    {
         $lokacija = $this->doctrine->em->getRepository(Mikrolokacija::class)->find($this->request->getVar('idLok'));
         $this->doctrine->em->remove($lokacija);
         $this->doctrine->em->flush();
@@ -377,14 +390,23 @@ class Administrator extends BaseController
 
     }
 
-    public function brisanjeUlice(){
+    public function brisanjeUlice()
+    {
         $ulica = $this->doctrine->em->getRepository(Ulica::class)->find($this->request->getVar('idU'));
         $this->doctrine->em->remove($ulica);
         $this->doctrine->em->flush();
         return redirect()->to(site_url("administrator/novaUlicaAdmin"));
     }
 
-    public function Onama(){
-        $this->prikaz('oNama',[]);
+    public function Onama()
+    {
+        $this->prikaz('oNama', []);
+    }
+
+    public function promenaLozinke()
+    {
+        //echo view("sabloni/headerKupac");
+        $this->prikaz('promenaSifre', []);
+        //echo view("sabloni/footer");
     }
 }
