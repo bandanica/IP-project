@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `baza` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `baza`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: baza
@@ -34,7 +36,7 @@ CREATE TABLE `agencija` (
   UNIQUE KEY `PIB_UNIQUE` (`PIB`),
   KEY `grad` (`idGrada`),
   CONSTRAINT `grad` FOREIGN KEY (`idGrada`) REFERENCES `grad` (`idG`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +45,7 @@ CREATE TABLE `agencija` (
 
 LOCK TABLES `agencija` WRITE;
 /*!40000 ALTER TABLE `agencija` DISABLE KEYS */;
-INSERT INTO `agencija` VALUES (1,'Felix','Tosin bunar','011/324511','0058649',1),(2,'Mitos travel','Kralja Milutina 35','011542986','0064521354',1);
+INSERT INTO `agencija` VALUES (1,'Felix','Tosin bunar','011/324511','0058649',1),(2,'Mitos travel','Kralja Milutina 35','011542986','0064521354',1),(4,'TvojStan','kralja Milana','0113254785','007458963',1);
 /*!40000 ALTER TABLE `agencija` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +62,7 @@ CREATE TABLE `grad` (
   `gradski_prevoz` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`idG`),
   UNIQUE KEY `idG_UNIQUE` (`idG`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +71,7 @@ CREATE TABLE `grad` (
 
 LOCK TABLES `grad` WRITE;
 /*!40000 ALTER TABLE `grad` DISABLE KEYS */;
-INSERT INTO `grad` VALUES (1,'Beograd','7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95');
+INSERT INTO `grad` VALUES (1,'Beograd','7,9,14,17,18,23,26,27,29,33,45,50,65,74,77,83,95'),(2,'Kraljevo','1,2,3');
 /*!40000 ALTER TABLE `grad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +142,7 @@ CREATE TABLE `korisnik` (
   CONSTRAINT `gradid` FOREIGN KEY (`idGrada`) REFERENCES `grad` (`idG`),
   CONSTRAINT `idAgencije` FOREIGN KEY (`idAgencije`) REFERENCES `agencija` (`idA`),
   CONSTRAINT `tip` FOREIGN KEY (`tip`) REFERENCES `tipkorisnika` (`idT`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +151,7 @@ CREATE TABLE `korisnik` (
 
 LOCK TABLES `korisnik` WRITE;
 /*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-INSERT INTO `korisnik` VALUES (1,'mile123','Mile','Milic','f1dc735ee3581693489eaf286088b916','1985-05-05 00:00:00','0616672345','milence@gmail.com',1,NULL,NULL,1,1),(2,'luka123','Luka','Lukic','c4ca4238a0b923820dcc509a6f75849b','1990-03-01 00:00:00','06375751895','lulence@gmail.com',1,NULL,NULL,1,1),(3,'stana123','Stana','Stanic','f1dc735ee3581693489eaf286088b916','1976-01-04 00:00:00','0665619730','stanika@gmail.com',1,1,'0045128',3,1),(19,'admin123','admin','admin','0192023a7bbd73250516f069df18b500','2022-02-06 12:23:37',NULL,NULL,1,NULL,NULL,4,3),(20,'danica123','Danica','Markovic','12e2d5bda4758ec4c02a3d42eb447d4f','1999-05-05 13:16:31','011/123-1-143','danicabandovic@gmail.com',1,NULL,NULL,2,1),(23,'sarita','sara','Markovic','028c309faf80aadd944298541eabbcda','2022-02-02 01:39:57','011/123-1-143','sarasaric@yahoo.com',1,NULL,NULL,1,1),(24,'stefoni','Stefan','Stefic','f3c38e9119a8f193ded17d25f7d65fd8','1995-03-20 02:06:42','0667458962','stefstef@gmail.com',1,1,'021457',3,1),(25,'unica123','una','Savic','938d7eac457dab9bfce41a63becbe959','1991-07-25 07:21:00','0642357459','unica1@gmail.com',1,NULL,NULL,2,1),(26,'sara1','Sara','Minic','75de460ce2ccbc5da0ff1e3865a5350c','1986-03-30 07:53:28','0632573465','sarka@gmail.com',1,1,'00547589',3,1),(27,'aki123','Aleksa','Vostic','a177ab6f4f3dab2e833420c0c34c39ab','1988-12-30 05:47:41','0645789856','aleksav@gmail.com',1,2,'00745485',3,1),(30,'mima45','Milena','Maric','deb4390542c57d6e07668006de8f9496','1988-04-19 16:23:45','0612789856','mimica@gmail.com',1,NULL,NULL,1,1);
+INSERT INTO `korisnik` VALUES (1,'mile1234','Gile','Milicc','f1dc735ee3581693489eaf286088b916','1985-05-15 17:08:32','0616672345','milencee@gmail.com',1,NULL,NULL,2,1),(2,'luka123','Luka','Lukic','c4ca4238a0b923820dcc509a6f75849b','1990-03-01 00:00:00','06375751895','lulence@gmail.com',1,NULL,NULL,1,1),(3,'stana123','Stana','Stanic','f1dc735ee3581693489eaf286088b916','1976-01-04 00:00:00','0665619730','stanika@gmail.com',1,1,'0045128',3,1),(19,'admin123','admin','admin','0192023a7bbd73250516f069df18b500','2022-02-06 12:23:37',NULL,NULL,1,NULL,NULL,4,3),(20,'danica123','Danica','Markovic','12e2d5bda4758ec4c02a3d42eb447d4f','1999-05-05 13:16:31','011/123-1-143','danicabandovic@gmail.com',1,NULL,NULL,2,1),(23,'sarita','sara','Markovic','028c309faf80aadd944298541eabbcda','2022-02-02 01:39:57','011/123-1-143','sarasaric@yahoo.com',1,NULL,NULL,1,1),(24,'stefoni','Stefan','Stefic','f3c38e9119a8f193ded17d25f7d65fd8','1995-03-20 02:06:42','0667458962','stefstef@gmail.com',1,1,'021457',3,1),(25,'unica123','una','Savic','938d7eac457dab9bfce41a63becbe959','1991-07-25 07:21:00','0642357459','unica1@gmail.com',1,NULL,NULL,2,1),(26,'sara1','Sara','Minic','75de460ce2ccbc5da0ff1e3865a5350c','1986-03-30 07:53:28','0632573465','sarka@gmail.com',1,1,'00547589',3,1),(27,'aki123','Aleksa','Vostic','f3c38e9119a8f193ded17d25f7d65fd8','1988-12-30 05:47:41','0645789857','aleksav1@gmail.com',1,2,'00412578',3,1),(30,'mima45','Milena','Maric','deb4390542c57d6e07668006de8f9496','1988-04-19 16:23:45','0612789856','mimica@gmail.com',1,NULL,NULL,1,1);
 /*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -168,7 +170,7 @@ CREATE TABLE `mikrolokacija` (
   UNIQUE KEY `idmikro_UNIQUE` (`idmikro`),
   KEY `opstina` (`opstina`),
   CONSTRAINT `opstina` FOREIGN KEY (`opstina`) REFERENCES `opstina` (`idOpstine`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -177,7 +179,7 @@ CREATE TABLE `mikrolokacija` (
 
 LOCK TABLES `mikrolokacija` WRITE;
 /*!40000 ALTER TABLE `mikrolokacija` DISABLE KEYS */;
-INSERT INTO `mikrolokacija` VALUES (1,'Neimar',1),(2,'Crveni krst',1),(3,'Kalenic',1),(4,'Gardos',3),(6,'Gornji grad',3),(7,'Altina',3),(8,'Cvetkova pijaca',10),(9,'Kluz',10),(10,'Lion',10),(11,'Djeram pijaca',10),(12,'Cukaricka padina',2),(13,'Bezanijska kosa',4);
+INSERT INTO `mikrolokacija` VALUES (1,'Neimar',1),(2,'Crveni krst',1),(3,'Kalenic',1),(4,'Gardos',3),(6,'Gornji grad',3),(7,'Altina',3),(8,'Cvetkova pijaca',10),(9,'Kluz',10),(10,'Lion',10),(11,'Djeram pijaca',10),(12,'Cukaricka padina',2),(13,'Bezanijska kosa',4),(14,'Ribnica',12),(15,'Centar',12);
 /*!40000 ALTER TABLE `mikrolokacija` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,7 +264,7 @@ CREATE TABLE `omiljene` (
   KEY `idnekretnine_idx` (`idN`),
   CONSTRAINT `idkupca` FOREIGN KEY (`idK`) REFERENCES `korisnik` (`idK`),
   CONSTRAINT `idnekretnine` FOREIGN KEY (`idN`) REFERENCES `nekretnina` (`idN`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -271,7 +273,7 @@ CREATE TABLE `omiljene` (
 
 LOCK TABLES `omiljene` WRITE;
 /*!40000 ALTER TABLE `omiljene` DISABLE KEYS */;
-INSERT INTO `omiljene` VALUES (7,2,16),(8,2,17),(9,2,22),(10,1,20);
+INSERT INTO `omiljene` VALUES (7,2,16),(8,2,17),(9,2,22),(10,1,20),(11,2,9),(13,2,28);
 /*!40000 ALTER TABLE `omiljene` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,7 +292,7 @@ CREATE TABLE `opstina` (
   UNIQUE KEY `idOpstine_UNIQUE` (`idOpstine`),
   KEY `idgrad` (`grad`),
   CONSTRAINT `idgrad` FOREIGN KEY (`grad`) REFERENCES `grad` (`idG`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -299,7 +301,7 @@ CREATE TABLE `opstina` (
 
 LOCK TABLES `opstina` WRITE;
 /*!40000 ALTER TABLE `opstina` DISABLE KEYS */;
-INSERT INTO `opstina` VALUES (1,'Vracar',1),(2,'Cukarica',1),(3,'Zemun',1),(4,'Novi Beograd',1),(5,'Palilula',1),(6,'Rakovica',1),(7,'Savski venac',1),(8,'Stari grad',1),(9,'Vozdovac',1),(10,'Zvezdara',1),(11,'Barajevo',1);
+INSERT INTO `opstina` VALUES (1,'Vracar',1),(2,'Cukarica',1),(3,'Zemun',1),(4,'Novi Beograd',1),(5,'Palilula',1),(6,'Rakovica',1),(7,'Savski venac',1),(8,'Stari grad',1),(9,'Vozdovac',1),(10,'Zvezdara',1),(11,'Barajevo',1),(12,'Kraljevo',2);
 /*!40000 ALTER TABLE `opstina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -368,7 +370,7 @@ CREATE TABLE `ulica` (
   UNIQUE KEY `idU_UNIQUE` (`idU`),
   KEY `mikrolokacija` (`mikrolokacija`),
   CONSTRAINT `mikrolokacija` FOREIGN KEY (`mikrolokacija`) REFERENCES `mikrolokacija` (`idmikro`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +379,7 @@ CREATE TABLE `ulica` (
 
 LOCK TABLES `ulica` WRITE;
 /*!40000 ALTER TABLE `ulica` DISABLE KEYS */;
-INSERT INTO `ulica` VALUES (1,2,'Cetinjska'),(2,2,'Danila Kisa'),(3,1,'Hadzi Milentijeva'),(4,4,'Gardoska ulica'),(5,7,'Ugrinovacki put'),(6,6,'Cara Dusana'),(7,6,'Koste Dragicevica'),(8,10,'Kulina Bana'),(9,10,'Ravanicka'),(10,11,'Marka Oreskovica'),(12,8,'Gornicevska'),(13,11,'Branka Krsmanovica'),(14,12,'Obalskih radnika');
+INSERT INTO `ulica` VALUES (1,2,'Cetinjska'),(2,2,'Danila Kisa'),(3,1,'Hadzi Milentijeva'),(4,4,'Gardoska ulica'),(5,7,'Ugrinovacki put'),(6,6,'Cara Dusana'),(7,6,'Koste Dragicevica'),(8,10,'Kulina Bana'),(9,10,'Ravanicka'),(10,11,'Marka Oreskovica'),(12,8,'Gornicevska'),(13,11,'Branka Krsmanovica'),(14,12,'Obalskih radnika'),(15,15,'Omladinska');
 /*!40000 ALTER TABLE `ulica` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -390,4 +392,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-21 13:51:05
+-- Dump completed on 2022-02-22  0:21:12
