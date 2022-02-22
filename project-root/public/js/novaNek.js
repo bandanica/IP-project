@@ -106,3 +106,15 @@ function prevoz(){
 //
 //     return option;
 // }
+
+function brojslika(){
+    let slike = document.getElementById('slike');
+    broj = slike.files.length;
+    if (broj<3 || broj>6){
+        document.getElementById('zavDugme').disabled = true;
+        console.log("Ne moze ovaj broj slika");
+    }else{
+        document.getElementById('zavDugme').disabled = false;
+    }
+
+}

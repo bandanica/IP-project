@@ -322,7 +322,7 @@ class Nekretnina
      */
     public function setDatumProdaje($datumProdaje)
     {
-        $this->datumProdajee = $datumProdaje;
+        $this->datumProdaje = $datumProdaje;
     }
 
     /**

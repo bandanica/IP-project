@@ -348,6 +348,7 @@ class Oglasivac extends BaseController
             $n = $this->doctrine->em->getRepository(Nekretnina::class)->find($n);
             $n->setStatus('Prodato');
             $date = date('Y-m-d H:i:s');
+            $date = date_create_from_format('Y-m-d H:i:s', $date);
             $n->setDatumProdaje($date);
             $this->doctrine->em->flush();
             return redirect()->to(site_url("oglasivac"));
@@ -412,14 +413,19 @@ class Oglasivac extends BaseController
         $gradskeLinije = $this->request->getVar('prevozG');
         $gLinije = "";
         $brojac = 0;
-        foreach ($gradskeLinije as $linija) {
-            if ($brojac == 0) {
-                $gLinije .= "$linija";
-                $brojac = 1;
-            } else {
-                $gLinije .= "," . "$linija";
+        if ($gradskeLinije!=null){
+            foreach ($gradskeLinije as $linija) {
+                if ($brojac == 0) {
+                    $gLinije .= "$linija";
+                    $brojac = 1;
+                } else {
+                    $gLinije .= "," . "$linija";
+                }
             }
+        }else{
+            $gLinije=null;
         }
+
         $c = (int)$this->request->getVar('cenaNekretnine');
         $p = "ne";
         $t = "ne";

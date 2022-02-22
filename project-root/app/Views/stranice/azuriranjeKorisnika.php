@@ -18,106 +18,199 @@
                     <div class="col justify-content-center text-center">
                         <h2>Azuriranje korisnika:</h2>
                     </div>
-                    <form method='post' action=<?php echo site_url() . "administrator/azuriranjeSubmit" ?>>
-                        <input type="text" hidden name="idKor" value="<?php echo $ka->getIdK(); ?>">
-                        Ime: <input type="text" name="ime" onchange="klik()" value="<?php echo $ka->getIme(); ?>"><br/>
-                        Prezime: <input type="text" name="prez" onchange="klik()"
-                                        value="<?php echo $ka->getPrezime(); ?>"><br/>
-                        Korisnicko ime: <input type="text" name="korime" onchange="klik()"
-                                               value="<?php echo $ka->getKorIme(); ?>"><br/>
-                        Grad: <select name="gradici" onchange="klik()">
-                            <?php
-                            if (isset($gradovi)) {
-                                foreach ($gradovi as $g) {
-                                    ?>
-                                    <option><?php echo $g->getNaziv() ?> </option>
-                                    <?php
-                                }
-                            }
-                            ?>
-
-                        </select>
-                        <br/>
-                        Datum rodjenja: <input type="date" name="rodjenje"
-                                               max=<?php echo date("Y-m-d") ?> onchange="klik()"
-                                               value="<?php echo $ka->getDatumRodjenja()->format('Y-m-d'); ?>"><br/>
-                        Kontakt telefon: <input type="text" name="tel" onchange="klik()"
-                                                value="<?php echo $ka->getTelefon(); ?>"><br/>
-                        I-mejl: <input type="text" name="mejl" onchange="klik()"
-                                       value="<?php echo $ka->getEMail(); ?>"><br/>
-
-                        Tip korisnika:
-                        <?php
-                        if (isset($tipkorisnika)) {
-                            foreach ($tipkorisnika as $t) {
-                                if ($t == ($ka->getTip())) {
-                                    ?>
-
-                                    <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
-                                           value="<?php echo $t->getTipKorisnika() ?>" onchange="promenaTipa()"
-                                           checked> <?php echo $t->getTipKorisnika() ?>
-                                    <?php
-                                } else {
-
-                                    ?>
-                                    <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
-                                           value="<?php echo $t->getTipKorisnika() ?>"
-                                           onchange="promenaTipa()"> <?php echo $t->getTipKorisnika() ?>
-                                    <?php
-                                }
-                            }
-                        }
-                        ?>
-                        <br/>
-
-
-                        <div id="agencija"<?php
-                        $tip = $ka->getTip()->getIdt();
-                        if ($tip != 3) {
-                            echo "hidden";
-                            echo " disabled";
-                        }
-                        ?>>
-                            Agencija:
-                            <select name="agencije1" id="ListaAgencija" <?php
-                            $tip = $ka->getTip()->getIdt();
-                            if ($tip != 3) {
-                                echo "hidden";
-                                echo " disabled";
-                            }
-                            ?> onchange="klik()">
-
+                </div>
+                <form method='post' action=<?php echo site_url() . "administrator/azuriranjeSubmit" ?>>
+                    <input type="text" hidden name="idKor" value="<?php echo $ka->getIdK(); ?>">
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Ime:
+                        </div>
+                        <div class="col text-start">
+                            <input type="text" class="form-control" name="ime" onchange="klik()"
+                                   value="<?php echo $ka->getIme(); ?>">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Prezime:
+                        </div>
+                        <div class="col text-start">
+                            <input type="text" class="form-control" name="prez" onchange="klik()"
+                                   value="<?php echo $ka->getPrezime(); ?>">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Korisnicko ime:
+                        </div>
+                        <div class="col text-start">
+                            <input type="text" name="korime" class="form-control" onchange="klik()"
+                                   value="<?php echo $ka->getKorIme(); ?>">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Grad:
+                        </div>
+                        <div class="col text-start">
+                            <select name="gradici" class="form-select" onchange="klik()">
                                 <?php
-                                if (isset($agencije)) {
-                                    foreach ($agencije as $a) {
+                                if (isset($gradovi)) {
+                                    foreach ($gradovi as $g) {
                                         ?>
-                                        <option><?php echo $a->getNaziv() ?> </option>
+                                        <option><?php echo $g->getNaziv() ?> </option>
                                         <?php
                                     }
                                 }
                                 ?>
-                            </select>
-                            <br/>
 
-                            Broj licence agenta:<input type="text" name="brlicence" id="idlicence" <?php
-                            $tip = $ka->getTip()->getIdt();
-                            if ($tip != 3) {
-                                echo "hidden";
-                                echo " disabled";
+                            </select>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Datum rodjenja:
+                        </div>
+                        <div class="col text-start">
+                            <input type="date" name="rodjenje"
+                                   max=<?php echo date("Y-m-d") ?> onchange="klik()"
+                                   value="<?php echo $ka->getDatumRodjenja()->format('Y-m-d'); ?>">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Kontakt telefon:
+                        </div>
+                        <div class="col text-start">
+                            <input type="text" name="tel" onchange="klik()" class="form-control"
+                                   value="<?php echo $ka->getTelefon(); ?>">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            I-mejl:
+                        </div>
+                        <div class="col text-start">
+                            <input type="text" name="mejl" onchange="klik()" class="form-control"
+                                   value="<?php echo $ka->getEMail(); ?>">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-4 offset-2 text-center">
+                            Tip korisnika:
+                        </div>
+                        <div class="col text-start">
+                            <?php
+                            if (isset($tipkorisnika)) {
+                                foreach ($tipkorisnika as $t) {
+                                    if ($t == ($ka->getTip())) {
+                                        ?>
+
+                                        <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                                               value="<?php echo $t->getTipKorisnika() ?>" onchange="promenaTipa()"
+                                               checked> <?php echo $t->getTipKorisnika() ?>
+                                        <?php
+                                    } else {
+
+                                        ?>
+                                        <input type="radio" name="tip" id="<?php echo $t->getTipKorisnika() ?>"
+                                               value="<?php echo $t->getTipKorisnika() ?>"
+                                               onchange="promenaTipa()"> <?php echo $t->getTipKorisnika() ?>
+                                        <?php
+                                    }
+                                }
                             }
-                            ?> value="<?php echo $ka->getBrLicence(); ?>"><br/>
+                            ?>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+
+                    <div id="agencija"<?php
+                    $tip = $ka->getTip()->getIdt();
+                    if ($tip != 3) {
+                        echo "hidden";
+                        echo " disabled";
+                    }
+                    ?>>
+                        <div class="row pb-2">
+                            <div class="col-4 offset-2 text-center">
+                                Agencija:
+                            </div>
+                            <div class="col text-start">
+                                <select class="form-select" name="agencije1" id="ListaAgencija" <?php
+                                $tip = $ka->getTip()->getIdt();
+                                if ($tip != 3) {
+                                    echo "hidden";
+                                    echo " disabled";
+                                }
+                                ?> onchange="klik()">
+
+                                    <?php
+                                    if (isset($agencije)) {
+                                        foreach ($agencije as $a) {
+                                            ?>
+                                            <option><?php echo $a->getNaziv() ?> </option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-2">
+
+                            </div>
                         </div>
 
-                        <input type='submit' name='submit' value='Azuriraj' id="regDugme">
-                        <br/>
+                        <div class="row pb-2">
+                            <div class="col-4 offset-2 text-center">
+                                Broj licence agenta:
+                            </div>
+                            <div class="col text-start">
+                                <input type="text" name="brlicence" id="idlicence" <?php
+                                $tip = $ka->getTip()->getIdt();
+                                if ($tip != 3) {
+                                    echo "hidden";
+                                    echo " disabled";
+                                }
+                                ?> value="<?php echo $ka->getBrLicence(); ?>">
+                            </div>
+                            <div class="col-2">
+                            </div>
+                        </div>
 
-                        <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
-                    </form>
-                </div>
+                    </div>
+                    <div class="row pt-1 pb-2">
+                        <div class="col text-center">
+                            <input type='submit' name='submit' value='Azuriraj' id="regDugme">
+                        </div>
+                    </div>
+                    <div class="row pt-1">
+                        <div class="col text-center">
+                            <span id="regGreske" style="color: red"><?php if (isset($poruka1)) echo $poruka1 ?></span>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

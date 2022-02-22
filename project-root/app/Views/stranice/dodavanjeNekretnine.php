@@ -282,10 +282,10 @@
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col-6 text-center">
-                                        Ucitajte slike neretnine (minimum 3):
+                                        Ucitajte slike neretnine (3-6):
                                     </div>
                                     <div class="col text-start">
-                                        <input type="file" class="form-control" name="izaberiSliku[]" multiple>
+                                        <input type="file" class="form-control" id="slike" name="izaberiSliku[]" multiple onchange="brojslika()">
                                     </div>
 
                                 </div>

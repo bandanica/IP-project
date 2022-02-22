@@ -442,7 +442,9 @@ class Korisnik extends BaseController
         $minG = $this->request->getVar('minG');
         $maxG = $this->request->getVar('maxG');
         $stanje = $this->request->getVar('stanje');
-
+        if ($stanje==null){
+            $stanje= "";
+        }
         //$stanje = "'lux'";
 
         if ($cmaks == '') {
