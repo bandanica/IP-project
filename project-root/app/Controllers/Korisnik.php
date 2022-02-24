@@ -172,6 +172,8 @@ class Korisnik extends BaseController
             $nek = $this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnineBezLokacije($c, $k, $s, $Tip);
         }
 
+        rsort($nek);
+
         //$nek=[];
 //        foreach ($lokacijePretraga as $obj){
 //            $nek = array_merge($nek,$this->doctrine->em->getRepository(Nekretnina::class)->traziNekretnine($x,$c,$k,$s,$obj,$Tip));
@@ -544,6 +546,7 @@ class Korisnik extends BaseController
 
         }
 
+        rsort($nek);
 
         $page = 1;
         $n = count($nek);
@@ -562,6 +565,7 @@ class Korisnik extends BaseController
         foreach ($nek as $n1) {
             array_push($ids, $n1->getIdn());
         }
+
         $this->session->set('sveN', $ids);
 
 
