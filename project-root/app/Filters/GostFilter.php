@@ -5,7 +5,10 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
-
+/*
+ * klasa GostFilter se poziva prilikom poziva Login kontrolera
+ * propusta svakoga jer korisnik treba da ima mogucnost gosta
+ */
 class GostFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)

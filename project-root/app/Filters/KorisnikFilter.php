@@ -6,6 +6,11 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
+/*
+ * klasa KorisnikFilter se poziva prilikom svakog pristupa Korisnik
+ * kontroleru, ukoliko je korisnik oglasivac ili administrator
+ * preusmeravaju se na njihove podrazumevane stranice
+ */
 class KorisnikFilter implements FilterInterface
 {
 

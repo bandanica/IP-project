@@ -5,6 +5,11 @@ use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Filters\FilterInterface;
 
+/*
+ * klasa OglasivacFilter poziva se prilikom svakog pristupa Oglasivac
+ * kontroleru, i korisnike koji nisu tipa samostalni oglasivac ili
+ * agent, preusmerava na njihove podrazumevane stranice.
+ */
 
 class OglasivacFilter implements FilterInterface
 {

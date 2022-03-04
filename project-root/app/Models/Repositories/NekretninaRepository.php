@@ -24,7 +24,11 @@ class NekretninaRepository extends EntityRepository
     }
 
     /*
-     * funkcija koja vraca rezultate pretrage kupca
+     * funkcija koja vraca rezultate pretrage kupca ako je uneta lokacija grad
+     *
+     * @param int $cena, int $kvadr, int $sobe, Grad $gradic, Tip $tip
+     *
+     * @return Nekretnina[]
      */
 
     public function traziNekretnineGrad($cena, $kvadr, $sobe, $gradic, $tip)
@@ -48,6 +52,15 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+
+    /*
+     * funkcija koja vraca rezultate pretrage kupca ako je uneta lokacija opstina
+     *
+     * @param int $cena, int $kvadr, int $sobe, Opstina $opstina, Tip $tip
+     *
+     * @return Nekretnina[]
+     */
+
     public function traziNekretnineOpstina($cena, $kvadr, $sobe, $opstina, $tip)
     {
         $status = "'Aktivno'";
@@ -69,6 +82,14 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+
+    /*
+     * funkcija koja vraca rezultate pretrage kupca ako je uneta lokacija mikrolokacija
+     *
+     * @param int $cena, int $kvadr, int $sobe, Mikrolokacija $lokacija, Tip $tip
+     *
+     * @return Nekretnina[]
+     */
     public function traziNekretnineLokacija($cena, $kvadr, $sobe, $lokacija, $tip)
     {
         $status = "'Aktivno'";
@@ -90,6 +111,14 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+
+    /*
+     * funkcija koja vraca rezultate pretrage kupca ako nije uneta lokacija
+     *
+     * @param int $cena, int $kvadr, int $sobe, Tip $tip
+     *
+     * @return Nekretnina[]
+     */
     public function traziNekretnineBezLokacije($cena, $kvadr, $sobe, $tip){
         $status = "'Aktivno'";
         $upit = $this->getEntityManager()->createQueryBuilder();
@@ -108,6 +137,14 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+
+    /*
+     * funkcija koja vraca rezultate napredne pretrage kupca ako je uneta lokacija grad
+     *
+     * @param int $minc, int $maxc, int $mink, int $maxk, int $mins, int $maxs, int $minSprat, int $maxSprat, Grad $gradic, Tip $tip, string $ming, string $maxg, string $stanje
+     *
+     * @return Nekretnina[]
+     */
     public function naprednaGradovi($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $gradic, $tip, $ming, $maxg, $stanje)
     {
         if ($stanje==""){
@@ -169,6 +206,13 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+    /*
+     * funkcija koja vraca rezultate napredne pretrage kupca ako je uneta lokacija opstina
+     *
+     * @param int $minc, int $maxc, int $mink, int $maxk, int $mins, int $maxs, int $minSprat, int $maxSprat, Opstina $opstina, Tip $tip, string $ming, string $maxg, string $stanje
+     *
+     * @return Nekretnina[]
+     */
     public function naprednaOpstine($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $opstina, $tip, $ming, $maxg, $stanje)
     {
         if ($stanje==""){
@@ -230,6 +274,13 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+    /*
+     * funkcija koja vraca rezultate napredne pretrage kupca ako je uneta lokacija mikrolokacija
+     *
+     * @param int $minc, int $maxc, int $mink, int $maxk, int $mins, int $maxs, int $minSprat, int $maxSprat, Mikrolokacija $lokacija, Tip $tip, string $ming, string $maxg, string $stanje
+     *
+     * @return Nekretnina[]
+     */
     public function naprednaLokacije($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $lokacija, $tip, $ming, $maxg, $stanje)
     {
         if ($stanje==""){
@@ -289,6 +340,13 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+    /*
+     * funkcija koja nalazi nekretnine zadatog tipa i na zadatoj mikrolokaciji
+     *
+     * @param Tip $tip, Mikrolokacija $lokacija
+     *
+     * @return Nekretnina[]
+     */
     public function nadjiSlicneNekretnine($tip, $lokacija)
     {
         $status = "'Aktivno'";
@@ -304,6 +362,13 @@ class NekretninaRepository extends EntityRepository
         return $upit->getQuery()->getResult();
     }
 
+    /*
+     * funkcija koja vraca rezultate napredne pretrage kupca ako nije uneta lokacija
+     *
+     * @param int $minc, int $maxc, int $mink, int $maxk, int $mins, int $maxs, int $minSprat, int $maxSprat, Tip $tip, string $ming, string $maxg, string $stanje
+     *
+     * @return Nekretnina[]
+     */
     public function naprednoBezLokacije($minc, $maxc, $mink, $maxk, $mins, $maxs, $minSprat, $maxSprat, $tip, $ming, $maxg, $stanje){
         if ($stanje==""){
             $status = "'Aktivno'";
